@@ -1,0 +1,7 @@
+LICENSE
+Makefile
+out/
+.auctex-auto/
+.gitignore
+^doc$
+^Meta$
