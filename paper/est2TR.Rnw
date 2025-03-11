@@ -1840,8 +1840,8 @@ We declare no conflict of interest.
 Data from the RESPIRE trials were extracted from Table~3 in \citet{DeSoyza2018}
 and Table~3 in \citet{Aksamit2018}. Data from the ORBIT trials were extracted
 from page~219 in \citet{Haworth2019}. Code and data to reproduce our analyses
-are openly available at \url{https://github.com/SamCH93/XXX}. A snapshot of the
-repository at the time of writing is available at
+are openly available at \url{https://github.com/SamCH93/twotrials}. A snapshot
+of the repository at the time of writing is available at
 \url{https://doi.org/10.5281/zenodo.XXXXX}. We used the statistical programming
 language \Sexpr{R.Version()[["version.string"]]} for analyses \citep{R} along
 with the \texttt{confMeta} \citep{confMeta2024}, \texttt{ggplot2}
