@@ -30,7 +30,7 @@ This function computes the combined p-value based on two
 }
 \examples{
 ## p-value for H0: logRR = 0 in RESPIRE trials
-pEdgington(mu = 0, t1 = -0.491, t2 = -0.185, se1 = 0.179, se2 = 0.174,
+pEdgington(mu = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
            alternative = "less")
 
 }

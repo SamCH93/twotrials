@@ -36,7 +36,7 @@ Plot method for class \code{"twotrials"}
 }
 \examples{
 ## logRR estimates from RESPIRE trials
-res <- twotrials(null = 0, t1 = -0.491, t2 = -0.185, se1 = 0.179, se2 = 0.174,
+res <- twotrials(null = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
                  alternative = "less", level = 0.95)
 plot(res) # one-sided p-value functions
 plot(res, two.sided = TRUE) # two-sided p-value functions

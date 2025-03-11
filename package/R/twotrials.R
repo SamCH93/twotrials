@@ -21,11 +21,11 @@
 #'
 #' @examples
 #' ## logRR estimates from RESPIRE trials
-#' twotrials(null = 0, t1 = -0.491, t2 = -0.185, se1 = 0.179, se2 = 0.174,
+#' twotrials(null = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
 #'           alternative = "less", level = 0.95)
 #'
 #' ## compute 99.875% CIs instead
-#' twotrials(null = 0, t1 = -0.491, t2 = -0.185, se1 = 0.179, se2 = 0.174,
+#' twotrials(null = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
 #'           alternative = "less", level = 0.99875)
 #'
 #' @export
@@ -122,7 +122,7 @@ twotrials <- function(null = 0, t1, t2, se1, se2, alternative = "greater",
 #'
 #' @examples
 #' ## logRR estimates from RESPIRE trials
-#' twotrials(null = 0, t1 = -0.491, t2 = -0.185, se1 = 0.179, se2 = 0.174,
+#' twotrials(null = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
 #'           alternative = "less", level = 0.95)
 #'
 #' @export
@@ -175,7 +175,7 @@ print.twotrials <- function(x, digits = 3, ...) {
 #'
 #' @examples
 #' ## logRR estimates from RESPIRE trials
-#' res <- twotrials(null = 0, t1 = -0.491, t2 = -0.185, se1 = 0.179, se2 = 0.174,
+#' res <- twotrials(null = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
 #'                  alternative = "less", level = 0.95)
 #' plot(res) # one-sided p-value functions
 #' plot(res, two.sided = TRUE) # two-sided p-value functions

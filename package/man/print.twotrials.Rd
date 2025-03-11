@@ -22,7 +22,7 @@ Print method for class \code{"twotrials"}
 }
 \examples{
 ## logRR estimates from RESPIRE trials
-twotrials(null = 0, t1 = -0.491, t2 = -0.185, se1 = 0.179, se2 = 0.174,
+twotrials(null = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
           alternative = "less", level = 0.95)
 
 }

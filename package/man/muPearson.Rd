@@ -34,8 +34,8 @@ Computes parameter estimate from estimation function based on
 }
 \examples{
 ## 95\% CI and median estimate for logRR in RESPIRE trials
-muPearson(a = c(0.975, 0.5, 0.025), t1 = -0.491, t2 = -0.185, se1 = 0.179,
-          se2 = 0.174, alternative = "less")
+muPearson(a = c(0.975, 0.5, 0.025), t1 = -0.4942, t2 = -0.1847, se1 = 0.1833,
+          se2 = 0.1738, alternative = "less")
 
 }
 \author{
