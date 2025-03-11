@@ -459,20 +459,20 @@ right plot in Figure~\ref{lab:pfunillustration}.
 
 When both trials have the same underlying true effect ($\theta_{1} = \theta_{2}
 = \theta$), sometimes called ``one population assumption'' or ``homogeneity''
-\citep{Shun2005, Zhan2022}, a CI based on a combined $p$-value
-function has correct coverage and the median estimate is median unbiased for the
-true common effect $\theta$, i.e., the probability of the median estimate being
-greater than $\theta$ is equal to the probability of it being smaller than
-$\theta$ \citep[see e.g.,][]{XieSingh2013}. However, it is unclear how other
-operating characteristics (e.g., mean bias or CI width) behave
-for different combined $p$-value functions $g$, and how they behave when the
-true effects are not the same ($\theta_{1} \neq \theta_{2}$), known as ``two
-populations assumption'' or ``heterogeneity'' \citep{Shun2005, Zhan2022}. In the
-following, we will investigate this in detail for the two-trials rule,
-fixed-effect meta-analysis, and four other types of combined $p$-value
-functions. As these investigations are somewhat technical, readers may choose to
-look only at the summary in Table~\ref{tab:summaries} and then jump directly to
-the applications in Section~\ref{sec:application}.
+\citep{Shun2005, Zhan2022}, a CI based on a combined $p$-value function has
+correct coverage and the median estimate is median unbiased for the true common
+effect $\theta$, i.e., the probability of the median estimate being greater than
+$\theta$ is equal to the probability of it being smaller than $\theta$
+\citep[see e.g.,][]{XieSingh2013}. However, it is unclear how other operating
+characteristics (e.g., mean bias or CI width) behave for different combined
+$p$-value functions $g$, and how they behave when the true effects are not the
+same ($\theta_{1} \neq \theta_{2}$), known as ``two populations assumption'' or
+``heterogeneity'' \citep{Shun2005, Zhan2022}. In the following, we will
+investigate this in detail for the two-trials rule, meta-analysis, and four
+other types of combined $p$-value functions. As these investigations are
+somewhat technical, readers may choose to look only at the summary in
+Table~\ref{tab:summaries} and then jump directly to the applications in
+Section~\ref{sec:application}.
 
 \afterpage{
 \begin{landscape}
@@ -2280,7 +2280,8 @@ to $\max\{\theta_1,\theta_2\}$.
 
 \onehalfspacing % Reset line spacing to 1.5 from here on
 {\small
-\bibliographystyle{apalikedoiurl}
+%% \bibliographystyle{apalikedoiurl}
+\bibliographystyle{unsrtnat}
 \bibliography{bibliography}
 }
 
