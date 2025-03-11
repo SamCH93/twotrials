@@ -1,3 +1,9 @@
+# Combined P-value Functions for Compatible Effect Estimation and Hypothesis Testing in Drug Regulation
+
+This directory contains code and data related to the preprint
+
+> Pawel, S., Roos, M., Held. L. (2025). Combined P-value Functions for Compatible Effect Estimation and Hypothesis Testing in Drug Regulation.
+
 ## Reproducibility
 
 The results can be reproduced by installing the necessary R packages

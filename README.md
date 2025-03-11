@@ -7,7 +7,7 @@ function inference based on the results from two trials.
 
 2. `./paper` Code and data to reproduce result from the preprint: *Pawel, S.,
    Roos, M., Held. L. (2025). Combined P-value Functions for Compatible Effect
-   Estimation and Hypothesis Testing in Drug Regulation*
+   Estimation and Hypothesis Testing in Drug Regulation.*
 
 To cite our work, use the following BibTeX reference
 

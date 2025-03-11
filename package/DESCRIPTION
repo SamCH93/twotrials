@@ -1,6 +1,6 @@
 Package: twotrials
 Version: 0.05
-Date: 2025-03-06
+Date: 2025-03-11
 Authors@R:
     c(person(given = "Samuel",
            family = "Pawel",
@@ -15,7 +15,6 @@ License: GPL-3
 Encoding: UTF-8
 Imports:
 Suggests: roxygen2, tinytest, knitr
-VignetteBuilder: knitr
 NeedsCompilation: no
 RoxygenNote: 7.3.1
 URL: https://github.com/SamCH93/twotrials
