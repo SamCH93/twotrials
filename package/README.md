@@ -57,5 +57,6 @@ print(results, digits = 2) # print summary of results
 
 plot(results, xlim = c(-1, 0.5), two.sided = TRUE) # plot p-value functions
 ```
+![Plot produced from plotting the twotrials object: Individual trial p-value functions and combined p-value functions based on the two-trials rule, meta-analysis, Tippett's method, Fisher's method, Pearson's method, and Edgington's method.](twotrials.png)
 
 <!-- png(filename = "twotrials.png", width = 1*800, height = 1*600, pointsize = 22); plot(results, xlim = c(-1, 0.5), two.sided = TRUE); dev.off() -->
