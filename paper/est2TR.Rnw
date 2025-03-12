@@ -274,10 +274,9 @@ meta-analytic $\Sexpr{100*(1 - 2*0.025^2)}\%$ CI from $\Sexpr{round(cimeta2[1],
 aligns with the two-trials rule decision. However, the level $\alpha = 0.025$ is
 arbitrary and it would be desirable to have a CI that is compatible with the
 two-trials rule for any level, which is still not the case. For example, for
-$\alpha = 0.05$, the two-trials rule would still not be fulfilled, while the $(1
-- 2 \, \alpha^2) \times 100\% = \Sexpr{100*(1 - 2*0.05^2)}\%$ meta-analytic CI
-from $\Sexpr{round(cimeta3[1], 2)}$ to $\Sexpr{round(cimeta3[2], 2)}$ would
-exclude zero.
+$\alpha = 0.05$, the two-trials rule is still not fulfilled, while the $(1 - 2
+\, \alpha^2) \times 100\% = \Sexpr{100*(1 - 2*0.05^2)}\%$ meta-analytic CI from
+$\Sexpr{round(cimeta3[1], 2)}$ to $\Sexpr{round(cimeta3[2], 2)}$ excludes zero.
 
 Despite the widespread use of the two-trials rule in regulatory decision-making
 \citep{Zhang2020}, it remains unclear how point and interval estimation should
