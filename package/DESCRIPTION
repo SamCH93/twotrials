@@ -1,6 +1,6 @@
 Package: twotrials
 Version: 0.05
-Date: 2025-03-11
+Date: 2025-03-12
 Authors@R:
     c(person(given = "Samuel",
            family = "Pawel",

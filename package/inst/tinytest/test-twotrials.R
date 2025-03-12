@@ -11,7 +11,7 @@ for (i in seq_along(res$pfuns)) {
     mtd <- names(res$pfuns)[i]
 
     print(expect_equal(f(res$summaries$lower[i]), 0.975,
-                       info = paste0(mtd, ": p(lower limit) should be 0.975"),
+                       info = paste0(mtd, ": p(lower 95% CI limit) should be 0.975"),
                        tol = 0.001))
 
     print(expect_equal(f(res$summaries$est[i]), 0.5,
@@ -19,6 +19,6 @@ for (i in seq_along(res$pfuns)) {
                        tol = 0.001))
 
     print(expect_equal(f(res$summaries$upper[i]), 0.025,
-                       info = paste0(mtd, ": p(upper CI limit) should be 0.025"),
+                       info = paste0(mtd, ": p(upper 95% CI limit) should be 0.025"),
                        tol = 0.001))
 }
