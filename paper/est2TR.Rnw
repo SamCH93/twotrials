@@ -282,28 +282,28 @@ exclude zero.
 Despite the widespread use of the two-trials rule in regulatory decision-making
 \citep{Zhang2020}, it remains unclear how point and interval estimation should
 be reconciled with it. This paper aims to resolve this issue with a new
-approach. The key idea is to look at both the two-trials rule and fixed-effect
-meta-analysis from the perspective of $p$-value functions
-\citep{Bender_etal2005, XieSingh2013, Fraser2019, InfangerSchmidt-Trucksass2019,
-  Marschner2024} and $p$-value combination methods \citep{HedgesOlkin1985,
-  Singh_etal2005, cousins2007annotated, Xie_etal2011, Heard2018}. The two-trials
-rule can be understood as a combined $p$-value function based on the squared
-maximum of two $p$-values \citep{Held2024} which is a special case of
-Wilkinson's combination method \citep{Wilkinson1951}, while fixed-effect
-meta-analysis corresponds to the combined $p$-value function based on Stouffer's
-$p$-value combination method \citep{Stouffer1949} with suitable weights. Both
-can be used to obtain combined $p$-values for the null hypothesis of no effect,
-CIs, and point estimates. These quantities are compatible in the sense that the
-(two-sided) $p$-value for a null value is less than $\alpha$ if and only if the
-null value is excluded by the $(1 - \alpha) \times 100\%$ CI, and that the point
-estimate is included in the CI at any confidence level $(1 - \alpha) \in (0,1)$.
-However, as we will show, the two methods implicitly target different estimands,
-which explains their different behaviors, and highlights the need to choose the
-method depending on the scientific question and corresponding estimand of
-interest. Moreover, the combined $p$-value function pespective suggests
-considering alternative $p$-value combination methods, for example, Edgington's
-sum of $p$-values method \citep{Edgington1972} or Fisher's method product of
-$p$-values method \citep{Fisher1934}.
+approach. The key idea is to look at both the two-trials rule and meta-analysis
+from the perspective of $p$-value functions \citep{Bender_etal2005,
+  XieSingh2013, Fraser2019, InfangerSchmidt-Trucksass2019, Marschner2024} and
+$p$-value combination methods \citep{HedgesOlkin1985, Singh_etal2005,
+  cousins2007annotated, Xie_etal2011, Heard2018}. The two-trials rule can be
+understood as a combined $p$-value function based on the squared maximum of two
+$p$-values \citep{Held2024} which is a special case of Wilkinson's combination
+method \citep{Wilkinson1951}, while meta-analysis corresponds to the combined
+$p$-value function based on Stouffer's $p$-value combination method
+\citep{Stouffer1949} with suitable weights. Both can be used to obtain combined
+$p$-values for the null hypothesis of no effect, CIs, and point estimates. These
+quantities are compatible in the sense that the (two-sided) $p$-value for a null
+value is less than $\alpha$ if and only if the null value is excluded by the $(1
+- \alpha) \times 100\%$ CI, and that the point estimate is included in the CI at
+any confidence level $(1 - \alpha) \in (0,1)$. However, as we will show, the two
+methods implicitly target different estimands, which explains their different
+behaviors, and highlights the need to choose the method depending on the
+scientific question and corresponding estimand of interest. Moreover, the
+combined $p$-value function pespective suggests considering alternative
+$p$-value combination methods, for example, Edgington's method based on the sum
+of $p$-values \citep{Edgington1972} or Fisher's method based on the product of
+$p$-values \citep{Fisher1934}.
 
 This paper is organized as follows: We begin by summarizing the general theory
 of combined $p$-value functions (Section~\ref{sec:combinedp}), followed by
@@ -441,9 +441,9 @@ axis(side = 2, at = c(alpha, 1), col.ticks = col, col.axis = col,
 arrows(x0 = ci[1], x1 = ci[2], y0 = -0.1, code = 3, length = 0.075, col = col, angle = 90)
 points(x = t, y = -0.1, col = col, pch = 20)
 @
-\caption{Illustration of a one-sided $p$-value function alternative = "greater"
-  (left plot), corresponding two-sided $p$-value function (right plot), and
-  corresponding 95\% CI and median estimate.}
+\caption{Illustration of a one-sided $p$-value function with alternative =
+  "greater" (left plot), corresponding two-sided $p$-value function (right
+  plot), and corresponding 95\% CI and median estimate.}
 \label{lab:pfunillustration}
 \end{figure}
 
@@ -511,9 +511,9 @@ Section~\ref{sec:application}.
     R function \texttt{twotrials::mu2TR}
     &
     -- Targets least extreme true effect (conservative) \newline
-    -- Mean-biased when trials have the same true effect \newline
-    -- CI shrinks to point with decreasing standard error \newline
-    -- Median estimate not equal to observed effect estimate when the same estimate in both trials
+    -- Mean-biased when trials have the same true effects \newline
+    -- CI shrinks to point with decreasing standard errors \newline
+    -- Median estimate not equal to observed effect estimates when the same estimates in both trials
     \\
 
     \textbf{Fixed-effect \newline meta-analysis} \newline Weighted Stouffer's method, inverse-normal method, Section~\ref{sec:fema} &
@@ -537,9 +537,9 @@ Section~\ref{sec:application}.
     R function \texttt{twotrials::muMA}
     &
     -- Targets weighted average effect (inverse squared standard error weights) \newline
-    -- Mean-unbiased when the same true effect \newline
-    -- CI shrinks to point with decreasing standard error \newline
-    -- Median estimate equals observed effect estimate when the same estimate in both trials
+    -- Mean-unbiased when the same true effects \newline
+    -- CI shrinks to point with decreasing standard errors \newline
+    -- Median estimate equals observed effect estimates when the same estimates in both trials
     \\
 
     \textbf{Tippett's method} \newline Minimum $p$-value, special case of Wilkinson's method, Section~\ref{sec:tippett} &
@@ -557,9 +557,9 @@ Section~\ref{sec:application}.
     R function \texttt{twotrials::muTippett}
     &
     -- Targets most extreme true effect (anti-conservative) \newline
-    -- Mean-biased when the same true effect \newline
-    -- CI shrinks to point with decreasing standard error \newline
-    -- Median estimate not equal to observed effect estimate when the same estimate in both trials
+    -- Mean-biased when the same true effects \newline
+    -- CI shrinks to point with decreasing standard errors \newline
+    -- Median estimate not equal to observed effect estimates when the same estimates in both trials
     \\
 
     \textbf{Fisher's method} \newline Product of $p$-values, Section~\ref{sec:fisher} &
@@ -579,8 +579,8 @@ Section~\ref{sec:application}.
     R function \texttt{twotrials::muFisher}
     &
     -- Targets most extreme true effect (anti-conservative) \newline
-    -- CI shrinks to point with decreasing standard error\newline
-    -- Median estimate not equal to observed effect estimate when the same estimate in both trials
+    -- CI shrinks to point with decreasing standard errors \newline
+    -- Median estimate not equal to observed effect estimates when the same estimates in both trials
     \\
 
     \textbf{Pearson's method} \newline Product of $1 - p$-values, Section~\ref{sec:fisher} &
@@ -599,8 +599,8 @@ Section~\ref{sec:application}.
     R function \texttt{twotrials::muPearson}
     &
     -- Targets least extreme true effect (conservative) \newline
-    -- CI shrinks to point with decreasing standard error \newline
-    -- Median estimate not equal to observed effect estimate when the same estimate in both trials
+    -- CI shrinks to point with decreasing standard errors \newline
+    -- Median estimate not equal to observed effect estimates when the same estimates in both trials
     \\
 
     \textbf{Edgington's method} \newline Sum of $p$-values, \newline Section~\ref{sec:edgington} &
@@ -628,9 +628,9 @@ Section~\ref{sec:application}.
      R function \texttt{twotrials::muEdgington}
     &
     -- Targets weighted average effect (inverse standard error weights) \newline
-    -- Mean-unbiased when the same true effect \newline
+    -- Mean-unbiased when the same true effects \newline
     -- CI asymptotically always includes both true effects (only shrinks to point when both are equal) \newline
-    -- Median estimate equals observed effect estimate when the same estimate in both trials
+    -- Median estimate equals observed effect estimates when the same estimates in both trials
     \\
     \bottomrule
   \end{tabular}
@@ -812,8 +812,8 @@ ggplot(data = pDF, aes(x = mu, y = p, color = type, linetype = type)) +
   (imprecise) or \Sexpr{nlarge} (precise), and in trial 2 to twice the sample
   size of trial 1. The two-sided $p$-value functions of the individual trials
   (dashed lines), and the combined $p$-value functions (solid lines) based on
-  fixed-effect meta-analysis, Edgington's, Fisher's, Tippett's, Pearson's
-  methods, and the two-trials rule are shown along with the corresponding
+  the two-trials rule, fixed-effect meta-analysis, Tippett's, Fisher's,
+  Pearson's, and Edgington's methods, and are shown along with the corresponding
   95\%~CIs and median estimates (top). All $p$-values are based on the
   alternative "\Sexpr{input_p}" and then converted to two-sided $p$-values via
   the centrality function $2\min\{p, 1 - p\}$.}
@@ -865,20 +865,23 @@ with
   = \frac{\hat{\theta}_{\text{MA}} - \mu}{\sigma_{\text{MA}}} \label{eq:zMeta}
 \end{align}
 where $\sigma_{\text{MA}}^{2} = 1/(1/\sigma_{1}^{2} + 1/\sigma_{2}^{2})$ and
-$\hat{\theta}_{\text{MA}} = (\hat{\theta}_{1}/\sigma_{1}^{2} +
-\hat{\theta}_{2}/\sigma_{2}^{2}) \, \sigma_{\text{MA}}^{2}$. The first equation
-in~\eqref{eq:zMeta} represents Stouffer's $p$-value combination method (after
-transforming $p$-values to $z$-values) using inverse standard errors as weights
-\citep{cousins2007annotated}, whereas the second equation in~\eqref{eq:zMeta}
-shows the corresponding representation via the meta-analytically pooled estimate
-$\hat{\theta}_{\text{MA}}$ and standard error $\sigma_{\text{MA}}$
-\citep{Borenstein2010}. While meta-analytic pooling could be extended to the
-random-effects model, this is typically not desired with only two studies for
-three reasons. First, the interest is in the true effects underlying the
-studies. Second, random-effects variance estimation is unreliable with only two
-studies. Finally, even if there is effect heterogeneity, fixed-effect
-meta-analysis is a valid procedure which estimates a well-defined average true
-effect \citep{Rice_etal2018}.
+\begin{align}
+  \label{eq:tMA}
+  \hat{\theta}_{\text{MA}} = \frac{\hat{\theta}_{1}/\sigma_{1}^{2} +
+    \hat{\theta}_{2}/\sigma_{2}^{2}}{1/\sigma_1^2 + 1/\sigma_2^2}
+\end{align}
+The first equation in~\eqref{eq:zMeta} represents Stouffer's $p$-value
+combination method (after transforming $p$-values to $z$-values) using inverse
+standard errors as weights \citep{cousins2007annotated}, whereas the second
+equation in~\eqref{eq:zMeta} shows the corresponding representation via the
+meta-analytically pooled estimate $\hat{\theta}_{\text{MA}}$ and standard error
+$\sigma_{\text{MA}}$ \citep{Borenstein2010}. While meta-analytic pooling could
+be extended to the random-effects model, this is typically not desired with only
+two studies for three reasons. First, the interest is in the true effects
+underlying the studies. Second, random-effects variance estimation is unreliable
+with only two studies. Finally, even if there is effect heterogeneity,
+fixed-effect meta-analysis is a valid procedure which estimates a well-defined
+average true effect \citep{Rice_etal2018}.
 
 \subsubsection{Effect estimation}
 To obtain meta-analytic CIs and point estimates we can also
@@ -929,12 +932,12 @@ weighted average is slightly closer to the estimate from trial 2.
 
 \section{Other \textit{p}-value combination methods}
 While the two-trials rule and meta-analysis are the most commonly used $p$-value
-combination methods in practice, several other combination methods exist. In
-this section, we examine Tippett's, Fisher's, Pearson's, and Edgington's
-methods, which can also be used to obtain combined effect estimates, CIs, and
-$p$-values. Although these methods are not standard in drug regulation, they may
-have useful properties in certain settings, as we will demonstrate in the
-following.
+combination methods in practice, several other combination methods exist
+\citep{HedgesOlkin1985}. In this section, we examine Tippett's, Fisher's,
+Pearson's, and Edgington's methods, which can also be used to obtain combined
+effect estimates, CIs, and $p$-values. Although these methods are not standard
+in drug regulation, they may have useful properties in certain settings, as we
+will demonstrate in the following.
 
 \subsection{Tippett's (minimum) method}
 \label{sec:tippett}
@@ -1138,16 +1141,16 @@ obtained in closed-form by
   \frac{\hat{\theta}_1/\sigma_1 + \hat{\theta}_2/\sigma_2}{1/\sigma_1 + 1/\sigma_2}
 \end{equation}
 so is a weighted average of the two effect estimates, as the meta-analytic point
-estimate. However, the weights from Edgington's method are equal to the inverse
-standard errors, whereas the weights from meta-analysis are equal to the inverse
-squared standard errors. Thus, Edgington's method gives more weight to smaller
-studies (those with larger standard errors) compared to meta-analysis. Moreover,
-since the expectation of the median estimate~\eqref{eq:edgingtonpointest} is
-again a weighted average of the true effects, it follows that Edgington's median
-estimate is unbiased when the true effects coincide ($\theta_1 = \theta_2 =
-\theta$), while in case they differ, the median estimate targets a weighted
-average of the true effects, though not the same weighted average as targeted by
-meta-analysis.
+estimate~\eqref{eq:tMA}. However, the weights from Edgington's method are equal
+to the inverse standard errors, whereas the weights from meta-analysis are equal
+to the inverse squared standard errors. Thus, Edgington's method gives more
+weight to smaller studies (those with larger standard errors) compared to
+meta-analysis. Moreover, since the expectation of the median
+estimate~\eqref{eq:edgingtonpointest} is again a weighted average of the true
+effects, it follows that Edgington's median estimate is unbiased when the true
+effects coincide ($\theta_1 = \theta_2 = \theta$), while in case they differ,
+the median estimate targets a weighted average of the true effects, though not
+the same weighted average as targeted by meta-analysis.
 
 In general, CIs for Edgington's method do not have closed-form solutions and
 must be computed numerically. Nevertheless, as with Pearson's and Fisher's
@@ -1206,7 +1209,7 @@ CI~\eqref{eq:edgingtonthesame} will shrink to the common true effect, which is
 illustrated in panel C of Figure~\ref{fig:extremeExamples}. However, when the
 true effects differ, the CI will not shrink to a point but remain an interval
 that always includes both true effects as the limiting combined estimation
-function is given by
+function is
 \begin{equation}
   \plim_{\sigma_1, \sigma_2 \downarrow 0} \hat{\mu}_{\text{E}}(a) =
   \begin{cases}
@@ -1230,7 +1233,7 @@ on data from two different pairs of clinical trials.
 
 \subsection{The RESPIRE trials}
 We first revisit the RESPIRE trials \citep{Aksamit2018, DeSoyza2018,
-  Chotirmall2018}, which were provided as motivating example in
+  Chotirmall2018}, which were presented as motivating example in
 Table~\ref{tab:respire} in the introduction. The trials investigated the effect
 of ciprofloxacin in the treatment of non-cystic fibrosis bronchiectasis. Each
 trial had two treatment groups (on/off treatment cycles of either 14 or 28 days
@@ -1349,11 +1352,12 @@ ggplot(data = RESPIREres$pDF, aes(x = mu, y = p, color = type, linetype = type))
   days (bottom) compared to placebo for the treatment of non-cystic fibrosis
   bronchiectasis. The two-sided $p$-value functions of the individual trials
   (dashed lines), and the combined $p$-value functions (solid lines) based on
-  the meta-analysis, Edgington's, Fisher's, Tippett's, Pearson's, methods, and
-  the two-trials rule are shown along with corresponding median estimates and
-  CIs (95\% and \Sexpr{round(100*(1 - 2*0.025^2),3)}\% via telescope lines). All
-  $p$-values are based on the alternative "\Sexpr{input_p}" and then converted
-  to two-sided $p$-values via the centrality function $2\min\{p, 1 - p\}$.}
+  the two-trials rule, fixed-effect meta-analysis, Tippett's, Fisher's,
+  Pearson's, and Edgington's methods are shown along with corresponding median
+  estimates and CIs (95\% and \Sexpr{round(100*(1 - 2*0.025^2),3)}\% via
+  telescope lines). All $p$-values are based on the alternative
+  "\Sexpr{input_p}" and then converted to two-sided $p$-values via the
+  centrality function $2\min\{p, 1 - p\}$.}
 \label{fig:twinstudies}
 \end{figure}
 
@@ -1392,29 +1396,28 @@ Looking at the combined point estimates, we can see that for both the 14-day and
 most anti-conservative for alternative = ``less''), while the estimate based on the
 two-trials rule is the largest (i.e., the most conservative). A similar but
 slightly attenuated pattern is seen for Fisher's (anti-conservative) and Pearson's
-(conservative) methods, while the estimates from meta-analysis and Edgington's
-method are virtually identical and fall somewhere between the individual trials'
+(conservative) methods, whereas the estimates from meta-analysis and Edgington's
+method are almost identical and fall somewhere between the individual trials'
 effect estimates. All point estimates are thus consistent with the theoretically
 expected behavior of the methods.
 
-Looking at the CIs, we can see that fixed-effect meta-analysis produces narrower
-CIs than the other methods for both treatment regimens. The widest CIs are
-produced by Edgington's method. For the 28-day regimen, Edgington's CI is the
-only method that includes both trial effect estimates, and as a result is even
-wider than the CIs from the individual trials, reflecting the apparent
-heterogeneity. Looking at the decision based on the CIs, we can see that for the
-14-day regimens, all 95\% CIs exclude a log rate ratio of zero, the value of no
-effect, while all \Sexpr{round(100*(1 - 2*0.025^2),3)}\% CIs include it.
-However, for the 28-day regimens, the 95\% CIs from meta-analysis, Fisher's, and
-Tippett's methods exclude zero. The other method's 95\% CIs include zero, but
-only Edgington's method includes also the point estimate from RESPIRE~2.
-Finally, the \Sexpr{round(100*(1 - 2*0.025^2),3)}\% CIs of all methods include
-zero, thus leading to identical decisions at the one-sided $0.025^2 =
-\Sexpr{0.025^2}$ level. Note that for each method, the decision based on the CI
-is compatible with the combined $p$-values in
-Table~\ref{tab:tabrespirecombined}, for example, a \Sexpr{round(100*(1 -
-  2*0.025^2),3)}\% CI excludes a log rate ratio of zero only if also the
-combined one-sided $p$-value is less than $\Sexpr{0.025^2}$.
+Looking at the CIs, we can see that meta-analysis produces narrower CIs than the
+other methods for both treatment regimens. The widest CIs are produced by
+Edgington's method. For the 28-day regimen, Edgington's CI is the only method
+that includes both trial effect estimates, and as a result is even wider than
+the CIs from the individual trials, reflecting the apparent heterogeneity.
+Looking at the decision based on the CIs, we can see that for the 14-day
+regimens, all 95\% CIs exclude a log rate ratio of zero, the value of no effect,
+while all \Sexpr{round(100*(1 - 2*0.025^2),3)}\% CIs include it. However, for
+the 28-day regimens, the 95\% CIs from meta-analysis, Fisher's, and Tippett's
+methods exclude zero. The other method's 95\% CIs include zero, but only
+Edgington's method includes also the point estimate from RESPIRE~2. Finally, the
+\Sexpr{round(100*(1 - 2*0.025^2),3)}\% CIs of all methods include zero, thus
+leading to identical decisions at the one-sided $0.025^2 = \Sexpr{0.025^2}$
+level. Note that for each method, the decision based on the CI is compatible
+with the combined $p$-values in Table~\ref{tab:tabrespirecombined}, for example,
+a \Sexpr{round(100*(1 - 2*0.025^2),3)}\% CI excludes a log rate ratio of zero
+only if also the combined one-sided $p$-value is less than $\Sexpr{0.025^2}$.
 
 \subsection{The ORBIT trials}
 Another pair of clinical trials that investigated the effect of ciprofloxacin
@@ -1489,12 +1492,12 @@ ggplot(data = ORBITres$pDF, aes(x = mu, y = p, color = type, linetype = type)) +
   ciprofloxacin in patients with non-cystic fibrosis bronchiectasis and chronic
   lung infection with \textit{Pseudomonas aeruginosa}. The two-sided $p$-value
   functions of the individual trials (dashed lines), and the combined $p$-value
-  functions (solid lines) based on meta-analysis, Edgington's, Fisher's,
-  Tippett's, Pearson's, methods, and the two-trials rule are shown along with
-  corresponding median estimates and CIs (95\% and \Sexpr{round(100*(1 -
-    2*0.025^2),3)}\% via telescope lines). All $p$-values are based on the
-  alternative "\Sexpr{input_p}" and then converted to two-sided $p$-values via
-  the centrality function $2\min\{p, 1 - p\}$.}
+  functions (solid lines) based on the two-trials rule, fixed-effect
+  meta-analysis, Tippett's, Fisher's, Pearson's, and Edgington's methods are
+  shown along with corresponding median estimates and CIs (95\% and
+  \Sexpr{round(100*(1 - 2*0.025^2),3)}\% via telescope lines). All $p$-values
+  are based on the alternative "\Sexpr{input_p}" and then converted to two-sided
+  $p$-values via the centrality function $2\min\{p, 1 - p\}$.}
 \label{fig:ORBIT}
 \end{figure}
 
@@ -1555,9 +1558,9 @@ others due to the substantial heterogeneity.
 In summary, the analyses of the RESPIRE and ORBIT trials showed how combined
 $p$-value functions allow us to obtain point estimates, CIs, and $p$-values that
 are inherently compatible. They also showed that different combination methods
-can lead to different conclusions about drug efficacy, especially in the
-presence of between-trial heterogeneity, highlighting the need to think about
-the estimand of interest.
+can lead to different inferential results, especially in the presence of
+between-trial heterogeneity, highlighting the need to think about the estimand
+of interest.
 
 \section{Extension to more than two trials}
 \label{sec:extensions}
@@ -1580,7 +1583,7 @@ While all point estimates and confidence intervals in this setting can be
 computed numerically, some of the analytical results derived earlier generalize
 to more than two studies. Specifically, closed-form median estimates and
 confidence intervals remain available for the two-trials rule, Tippett's method,
-and meta-analysis, whereas such closed-form solutions are not possible for
+and meta-analysis, whereas such closed-form solutions are not available for
 Fisher's, Pearson's, and Edgington's methods \citep{Held_etal2024b}. In
 particular, for Edgington's method, one might expect the median
 estimate~\eqref{eq:edgingtonpointest} to generalize by incorporating additional
@@ -1736,7 +1739,7 @@ two trials rule could now be defined by flagging drug efficacy when the $(1 -
 2\alpha^2) \times 100\% = 99.875\%$ excludes the null value. Following this
 rule, we can see that Fisher's method and meta-analysis lead to success while
 the remaining methods do not. In sum, this example illustrates how combined
-$p$-value functions can be applied to more than to studies, while allowing to
+$p$-value functions can be applied to more than two trials, while allowing to
 maintain the same type I error rate as for two trials.
 
 \section{Discussion}
@@ -1815,15 +1818,15 @@ combination method has the statistical properties to estimate the scientific
 effect of interest. Future research may also examine other combination methods
 beyond the ones considered here, such as the inverse chi-square method
 \citep{Lancaster1961, HedgesOlkin1985}, random-effects meta-analysis
-\citep{Borenstein2010}, and combination of $p$-value functions that are based on
-the exact distribution of the data rather than normality \citep[e.g., the
-  $p$-value function based on Fisher's exact test with mid-\textit{p} correction
-  as considered in ][]{Schweder2013, Held_etal2024b}. Additionally, fixed-effect
+\citep{Borenstein2010}, and combining $p$-value functions that are based on the
+exact distribution of the data rather than normality \citep[e.g., the $p$-value
+  function based on Fisher's exact test with mid-\textit{p} correction as
+  considered in ][]{Schweder2013, Held_etal2024b}. Additionally, fixed-effect
 meta-analysis has a Bayesian interpretation, corresponding to posterior
 inferences assuming equal true study effects and a flat prior distribution.
 Investigating whether other $p$-value combination methods have similar Bayesian
 justifications could be an interesting avenue for future work. To sum up,
-combined \textit{p}-value function provide a unified approach for combining
+combined \textit{p}-value functions provide a unified approach for combining
 results from two trials that can be further developed theoretically. Moreover,
 our software implementation allows researchers to conveniently apply these
 methods in practice.
@@ -1861,7 +1864,7 @@ via the R command \texttt{remotes::install\_github(repo = "SamCH93/twotrials",
 the package available on the Comprehensive R Archive Network (CRAN) after
 receiving community feedback.
 
-For every $p$-value combination method discussed in this paper the package
+For every $p$-value combination method discussed in this paper, the package
 provides a combined $p$-value function (e.g., \texttt{pEdgington}) and a
 combined estimation function (e.g., \texttt{muEdgington}). While these can be
 used to manually compute $p$-values and parameter estimates, the convenience
