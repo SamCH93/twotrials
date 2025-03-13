@@ -49,7 +49,7 @@
   Center for Reproducible Science (CRS) \\
   University of Zurich \\
   \texttt{\{samuel.pawel,malgorzata.roos,leonhard.held\}@uzh.ch} \\ ~ \\
-  March 11, 2025
+  March 13, 2025
 }
 
 %% hyperref options
@@ -1736,9 +1736,9 @@ median estimates based on Pearson's method and the two-trials rule are the most
 conservative. A decision rule that maintains the $\alpha^2 = 0.025^2$ type I
 error rate of the two trials rule could now be defined by flagging drug efficacy
 when the $(1 - 2\alpha^2) \times 100\% = 99.875\%$ excludes the null value.
-Following this rule, we can see that Fisher's method and meta-analysis lead to
-success while the remaining methods do not. In sum, this example illustrates how
-combined \textit{p}-value functions can be applied to more than two trials,
+Following this rule, we can see that Fisher's method and meta-analysis flag
+efficacy while the remaining methods do not. In sum, this example illustrates
+how combined \textit{p}-value functions can be applied to more than two trials,
 while allowing to maintain the same type I error rate as for two trials.
 
 \section{Discussion}
@@ -1845,12 +1845,12 @@ the ORBIT trials were extracted from page~219 in Haworth et al.
 \citep{Haworth2019}. Code and data to reproduce our analyses are openly
 available at \url{https://github.com/SamCH93/twotrials}. A snapshot of the
 repository at the time of writing is available at
-\url{https://doi.org/10.5281/zenodo.XXXXX}. We used the statistical programming
-language \Sexpr{R.Version()[["version.string"]]} for analyses \citep{R} along
-with the \texttt{confMeta} \citep{confMeta2024}, \texttt{ggplot2}
-\citep{Wickham2016}, \texttt{xtable} \citep{Dahl2019}, \texttt{kableExtra}
-\citep{Zhu2024}, \texttt{dplyr} \citep{Wickham2023}, and \texttt{knitr}
-\citep{Xie2015} packages.
+\url{https://doi.org/10.5281/zenodo.15017483}. We used the statistical
+programming language \Sexpr{R.Version()[["version.string"]]} for analyses
+\citep{R} along with the \texttt{confMeta} \citep{confMeta2024},
+\texttt{ggplot2} \citep{Wickham2016}, \texttt{xtable} \citep{Dahl2019},
+\texttt{kableExtra} \citep{Zhu2024}, \texttt{dplyr} \citep{Wickham2023}, and
+\texttt{knitr} \citep{Xie2015} packages.
 
 \begin{appendices}
 
