@@ -2,7 +2,7 @@
 
 This directory contains code and data related to the preprint
 
-> Pawel, S., Roos, M., Held. L. (2025). Combined P-value Functions for Compatible Effect Estimation and Hypothesis Testing in Drug Regulation.
+> Pawel, S., Roos, M., Held. L. (2025). Combined *P*-value Functions for Compatible Effect Estimation and Hypothesis Testing in Drug Regulation. <https://github.com/SamCH93/twotrials>
 
 ## Reproducibility
 
@@ -36,41 +36,49 @@ sessionInfo()
 
 #> R version 4.4.1 (2024-06-14)
 #> Platform: x86_64-pc-linux-gnu
-#> Running under: Ubuntu 22.04.5 LTS
+#> Running under: Ubuntu 24.04.2 LTS
 #> 
 #> Matrix products: default
-#> BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
-#> LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so;  LAPACK version 3.10.0
+#> BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.12.0 
+#> LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.12.0
 #> 
 #> locale:
-#>  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
-#>  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8    LC_PAPER=en_US.UTF-8       LC_NAME=C                 
-#>  [9] LC_ADDRESS=C               LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+#>  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+#>  [3] LC_TIME=de_CH.UTF-8        LC_COLLATE=en_US.UTF-8    
+#>  [5] LC_MONETARY=de_CH.UTF-8    LC_MESSAGES=en_US.UTF-8   
+#>  [7] LC_PAPER=de_CH.UTF-8       LC_NAME=C                 
+#>  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+#> [11] LC_MEASUREMENT=de_CH.UTF-8 LC_IDENTIFICATION=C       
 #> 
-#> time zone: Etc/UTC
+#> time zone: Europe/Zurich
 #> tzcode source: system (glibc)
 #> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets  methods   base     
 #> 
 #> other attached packages:
-#> [1] dplyr_1.1.4      kableExtra_1.4.0 twotrials_0.05   ggplot2_3.5.1    confMeta_0.4.2   xtable_1.8-4    
-#> [7] knitr_1.48      
+#> [1] dplyr_1.1.4      kableExtra_1.4.0 twotrials_0.05   ggplot2_3.5.1   
+#> [5] confMeta_0.4.2   xtable_1.8-4     knitr_1.48      
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] utf8_1.2.4               generics_0.1.3           xml2_1.3.6               stringi_1.8.4           
-#>  [5] lattice_0.22-6           digest_0.6.37            lme4_1.1-35.5            hms_1.1.3               
-#>  [9] magrittr_2.0.3           evaluate_1.0.1           grid_4.4.1               meta_7.0-0              
-#> [13] fastmap_1.2.0            CompQuadForm_1.4.3       Matrix_1.7-0             purrr_1.0.2             
-#> [17] fansi_1.0.6              viridisLite_0.4.2        scales_1.3.0             numDeriv_2016.8-1.1     
-#> [21] cli_3.6.3                rlang_1.1.4              ReplicationSuccess_1.3.3 munsell_0.5.1           
-#> [25] splines_4.4.1            withr_3.0.2              tools_4.4.1              tzdb_0.4.0              
-#> [29] nloptr_2.1.1             minqa_1.2.8              metafor_4.6-0            colorspace_2.1-1        
-#> [33] mathjaxr_1.6-0           boot_1.3-30              vctrs_0.6.5              R6_2.5.1                
-#> [37] lifecycle_1.0.4          stringr_1.5.1            MASS_7.3-60.2            pkgconfig_2.0.3         
-#> [41] pillar_1.9.0             gtable_0.3.6             glue_1.8.0               Rcpp_1.0.13             
-#> [45] systemfonts_1.1.0        xfun_0.48                tibble_3.2.1             tidyselect_1.2.1        
-#> [49] rstudioapi_0.17.1        farver_2.1.2             htmltools_0.5.8.1        nlme_3.1-164            
-#> [53] patchwork_1.3.0          labeling_0.4.3           svglite_2.1.3            rmarkdown_2.28          
-#> [57] readr_2.1.5              compiler_4.4.1           metadat_1.2-0  
+#>  [1] generics_0.1.3           xml2_1.3.6               stringi_1.8.4           
+#>  [4] lattice_0.22-6           lme4_1.1-36              hms_1.1.3               
+#>  [7] digest_0.6.37            magrittr_2.0.3           evaluate_0.24.0         
+#> [10] grid_4.4.1               meta_8.0-2               fastmap_1.2.0           
+#> [13] CompQuadForm_1.4.3       Matrix_1.7-2             purrr_1.0.4             
+#> [16] viridisLite_0.4.2        scales_1.3.0             numDeriv_2016.8-1.1     
+#> [19] reformulas_0.4.0         Rdpack_2.6.2             cli_3.6.4               
+#> [22] rlang_1.1.5              rbibutils_2.3            ReplicationSuccess_1.3.3
+#> [25] munsell_0.5.1            splines_4.4.1            withr_3.0.2             
+#> [28] tools_4.4.1              tzdb_0.4.0               nloptr_2.1.1            
+#> [31] minqa_1.2.8              metafor_4.8-0            colorspace_2.1-1        
+#> [34] mathjaxr_1.6-0           boot_1.3-30              vctrs_0.6.5             
+#> [37] R6_2.6.1                 lifecycle_1.0.4          stringr_1.5.1           
+#> [40] MASS_7.3-64              pkgconfig_2.0.3          pillar_1.10.1           
+#> [43] gtable_0.3.6             glue_1.8.0               Rcpp_1.0.14             
+#> [46] systemfonts_1.1.0        xfun_0.49                tibble_3.2.1            
+#> [49] tidyselect_1.2.1         rstudioapi_0.16.0        farver_2.1.2            
+#> [52] htmltools_0.5.8.1        nlme_3.1-167             patchwork_1.3.0         
+#> [55] labeling_0.4.3           svglite_2.1.3            rmarkdown_2.27          
+#> [58] readr_2.1.5              compiler_4.4.1           metadat_1.5-0 
 ```

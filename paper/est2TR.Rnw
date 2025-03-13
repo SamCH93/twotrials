@@ -1014,18 +1014,18 @@ while the combined \textit{p}-value function based on Pearson's method
   p_{\text{P}}(\mu) =
   \Pr\left(\chi^{2}_{4} \leq -2 [\log\{1 - p_{1}(\mu)\} + \log \{1 - p_{2}(\mu)\}]\right).
 \end{equation}
-\citet{Pearson1934} proposed also another method based on the maximum of the
-test statistics underlying the \textit{p}-values~\eqref{eq:fisher}
+Pearson \citep{Pearson1934} proposed also another method based on the maximum of
+the test statistics underlying the \textit{p}-values~\eqref{eq:fisher}
 and~\eqref{eq:pearson}, but we will not consider this method here as its test
 statistic does not have an exact null distribution \citep{Owen2009}. As with the
 two-trials rule and Tippett's method, the combined \textit{p}-value functions of
-Fisher's and Pearson's methods are related in the sense that the \textit{p}-value
-function based on Fisher's method and the alternative hypothesis ``greater'' is
-the same as one minus the \textit{p}-value function based on Pearson's method and the
-alternative ``less'', and vice versa \citep{Held_etal2024b}. As we will show in
-the following, Fisher's method also acts in a similar anti-conservative way as
-Tippett's method, while Pearson's method acts in a similar conservative way as
-the two-trials rule.
+Fisher's and Pearson's methods are related in the sense that the
+\textit{p}-value function based on Fisher's method and the alternative
+hypothesis ``greater'' is the same as one minus the \textit{p}-value function
+based on Pearson's method and the alternative ``less'', and vice versa
+\citep{Held_etal2024b}. As we will show in the following, Fisher's method also
+acts in a similar anti-conservative way as Tippett's method, while Pearson's
+method acts in a similar conservative way as the two-trials rule.
 
 \subsubsection{Effect estimation}
 CIs and point estimates based on Fisher's and Pearson's methods
@@ -1555,18 +1555,18 @@ decisions at the $0.025^2$ level. Again, Edgington's CI is much wider than the
 others due to the substantial heterogeneity.
 
 In summary, the analyses of the RESPIRE and ORBIT trials showed how combined
-\textit{p}-value functions allow us to obtain point estimates, CIs, and \textit{p}-values that
-are inherently compatible. They also showed that different combination methods
-can lead to different inferential results, especially in the presence of
-between-trial heterogeneity, highlighting the need to think about the estimand
-of interest.
+\textit{p}-value functions allow us to obtain point estimates, CIs, and
+\textit{p}-values that are inherently compatible. They also showed that
+different combination methods can lead to different inferences and decisions,
+especially in the presence of between-trial heterogeneity, highlighting the need
+to think about the estimand of interest.
 
 \section{Extension to more than two trials}
 \label{sec:extensions}
 The methods discussed so far have focused on the setting where only two trials
 are available, but in practice it may happen that investigators want to assess
-the combined evidence from more than two trials. In this context,
-\citet{Rosenkranz2023} suggested that decision rules should maintain the type I
+the combined evidence from more than two trials. In this context, Rosenkranz
+\citep{Rosenkranz2023} suggested that decision rules should maintain the type I
 error rate of the two-trials rule for two studies $\alpha^2$, even if there are
 more than two studies. This can be implemented using combined \textit{p}-value
 functions, as all methods considered before can be generalized to more than two
@@ -1725,21 +1725,21 @@ ggplot(data = pDF, aes(x = mu, y = p, color = method, linetype = method)) +
 \label{fig:respireall}
 \end{figure}
 
-Figure~\ref{fig:respireall} shows \textit{p}-value functions that combine all four
-results from the two RESPIRE trials, as also done by \citet{Chotirmall2018} with
-fixed-effect meta-analysis. Looking at the median estimates, we see the same
-patterns as when the methods are applied to only two trials; The median
-estimates from meta-analysis and Edgington's method are somewhere in between the
-trials' individual estimates. The median estimates based on Fisher's and
-Tippett's method are the most anti-conservative, and the median estimates based
-on Pearson's method and the two-trials rule are the most conservative. A
-decision rule that maintains the $\alpha^2 = 0.025^2$ type I error rate of the
-two trials rule could now be defined by flagging drug efficacy when the $(1 -
-2\alpha^2) \times 100\% = 99.875\%$ excludes the null value. Following this
-rule, we can see that Fisher's method and meta-analysis lead to success while
-the remaining methods do not. In sum, this example illustrates how combined
-\textit{p}-value functions can be applied to more than two trials, while allowing to
-maintain the same type I error rate as for two trials.
+Figure~\ref{fig:respireall} shows \textit{p}-value functions that combine all
+four results from the two RESPIRE trials, as also done by Chotirmall and
+Chalmers \citep{Chotirmall2018} with fixed-effect meta-analysis. Looking at the
+median estimates, we see the same patterns as when the methods are applied to
+only two trials; The median estimates from meta-analysis and Edgington's method
+are somewhere in between the trials' individual estimates. The median estimates
+based on Fisher's and Tippett's method are the most anti-conservative, and the
+median estimates based on Pearson's method and the two-trials rule are the most
+conservative. A decision rule that maintains the $\alpha^2 = 0.025^2$ type I
+error rate of the two trials rule could now be defined by flagging drug efficacy
+when the $(1 - 2\alpha^2) \times 100\% = 99.875\%$ excludes the null value.
+Following this rule, we can see that Fisher's method and meta-analysis lead to
+success while the remaining methods do not. In sum, this example illustrates how
+combined \textit{p}-value functions can be applied to more than two trials,
+while allowing to maintain the same type I error rate as for two trials.
 
 \section{Discussion}
 \label{sec:discussion}
@@ -1839,11 +1839,12 @@ methods in practice.
 We declare no conflict of interest.
 
 \section*{Software and data}
-Data from the RESPIRE trials were extracted from Table~3 in \citet{DeSoyza2018}
-and Table~3 in \citet{Aksamit2018}. Data from the ORBIT trials were extracted
-from page~219 in \citet{Haworth2019}. Code and data to reproduce our analyses
-are openly available at \url{https://github.com/SamCH93/twotrials}. A snapshot
-of the repository at the time of writing is available at
+Data from the RESPIRE trials were extracted from Table~3 in De Soyza et al.
+\citep{DeSoyza2018} and Table~3 in Aksamit et al. \citep{Aksamit2018}. Data from
+the ORBIT trials were extracted from page~219 in Haworth et al.
+\citep{Haworth2019}. Code and data to reproduce our analyses are openly
+available at \url{https://github.com/SamCH93/twotrials}. A snapshot of the
+repository at the time of writing is available at
 \url{https://doi.org/10.5281/zenodo.XXXXX}. We used the statistical programming
 language \Sexpr{R.Version()[["version.string"]]} for analyses \citep{R} along
 with the \texttt{confMeta} \citep{confMeta2024}, \texttt{ggplot2}
@@ -1941,9 +1942,10 @@ According to the assumptions stated at the beginning of
 Section~\ref{sec:combinedp}, $\hat{\theta}_1$ and $\hat{\theta}_2$ are
 independent normal random variables with means $\theta_1, \theta_2$, and
 variances $\sigma_1^2,\sigma_2^2$. We can therefore use the results from
-\citet{Nadarajah2008} on closed-form expressions for the moments of minima and
-maxima of bivariate Gaussian random vectors. That is, using their equations (9)
-and (11), it can be shown that the expectations of $Y$ and $X$ are given by
+Nadarajah and Kotz \citep{Nadarajah2008} on closed-form expressions for the
+moments of minima and maxima of bivariate Gaussian random vectors. That is,
+using their equations (9) and (11), it can be shown that the expectations of $Y$
+and $X$ are given by
 \begin{align*}
   E(Y) =&
   (\theta_1 - \sigma_1 \, q) \times \Phi\left(\frac{\theta_1 - \theta_2 + q (\sigma_2 - \sigma_1)}{\sqrt{\sigma_1^2 + \sigma_2^2}}\right)
@@ -2283,7 +2285,7 @@ to $\max\{\theta_1,\theta_2\}$.
 \onehalfspacing % Reset line spacing to 1.5 from here on
 {\small
 %% \bibliographystyle{apalikedoiurl}
-\bibliographystyle{unsrtnat}
+\bibliographystyle{wileyNJD-AMA} %{unsrtnat}
 \bibliography{bibliography}
 }
 

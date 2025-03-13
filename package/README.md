@@ -4,7 +4,7 @@ The **twotrials** R package implements combined *p*-value functions for two
 trials along with compatible combined point and interval estimates. The
 theoretical background of the package is described in
 
-> Pawel, S., Roos, M., Held, L. (2025). Combined P-Value Functions for Compatible Effect Estimation and Hypothesis Testing in Drug Regulation.
+> Pawel, S., Roos, M., Held. L. (2025). Combined *P*-value Functions for Compatible Effect Estimation and Hypothesis Testing in Drug Regulation. <https://github.com/SamCH93/twotrials>
 
 ## Installation
 
@@ -19,9 +19,9 @@ remotes::install_github(repo = "SamCH93/twotrials", subdir = "package")
 
 ## Usage 
 
-The **twotrials** package provides six different $p$-value combination method
+The **twotrials** package provides six different *p*-value combination method
 based on which combined *p*-values, parameter estimates, and confidence
-intervals can be computed. For each method, there is a combined $p$-value
+intervals can be computed. For each method, there is a combined *p*-value
 function (e.g., `pEdgington`) and a combined estimation function (e.g.,
 `muEdgington`). While these can be used to manually compute *p*-values and
 parameter estimates, the convenience function `twotrials` automatically computes
