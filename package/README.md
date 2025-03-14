@@ -4,7 +4,7 @@ The **twotrials** R package implements combined *p*-value functions for two
 trials along with compatible combined point and interval estimates. The
 theoretical background of the package is described in
 
-> Pawel, S., Roos, M., Held. L. (2025). Combined *P*-value Functions for Compatible Effect Estimation and Hypothesis Testing in Drug Regulation. <https://github.com/SamCH93/twotrials>
+> Pawel, S., Roos, M., Held. L. (2025). Combined *P*-value Functions for Compatible Effect Estimation and Hypothesis Testing in Drug Regulation. <https://doi.org/10.48550/arXiv.2503.10246>
 
 ## Installation
 

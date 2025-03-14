@@ -2,7 +2,8 @@ citHeader(paste("To cite the R-package 'twotrails' in publications,",
                 "please use:",
                 "Pawel, S., Roos, M., Held, L.",
                 "(2025).",
-                "Combined P-value Functions for Compatible Effect Estimation and Hypothesis Testing in Drug Regulation."))
+                "Combined P-value Functions for Compatible Effect Estimation and Hypothesis Testing in Drug Regulation.",
+                "https://doi.org/10.48550/arXiv.2503.10246"))
 
 bibentry(bibtype = "Misc",
          title = "Compatible Effect Estimation and Hypothesis Testing in Drug Regulation",
@@ -14,6 +15,6 @@ bibentry(bibtype = "Misc",
          ## volume = "",
          ## number = "",
          ## pages = "",
-         ## doi = "10.48550/ARXIV.XXXXX",
+         doi = "10.48550/arXiv.2503.10246",
          year = "2025"
          )
