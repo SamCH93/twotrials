@@ -18,8 +18,7 @@ remotes::install_github("felix-hof/confMeta")
 ```
 
 and then rerunning the code in `paper/est2TR.R`. To recompile the manuscript
-make sure to have LaTeX installed (tested only with TeX Live 2023/Debian) and
-the Wiley NJD LaTeX template files in the `paper/` directory. Then run
+make sure to have LaTeX installed (tested only with TeX Live 2023/Debian) and the Wiley NJD LaTeX template [files](https://authorservices.wiley.com/author-resources/Journal-Authors/Prepare/new-journal-design.html) in the `paper/` directory. Then run
 
 ``` sh
 make
