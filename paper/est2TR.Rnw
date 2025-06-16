@@ -743,7 +743,7 @@ so the median estimate from the two-trials rule exhibits a conservative bias in
 both cases.
 
 Another interesting operating characteristic is the standard error of the median
-estimate, elaborated in more detiail in Appendix~\ref{app:ses}. Notably, the
+estimate, elaborated in more detail in Appendix~\ref{app:ses}. Notably, the
 standard error of the two-trials rule depends not only on the standard errors of
 the trials, but also on the true trial effects.
 
@@ -1209,14 +1209,15 @@ The standard error of Edgington's median estimate is given by
 \end{equation}
 and is always larger than the meta-analytic standard error~\eqref{eq:seMA}, see
 Appendix~\ref{app:ses}. Therefore, under effect homogeneity, Edgington's method
-is less efficient thanmet a-analysis at estimating the common effect. Under
+is less efficient than meta-analysis at estimating the common effect. Under
 effect heterogeneity, however, the two methods target different estimands, so a
-comparison of their standard errors is not meaningful. Finally, Edgington's
-standard error is not always equal or smaller than either of the two trials'
-standard errors. This is only the case if the standard error ratio is $\sqrt{2}
-- 1 \leq \sigma_2/\sigma_1 \leq \sqrt{2} + 1$. For example, suppose $\sigma_1 =
-0.5$ and $\sigma_2 = 2$, then Edgington's standard error is $\sqrt{2}/(2 + 0.5)
-= \Sexpr{round(sqrt(2)/(2 + 0.5), 3)}$, which is greater than $\sigma_1$
+comparison of their standard errors is not meaningful. Finally, unlike
+meta-analysis, Edgington's standard error is not always smaller or equal to
+either of the two trials' standard errors. This is only the case if the standard
+error ratio is $\sqrt{2} - 1 \leq \sigma_2/\sigma_1 \leq \sqrt{2} + 1$. For
+example, suppose $\sigma_1 = 0.5$ and $\sigma_2 = 2$, then Edgington's standard
+error is $\sqrt{2}/(2 + 0.5) = \Sexpr{round(sqrt(2)/(2 + 0.5), 3)}$, which is
+greater than $\sigma_1$
 
 In general, CIs for Edgington's method do not have closed-form solutions and
 must be computed numerically. Nevertheless, as with Pearson's and Fisher's
@@ -1503,8 +1504,9 @@ It is interesting to consider the median estimate as a weighted average of the
 trial specific point estimates, and to determine the corresponding (implicit)
 weights. Table~\ref{tab:tabrespirecombined} reports the weight of the point
 estimate from RESPIRE 1 toward the median estimate (the weight from RESPIRE 2 is
-one minus the weight from RESPIRE 1).%%  These weights were computed by solving
-%% $\hat{\mu}(1/2) = w\hat{\theta}_1 + (1 - w) \hat{\theta}_2$ for the weight $w$.
+one minus the weight from RESPIRE 1).
+%%  These weights were computed by solving $\hat{\mu}(1/2) = w\hat{\theta}_1 +
+%% (1 - w) \hat{\theta}_2$ for the weight $w$.
 It is visible that the more extreme estimate (RESPIRE 1 in the 14-day group, and
 RESPIRE 2 in the 28-day group) contributes more to Tippett's and Fisher's
 estimates and less to Pearson's and the two-trials rule estimates, which aligns
