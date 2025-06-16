@@ -1,61 +1,29 @@
-\documentclass[a4paper, 11pt]{article}
+\documentclass[AMA,Times1COL]{WileyNJDv5}
 \usepackage{amsmath, amssymb} % math
 \usepackage{array} % math
-\usepackage{doi} % automatic doi-links
-\usepackage[square,numbers,sort&compress]{natbib} % bibliography
 \usepackage{multirow} % multicolumn and multirow
 \usepackage{booktabs} % nicer tables
-\usepackage[title]{appendix} % better appendices
 \usepackage{nameref} % reference appendices with names
 \usepackage[dvipsnames,table]{xcolor}
-%% \usepackage[onehalfspacing]{setspace} % more space
-\usepackage[doublespacing]{setspace} % more space
-\usepackage{helvet}
-\usepackage{mathpazo}
-\usepackage{sectsty} % use different fonts for different sections
-\allsectionsfont{\sffamily} % for sections use sans serif
-\usepackage[labelfont={bf,sf},font=small]{caption} % customize captions
 \usepackage{orcidlink} % for ORCID symbol with link
 \definecolor{lightgray}{gray}{0.9} % color for tables
 \usepackage{pdflscape} % rotated landscape
 \usepackage{afterpage} % floating landscape
 \DeclareMathOperator*{\plim}{plim} % limit in probability
 
-%% margins
-\usepackage{geometry}
-\geometry{
-  a4paper,
-  total={170mm,257mm},
-  left=20mm,
-  right=20mm,
-  top=30mm,
-  bottom=25mm,
-}
-
-%% title, authors, affiliations, mail
-\title{\vspace{-3em} \textbf{\textsf{
-      Combined \textit{P}-value Functions for Compatible Effect Estimation and
-      Hypothesis Testing in Drug Regulation
-}}}
-\author{
-  Samuel Pawel \orcidlink{0000-0003-2779-320X}
-  \and
-  Małgorzata Roos \orcidlink{0000-0001-9878-6969}
-  \and
-  Leonhard Held \orcidlink{0000-0002-8686-5325}
-}
-\date{
-  Epidemiology, Biostatistics and Prevention Institute (EBPI) \\
-  Center for Reproducible Science (CRS) \\
-  University of Zurich \\
-  \texttt{\{samuel.pawel,malgorzata.roos,leonhard.held\}@uzh.ch} \\ ~ \\
-  March 13, 2025
-}
+\articletype{Research Article}%
+\received{}
+\revised{}
+\accepted{}
+\journal{}
+\volume{}
+\copyyear{}
+\startpage{}
+\raggedbottom
 
 %% hyperref options
-\usepackage{hyperref}  
 \hypersetup{
-  bookmarksopen=true, 
+  bookmarksopen=true,
   breaklinks=true,
   pdfsubject={},
   pdfkeywords={},
@@ -84,7 +52,6 @@ Reproducibility <- TRUE
 @
 << "package" >>=
 ## packages
-library(xtable)
 library(confMeta)
 library(ggplot2)
 library(twotrials)
@@ -155,11 +122,44 @@ selogrr4 <- (cilogrr4[2] - cilogrr4[1])/(2*qnorm(p = 0.975))
 @
 
 \begin{document}
-\maketitle
 
-%% should be less than 250 words
-\begin{abstract}
-  \noindent The two-trials rule in drug regulation requires statistically
+%% %% title, authors, affiliations, mail
+%% \title{\vspace{-3em} \textbf{\textsf{
+%%       Combined \textit{P}-value Functions for Compatible Effect Estimation and
+%%       Hypothesis Testing in Drug Regulation
+%% }}}
+%% \author{
+%%   Samuel Pawel \orcidlink{0000-0003-2779-320X}
+%%   \and
+%%   Małgorzata Roos \orcidlink{0000-0001-9878-6969}
+%%   \and
+%%   Leonhard Held \orcidlink{0000-0002-8686-5325}
+%% }
+%% \date{
+%%   Epidemiology, Biostatistics and Prevention Institute (EBPI) \\
+%%   Center for Reproducible Science (CRS) \\
+%%   University of Zurich \\
+%%   \texttt{\{samuel.pawel,malgorzata.roos,leonhard.held\}@uzh.ch} \\ ~ \\
+%%   March 13, 2025
+%% }
+
+\title{Combined \textit{P}-value Functions for Compatible Effect Estimation and Hypothesis Testing in Drug Regulation}
+
+\author{Samuel Pawel}
+
+\author{Małgorzata Roos}
+
+\author{Leonhard Held}
+
+\authormark{Pawel \textsc{et al.}}
+\titlemark{Combined \textit{P}-value Functions for Compatible Effect Estimation and Hypothesis Testing in Drug Regulation}
+
+\address{\orgdiv{Epidemiology, Biostatistics and Prevention Institute (EBPI), Center for Reproducible Science (CRS)}, \orgname{University of Zurich}, \orgaddress{\state{Zurich}, \country{Switzerland}}}
+
+
+\corres{Samuel Pawel, Epidemiology, Biostatistics and Prevention Institute, Hirschengraben 84, 8001, Zurich, Switzerland. \email{samuel.pawel@uzh.ch}}
+
+\abstract[Abstract]{The two-trials rule in drug regulation requires statistically
   significant results from two pivotal trials to demonstrate efficacy. However,
   it is unclear how the effect estimates from both trials should be combined to
   quantify the drug effect. Fixed-effect meta-analysis is commonly used but may
@@ -183,13 +183,13 @@ selogrr4 <- (cilogrr4[2] - cilogrr4[1])/(2*qnorm(p = 0.975))
   may be appropriate depending on the estimand of interest. We implement
   combined \textit{p}-value function inference for two trials in the R package
   \texttt{twotrials}, allowing researchers to easily perform compatible
-  hypothesis testing and parameter estimation.
+  hypothesis testing and effect estimation.}
 
-  \noindent \textit{Keywords}: Confidence interval, estimand, median estimate,
-  meta-analysis, two-trials rule
-\end{abstract}
+\keywords{Confidence interval, estimand, median estimate, meta-analysis,
+  two-trials rule}
 
-%% TODO shorten abstract
+
+\maketitle
 
 \section{Introduction}
 
@@ -208,7 +208,7 @@ compatible with the two-trials rule. The meta-analytic CI may exclude the null
 value while the two-trials rule is not fulfilled, leading to discrepancies that
 are difficult to interpret and communicate.
 
-<< "respire-trials" >>=
+<< "RESPIRE-trials" >>=
 ## RESPIRE trials
 t1 <- logrr14r1
 t2 <- logrr14r2
@@ -253,11 +253,11 @@ $\Sexpr{round(cimeta[2], 2)}$ and thus excludes the value of 0.
     \toprule
     & \multicolumn{1}{c}{\textbf{Log rate ratio}} & \textbf{Confidence interval (95\%)} & \multicolumn{1}{c}{\textbf{\textit{P}-value (one-sided)}} \\
     \midrule
-    RESPIRE 1 & $\Sexpr{round(t1, 2)}$ & $[\Sexpr{round(ci1, 2)}]$ & $\Sexpr{round(p1, 3)}$ \\
+    RESPIRE 1 & $\Sexpr{round(t1, 2)}$ & $\Sexpr{round(ci1[1], 2)}$ to $\Sexpr{round(ci1[2], 2)}$ & $\Sexpr{round(p1, 3)}$ \\
 
-    RESPIRE 2 & $\Sexpr{round(t2, 2)}$ & $[\Sexpr{paste0(ifelse(ci2 > 0, "~~~ ", " "), round(ci2, 2))}]$ & $\Sexpr{round(p2, 3)}$ \\
+    RESPIRE 2 & $\Sexpr{round(t2, 2)}$ & $\Sexpr{round(ci2[1], 2)}$ to $\phantom{-}\Sexpr{round(ci2[2], 2)}$ & $\Sexpr{round(p2, 3)}$ \\
     \midrule
-    Meta-analysis & $\Sexpr{round(tmeta, 2)}$ & $[\Sexpr{round(cimeta, 2)}]$ & $\Sexpr{round(pmeta, 3)}$ \\
+    Meta-analysis & $\Sexpr{round(tmeta, 2)}$ & $\Sexpr{round(cimeta[1], 2)}$ to $\Sexpr{round(cimeta[2], 2)}$ & $\Sexpr{round(pmeta, 3)}$ \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -286,23 +286,28 @@ from the perspective of \textit{p}-value functions \citep{Bender_etal2005,
   XieSingh2013, Fraser2019, InfangerSchmidt-Trucksass2019, Marschner2024} and
 \textit{p}-value combination methods \citep{HedgesOlkin1985, Singh_etal2005,
   cousins2007annotated, Xie_etal2011, Heard2018}. The two-trials rule can be
-understood as a combined \textit{p}-value function based on the squared maximum of two
-\textit{p}-values \citep{Held2024} which is a special case of Wilkinson's combination
-method \citep{Wilkinson1951}, while meta-analysis corresponds to the combined
-\textit{p}-value function based on Stouffer's \textit{p}-value combination method
-\citep{Stouffer1949} with suitable weights. Both can be used to obtain combined
-\textit{p}-values for the null hypothesis of no effect, CIs, and point estimates. These
-quantities are compatible in the sense that the (two-sided) \textit{p}-value for a null
-value is less than $\alpha$ if and only if the null value is excluded by the $(1
-- \alpha) \times 100\%$ CI, and that the point estimate is included in the CI at
-any confidence level $(1 - \alpha) \in (0,1)$. However, as we will show, the two
-methods implicitly target different estimands, which explains their different
-behaviors, and highlights the need to choose the method depending on the
-scientific question and corresponding estimand of interest. Moreover, the
-combined \textit{p}-value function pespective suggests considering alternative
-\textit{p}-value combination methods, for example, Edgington's method based on the sum
-of \textit{p}-values \citep{Edgington1972} or Fisher's method based on the product of
-\textit{p}-values \citep{Fisher1934}.
+understood as a combined \textit{p}-value function based on the squared maximum
+of two \textit{p}-values \citep{Held2024} which is a special case of Wilkinson's
+combination method \citep{Wilkinson1951}, while meta-analysis corresponds to the
+combined \textit{p}-value function based on Stouffer's \textit{p}-value
+combination method \citep{Stouffer1949} with suitable weights. Both can be used
+to obtain combined \textit{p}-values for the null hypothesis of no effect, CIs,
+and point estimates. These quantities are compatible in the sense that the
+(two-sided) \textit{p}-value for a null value is less than $\alpha$ if and only
+if the null value is excluded by the $(1 - \alpha) \times 100\%$ CI, and that
+the point estimate is included in the CI at any confidence level $(1 - \alpha)
+\in (0,1)$. However, as we will show, the two methods implicitly target
+different estimands, which explains their different behaviors, and highlights
+the need to choose the method depending on the scientific question and
+corresponding estimand of interest. Moreover, the combined \textit{p}-value
+function pespective suggests considering alternative \textit{p}-value
+combination methods, for example, Edgington's method based on the sum of
+\textit{p}-values \citep{Edgington1972} or Fisher's method based on the product
+of \textit{p}-values \citep{Fisher1934}. All these \textit{p}-value combination
+methods have been studied before in terms of hypothesis testing properties, such
+as admissibility or monotonicity \citep{Birnbaum1954, HedgesOlkin1985}. In this
+paper, we take an alternative estimation perspective motivated by practical
+issues in drug regulation.
 
 This paper is organized as follows: We begin by summarizing the general theory
 of combined \textit{p}-value functions (Section~\ref{sec:combinedp}), followed by
@@ -356,7 +361,7 @@ communicate \citep{Held_etal2024b}.
 
 A combined \textit{p}-value function $p(\mu)$ is then defined by the function $g$
 \begin{equation*}
-  p(\mu) = g\left(p_{1}(\mu), p_{2}(\mu)\right)
+  p(\mu) = g\left(p_{1}(\mu), p_{2}(\mu)\right),
 \end{equation*}
 which combines the individual \textit{p}-value functions $p_{1}(\mu)$ and $p_{2}(\mu)$
 into a \textit{p}-value function $p(\mu)$, which is a valid \textit{p}-value function in the
@@ -406,7 +411,7 @@ pfun1 <- pfunnorm(mu = museq, t = t, se = se)
 alpha <- 0.05
 ci <- t + c(-1, 1)*se*qnorm(p = 1 - alpha/2)
 plot(museq, pfun1, type = "l", lwd = 1.5, xlab = "", ylim = c(0, 1),
-     ylab = bquote(italic(P) * "-value"), xaxt = "n", yaxt = "n")
+     ylab = bquote(italic(p) * "-value (one-sided)"), xaxt = "n", yaxt = "n")
 mtext(side = 1, text = bquote(mu), line = 1.5)
 axis(side = 2, at = pbks)
 segments(x0 = c(ci[1], t, ci[2]), y0 = c(alpha/2, 0.5, 1 - alpha/2), y1 = -0.02,
@@ -424,7 +429,7 @@ points(x = t, y = -0.1, col = col, pch = 20)
 
 plot(museq, 2*pmin(pfun1, 1 - pfun1), type = "l", lwd = 1.5, xlab = "",
      ylim = c(0, 1),
-     ylab = bquote("2min{" * italic(P) * "-value," * 1 - italic(P) * "-value}"),
+     ylab = bquote(italic(p) * "-value (two-sided)"),
      xaxt = "n", yaxt = "n")
 mtext(side = 1, text = bquote(mu), line = 1.5)
 axis(side = 2, at = pbks)
@@ -486,8 +491,8 @@ Section~\ref{sec:application}.
     $a = 1 - \alpha/2$, respectively.}
   \label{tab:summaries}
   \rowcolors{1}{}{gray!15}
-  \resizebox{1.08\linewidth}{!}{%
-  \begin{tabular}{p{0.15\linewidth}   p{0.33\linewidth}  p{0.32\linewidth}  >{\footnotesize}p{0.3\linewidth}}
+  \resizebox{1\linewidth}{!}{%
+  \begin{tabular}{p{0.11\linewidth}   p{0.22\linewidth}  p{0.22\linewidth}  >{\footnotesize}p{0.26\linewidth}}
     \toprule
     \multicolumn{1}{c}{\textbf{Method}} &
     \multicolumn{1}{c}{\textbf{Combined \textit{p}-value function}} &
@@ -512,7 +517,8 @@ Section~\ref{sec:application}.
     -- Targets least extreme true effect (conservative) \newline
     -- Mean-biased when trials have the same true effects \newline
     -- CI shrinks to point with decreasing standard errors \newline
-    -- Median estimate not equal to observed effect estimates when the same estimates in both trials
+    -- Median estimate not equal to observed effect estimates when the same estimates in both trials \newline
+    -- Median estimate standard error can be larger than trial standard errors
     \\
 
     \textbf{Fixed-effect \newline meta-analysis} \newline Weighted Stouffer's method, inverse-normal method, Section~\ref{sec:fema} &
@@ -538,7 +544,8 @@ Section~\ref{sec:application}.
     -- Targets weighted average effect (inverse squared standard error weights) \newline
     -- Mean-unbiased when the same true effects \newline
     -- CI shrinks to point with decreasing standard errors \newline
-    -- Median estimate equals observed effect estimates when the same estimates in both trials
+    -- Median estimate equals observed effect estimates when the same estimates in both trials \newline
+    -- Median estimate standard error cannot be larger than trial standard errors
     \\
 
     \textbf{Tippett's method} \newline Minimum \textit{p}-value, special case of Wilkinson's method, Section~\ref{sec:tippett} &
@@ -558,7 +565,8 @@ Section~\ref{sec:application}.
     -- Targets most extreme true effect (anti-conservative) \newline
     -- Mean-biased when the same true effects \newline
     -- CI shrinks to point with decreasing standard errors \newline
-    -- Median estimate not equal to observed effect estimates when the same estimates in both trials
+    -- Median estimate not equal to observed effect estimates when the same estimates in both trials \newline
+    -- Median estimate standard error can be larger than trial standard errors
     \\
 
     \textbf{Fisher's method} \newline Product of \textit{p}-values, Section~\ref{sec:fisher} &
@@ -579,7 +587,8 @@ Section~\ref{sec:application}.
     &
     -- Targets most extreme true effect (anti-conservative) \newline
     -- CI shrinks to point with decreasing standard errors \newline
-    -- Median estimate not equal to observed effect estimates when the same estimates in both trials
+    -- Median estimate not equal to observed effect estimates when the same estimates in both trials \newline
+    -- Median estimate standard error can be larger than trial standard errors
     \\
 
     \textbf{Pearson's method} \newline Product of $1 - p$-values, Section~\ref{sec:fisher} &
@@ -599,7 +608,8 @@ Section~\ref{sec:application}.
     &
     -- Targets least extreme true effect (conservative) \newline
     -- CI shrinks to point with decreasing standard errors \newline
-    -- Median estimate not equal to observed effect estimates when the same estimates in both trials
+    -- Median estimate not equal to observed effect estimates when the same estimates in both trials \newline
+    -- Median estimate standard error can be larger than trial standard errors
     \\
 
     \textbf{Edgington's method} \newline Sum of \textit{p}-values, \newline Section~\ref{sec:edgington} &
@@ -629,7 +639,8 @@ Section~\ref{sec:application}.
     -- Targets weighted average effect (inverse standard error weights) \newline
     -- Mean-unbiased when the same true effects \newline
     -- CI asymptotically always includes both true effects (only shrinks to point when both are equal) \newline
-    -- Median estimate equals observed effect estimates when the same estimates in both trials
+    -- Median estimate equals observed effect estimates when the same estimates in both trials \newline
+    -- Median estimate standard error can be larger than trial standard errors
     \\
     \bottomrule
   \end{tabular}
@@ -638,7 +649,6 @@ Section~\ref{sec:application}.
 \endgroup
 \end{landscape}
 }
-
 
 \subsection{The two-trials rule (maximum method)}
 \label{sec:2tr}
@@ -732,8 +742,29 @@ show that the median estimate for the alternative "less" is positively biased,
 so the median estimate from the two-trials rule exhibits a conservative bias in
 both cases.
 
+Another interesting operating characteristic is the standard error of the median
+estimate, elaborated in more detiail in Appendix~\ref{app:ses}. Notably, the
+standard error of the two-trials rule depends not only on the standard errors of
+the trials, but also on the true trial effects.
+
+An intuitively desirable property is that the standard error of a combined
+estimate should not be larger than either of the trials' standard errors.
+Assuming again that the true trial effects and standard errors coincide, the
+two-trials rule satisfies, as the standard error takes the simple form
+\begin{equation*}
+  \label{eq:se2tr}
+  \sigma_{\text{2TR}} =
+  %% \sqrt{\mathrm{Var}\left[\hat{\mu}_{\text{2TR}}(1/2)\right]} =
+  \sigma \sqrt{1 - 1/\pi}
+  \approx \sigma \times 0.83,
+\end{equation*}
+so is approximately $17\%$ smaller than the standard errors of each individual
+trial. However, this is no longer the case when the trial standard errors
+differ, see Appendix~\ref{app:ses}.
+
+
 \begin{figure}[!htb]
-<< "hypothetical-examples", fig.height = 5.5 >>=
+<< "hypothetical-examples", fig.height = 5 >>=
 c <- 2 # relative sample size of study 2 to study 1
 nsmall <- 5 # small per-group sample size
 nlarge <- 500 # big per-group sample size
@@ -763,7 +794,7 @@ resList <- lapply(X = seq(1, nrow(settingsgrid)), FUN = function(i) {
     colnames(isummaries)[1] <- "type"
     colnames(summaries)[1] <- "type"
     list("p" = data.frame(plotres, settingsgrid[i,]),
-         "summaries" = data.frame(rbind(isummaries, summaries), settingsgrid[i,]))
+         "summaries" = data.frame(rbind(isummaries, summaries[,1:5]), settingsgrid[i,]))
 })
 pDF <- do.call("rbind", lapply(X = resList, function(x) x$p))
 summariesDF <- do.call("rbind", lapply(X = resList, function(x) x$summaries))
@@ -799,7 +830,7 @@ ggplot(data = pDF, aes(x = mu, y = p, color = type, linetype = type)) +
                                            breaks = c(seq(0, 0.75, 0.25), 0.95),
                                            labels = scales::percent,
                                            name = "Confidence")) +
-    labs(x = "Effect size", y = bquote(italic(P) * "-value"),
+    labs(x = "Effect size", y = bquote(italic(p) * "-value"),
          color = NULL, linetype = NULL) +
     theme_bw() +
     theme(panel.grid.minor = element_blank(),
@@ -863,18 +894,23 @@ with
   = \frac{Z_{1}/\sigma_{1} + Z_{2}/\sigma_{2}}{\sqrt{1/\sigma_{1}^{2} + 1/\sigma_{2}^{2}}}
   = \frac{\hat{\theta}_{\text{MA}} - \mu}{\sigma_{\text{MA}}} \label{eq:zMeta}
 \end{align}
-where $\sigma_{\text{MA}}^{2} = 1/(1/\sigma_{1}^{2} + 1/\sigma_{2}^{2})$ and
+where
 \begin{align}
   \label{eq:tMA}
-  \hat{\theta}_{\text{MA}} = \frac{\hat{\theta}_{1}/\sigma_{1}^{2} +
+ \hat{\theta}_{\text{MA}} = \frac{\hat{\theta}_{1}/\sigma_{1}^{2} +
     \hat{\theta}_{2}/\sigma_{2}^{2}}{1/\sigma_1^2 + 1/\sigma_2^2}
 \end{align}
+and
+\begin{align}
+  \label{eq:seMA}
+  \sigma_{\text{MA}} = \frac{1}{\sqrt{1/\sigma_{1}^{2} + 1/\sigma_{2}^{2}}}.
+\end{align}
 The first equation in~\eqref{eq:zMeta} represents Stouffer's \textit{p}-value
-combination method (after transforming \textit{p}-values to $z$-values) using inverse
-standard errors as weights \citep{cousins2007annotated}, whereas the second
-equation in~\eqref{eq:zMeta} shows the corresponding representation via the
-meta-analytically pooled estimate $\hat{\theta}_{\text{MA}}$ and standard error
-$\sigma_{\text{MA}}$ \citep{Borenstein2010}. While meta-analytic pooling could
+combination method (after transforming \textit{p}-values to $z$-values) using
+inverse standard errors as weights \citep{cousins2007annotated}, whereas the
+second equation in~\eqref{eq:zMeta} shows the corresponding representation via
+the meta-analytically pooled estimate~\eqref{eq:tMA} and standard
+error~\eqref{eq:seMA} \citep{Borenstein2010}. While meta-analytic pooling could
 be extended to the random-effects model, this is typically not desired with only
 two studies for three reasons. First, the interest is in the true effects
 underlying the studies. Second, random-effects variance estimation is unreliable
@@ -897,6 +933,15 @@ When $a = 1/2$ we obtain $\hat{\theta}_{\text{MA}}$ as the median estimate,
 while $a = \alpha/2$ and $a = 1 - \alpha/2$ give the limits of the $(1 -\alpha)
 \times 100\%$ CI corresponding to the usual fixed-effect
 meta-analytic Wald CI.
+
+The standard error of the meta-analytic median estimate is given by
+$\sigma_{\text{MA}}$ from~\eqref{eq:seMA}, and it has two desirable properties:
+First, it it is never larger than either of trials' standard errors
+($\sigma_{\text{MA}} \leq \min\{\sigma_1, \sigma_2\}$). Second, under effect
+homogeneity, the standard error is the smallest among all unbiased estimators of
+the common effect \citep{HedgesOlkin1985}. Both properties do not hold for the
+two-trials rule and the other \textit{p}-value combination methods discussed
+below.
 
 \subsubsection{Asymptotics}
 Since the meta-analytic combined estimation function is a linear combination of
@@ -967,13 +1012,17 @@ with the combined estimation function
 The similarity to the two-trials rule is again visible as~\eqref{eq:tippest}
 looks similar to the estimation function from the two-trials
 rule~\eqref{eq:2trialsest} with the minimum and maximum flipped and using
-different normal quantiles. We can see that when the observed effect estimates
-are the same ($\hat{\theta}_1 = \hat{\theta}_2 = \hat{\theta}$), the median
-estimate ($a = 1/2$) based on Tippett's method is not equal to $\hat{\theta}$
-but shifted from it, as the two-trials rule (see panels A and C in
-Figure~\ref{fig:extremeExamples} for an illustration). Similarly, CIs obtained
-from Tippett's method are typically skewed in the sense that the distances
-between the point estimate and the upper and lower limits are not the same.
+different normal quantiles. The same median estimates are obtained (i.e.,
+$\hat{\mu}_{\text{2TR}}(1/2) = \hat{\mu}_{\text{T}}(1/2)$) if opposite
+alternatives are specified.
+
+We can see that when the observed effect estimates are the same ($\hat{\theta}_1
+= \hat{\theta}_2 = \hat{\theta}$), the median estimate ($a = 1/2$) based on
+Tippett's method is not equal to $\hat{\theta}$ but shifted from it, as the
+two-trials rule (see panels A and C in Figure~\ref{fig:extremeExamples} for an
+illustration). Similarly, CIs obtained from Tippett's method are typically
+skewed in the sense that the distances between the point estimate and the upper
+and lower limits are not the same.
 
 \subsubsection{Asymptotics}
 It can be shown that as the standard errors $\sigma_1$ and $\sigma_2$ decrease,
@@ -1151,6 +1200,24 @@ effects coincide ($\theta_1 = \theta_2 = \theta$), while in case they differ,
 the median estimate targets a weighted average of the true effects, though not
 the same weighted average as targeted by meta-analysis.
 
+The standard error of Edgington's median estimate is given by
+\begin{equation}
+  \label{eq:se2E}
+  %% \sqrt{\mathrm{Var}\left[\hat{\mu}_{\text{E}}(1/2)\right]} =
+  \sigma_{\text{E}} =
+  \frac{\sqrt{2}}{1/\sigma_1 + 1/\sigma_2}
+\end{equation}
+and is always larger than the meta-analytic standard error~\eqref{eq:seMA}, see
+Appendix~\ref{app:ses}. Therefore, under effect homogeneity, Edgington's method
+is less efficient thanmet a-analysis at estimating the common effect. Under
+effect heterogeneity, however, the two methods target different estimands, so a
+comparison of their standard errors is not meaningful. Finally, Edgington's
+standard error is not always equal or smaller than either of the two trials'
+standard errors. This is only the case if the standard error ratio is $\sqrt{2}
+- 1 \leq \sigma_2/\sigma_1 \leq \sqrt{2} + 1$. For example, suppose $\sigma_1 =
+0.5$ and $\sigma_2 = 2$, then Edgington's standard error is $\sqrt{2}/(2 + 0.5)
+= \Sexpr{round(sqrt(2)/(2 + 0.5), 3)}$, which is greater than $\sigma_1$
+
 In general, CIs for Edgington's method do not have closed-form solutions and
 must be computed numerically. Nevertheless, as with Pearson's and Fisher's
 methods, a closed-form combined estimation function is available when the effect
@@ -1219,8 +1286,8 @@ function is
 \end{equation}
 see Appendix~\ref{app:approxmu} for details. This means that CIs based on
 Edgington's method will asymptotically always include both true effects, even
-when the trials' sample sizes become arbitrarily large, see
-Figure~\ref{fig:extremeExamples}D for an illustration. This behavior is
+when the trials' sample sizes become arbitrarily large, see panel D of
+Figure~\ref{fig:extremeExamples} for an illustration. This behavior is
 strikingly different from meta-analysis whose CI shrinks to a point at the
 weighted average, even when the true effects are not the same.
 
@@ -1257,7 +1324,7 @@ numerical form. Of note, all results were computed with our R package
 14-day treatment group can be reproduced.
 
 \begin{figure}[!htb]
-<< "RESPIRE-analysis", fig.height = 5.5 >>=
+<< "RESPIRE-analysis", fig.height = 5 >>=
 ## wrapper function to compute combined CIs, median estimates, and p-values
 resFun <- function(t1, t2, se1, se2, labels, xlim, alternative, alpha, null,
                    lab1, lab2) {
@@ -1274,6 +1341,7 @@ resFun <- function(t1, t2, se1, se2, labels, xlim, alternative, alpha, null,
         colnames(plotres)[1] <- "type"
         colnames(res$isummaries)[1] <- "type"
         colnames(res$summaries)[1] <- "type"
+        res$isummaries$w2 <- res$isummaries$w1 <- NA
         summaries <- rbind(res$isummaries, res$summaries)
         summaries$lower2 <- c(NA, NA, res2$summaries$lower)
         summaries$upper2 <- c(NA, NA, res2$summaries$upper)
@@ -1304,6 +1372,14 @@ RESPIREres <- resFun(t1 = c(logrr14r1, logrr28r1),
                      alternative = "less", alpha = 0.05, null = 0,
                      lab1 = "RESPIRE 1", lab2 = "RESPIRE 2")
 names(cols)[1:2] <- names(lty)[1:2] <- c("RESPIRE 1", "RESPIRE 2")
+
+## ## save results as CSV
+## RESPIREres$summariesDF |>
+##         select(type, labels, lower, est, upper, p0, w1, w2) |>
+##     rename("Type" = type, "Regimen" = labels, "Lower 95% CL" = lower,
+##            "Point estimate" = est, "Upper 95% CL" = upper, "P-value" = p0,
+##            "Weight RESPIRE 1" = w1, "Weight RESPIRE 2" = w2) |>
+##     write.csv(file = "data/RESPIRE.csv", row.names = FALSE)
 
 ## plot results
 ggplot(data = RESPIREres$pDF, aes(x = mu, y = p, color = type, linetype = type)) +
@@ -1340,7 +1416,7 @@ ggplot(data = RESPIREres$pDF, aes(x = mu, y = p, color = type, linetype = type))
              x = -0.1, y = -0.025, size = 2.75) +
      annotate(geom = "text", alpha = 0.8, label = "Harm",
              x = 0.1, y = -0.025, size = 2.75) +
-    labs(x = "Log rate ratio", y = bquote(italic(P) * "-value"),
+    labs(x = "Log rate ratio", y = bquote(italic(p) * "-value"),
          color = NULL, linetype = NULL) +
     theme_bw() +
     theme(panel.grid.minor = element_blank(),
@@ -1362,22 +1438,45 @@ ggplot(data = RESPIREres$pDF, aes(x = mu, y = p, color = type, linetype = type))
 
 \begin{table}[!htb]
   \centering
-  \caption{Point estimates, 95\% CIs, and \textit{p}-values for
-    the RESPIRE trials \citep{Aksamit2018, DeSoyza2018, Chotirmall2018}.}
+  \caption{Point estimates (with implicit weights), 95\% CIs (with widths), and
+    \textit{p}-values for the RESPIRE trials \citep{Aksamit2018, DeSoyza2018,
+      Chotirmall2018}.}
   \label{tab:tabrespirecombined}
-<< results = "asis" >>=
+<< "table-RESPIRE", results = "asis" >>=
+formatNumberLaTeX. <- function(number, digits = 2) {
+    if (is.na(number)) {
+        return("$ $")
+    }
+    sprintfString <- paste0("%.", digits, "f")
+    numberRound <- sprintf(sprintfString, number)
+    if (number >= 0) {
+        numberRound <- paste0("\\phantom{-}", numberRound)
+    }
+    paste0("$", numberRound, "$")
+}
+formatNumberLaTeX <- Vectorize(FUN = formatNumberLaTeX.)
+formatCILaTeX <- function(lower, upper, digits = 2) {
+    paste0(formatNumberLaTeX(number = lower, digits = digits),
+           " to ",
+           formatNumberLaTeX(number = upper, digits = digits))
+}
+
+dig <- 2
+digPvals <- 5
 RESPIREtab <- RESPIREres$summariesDF |>
-    mutate(ciwidth = upper - lower,
-           across(c(lower, est, upper, ciwidth), ~ paste0("$",
-                                                          sprintf("%.2f", .x), "$")),
-           p0 =  paste0("$", sprintf("%.5f", p0), "$")) |>
-    select(labels, type, lower, est, upper, ciwidth, p0)
+    mutate(est = formatNumberLaTeX(number = est, digits = dig),
+           w1 = formatNumberLaTeX(number = w1, digits = dig),
+           ci = formatCILaTeX(lower = lower, upper = upper, digits = dig),
+           ciwidth = formatNumberLaTeX(number = upper - lower, digits = dig),
+           p0 = formatNumberLaTeX(number = p0, digits = digPvals)
+           ) |>
+    select(labels, type, est, w1, ci, ciwidth, p0)
 kable(RESPIREtab |> select(-labels),
-      format = "latex", booktabs = TRUE, align = "lrrrcc",
+      format = "latex", booktabs = TRUE, align = "lcccccc",
       col.names = c("",
-                    "\\textbf{Lower CI}",
                     "\\textbf{Log rate ratio}",
-                    "\\textbf{Upper CI}",
+                    "\\textbf{Weight RESPIRE 1}",
+                    "\\textbf{95\\% CI}",
                     "\\textbf{CI width}",
                     "\\textbf{\\textit{P}-value (one-sided)}"),
       bold = TRUE, escape = FALSE) |>
@@ -1392,13 +1491,27 @@ kable(RESPIREtab |> select(-labels),
 
 Looking at the combined point estimates, we can see that for both the 14-day and
 28-day regimens, the estimate based on Tippett's method is the smallest (i.e.,
-most anti-conservative for alternative = ``less''), while the estimate based on the
-two-trials rule is the largest (i.e., the most conservative). A similar but
-slightly attenuated pattern is seen for Fisher's (anti-conservative) and Pearson's
-(conservative) methods, whereas the estimates from meta-analysis and Edgington's
-method are almost identical and fall somewhere between the individual trials'
-effect estimates. All point estimates are thus consistent with the theoretically
-expected behavior of the methods.
+most anti-conservative for alternative = ``less''), while the estimate based on
+the two-trials rule is the largest (i.e., the most conservative). A similar but
+slightly attenuated pattern is seen for Fisher's (anti-conservative) and
+Pearson's (conservative) methods, whereas the estimates from meta-analysis and
+Edgington's method are almost identical and fall somewhere between the
+individual trials' effect estimates. All point estimates are thus consistent
+with the theoretically expected behavior of the methods.
+
+It is interesting to consider the median estimate as a weighted average of the
+trial specific point estimates, and to determine the corresponding (implicit)
+weights. Table~\ref{tab:tabrespirecombined} reports the weight of the point
+estimate from RESPIRE 1 toward the median estimate (the weight from RESPIRE 2 is
+one minus the weight from RESPIRE 1).%%  These weights were computed by solving
+%% $\hat{\mu}(1/2) = w\hat{\theta}_1 + (1 - w) \hat{\theta}_2$ for the weight $w$.
+It is visible that the more extreme estimate (RESPIRE 1 in the 14-day group, and
+RESPIRE 2 in the 28-day group) contributes more to Tippett's and Fisher's
+estimates and less to Pearson's and the two-trials rule estimates, which aligns
+with the expected behavior. Similarly, the weight of RESPIRE 1 is slightly
+larger for Edgington's method than meta-analysis because Edgington's estimate
+gives more weights to trials with larger standard errors due to its inverse
+standard error weighting.
 
 Looking at the CIs, we can see that meta-analysis produces narrower CIs than the
 other methods for both treatment regimens. The widest CIs are produced by
@@ -1431,7 +1544,7 @@ endpoint (frequency of exacerbations; effect quantified with a log rate ratio).
 Table~\ref{tab:taborbitcombined} gives numerical summaries.
 
 \begin{figure}[!tb]
-<< "ORBIT-analysis", fig.height = 5.5 >>=
+<< "ORBIT-analysis", fig.height = 5 >>=
 ## compute results for ORBIT trials
 ORBITres <- resFun(t1 = c(loghr3, logrr3),
                    se1 = c(seloghr3, selogrr3),
@@ -1445,6 +1558,14 @@ ORBITres <- resFun(t1 = c(loghr3, logrr3),
                    alternative = "less", alpha = 0.05, null = 0,
                    lab1 = "ORBIT 3", lab2 = "ORBIT 4")
 names(cols)[1:2] <- names(lty)[1:2] <- c("ORBIT 3", "ORBIT 4")
+
+## ## save ORBIT results as CSV
+## ORBITres$summariesDF |>
+##         select(type, labels, lower, est, upper, p0, w1, w2) |>
+##     rename(Type = type, Endpoint = labels, "Lower 95% CL" = lower,
+##            "Point estimate" = est, "Upper 95% CL" = upper, "P-value" = p0,
+##            "Weight ORBIT 3" = w1, "Weight ORBIT 4" = w2) |>
+##     write.csv(file = "data/ORBIT.csv", row.names = FALSE)
 
 ## plot results
 ggplot(data = ORBITres$pDF, aes(x = mu, y = p, color = type, linetype = type)) +
@@ -1481,7 +1602,7 @@ ggplot(data = ORBITres$pDF, aes(x = mu, y = p, color = type, linetype = type)) +
              x = -0.1, y = -0.025, size = 2.75) +
      annotate(geom = "text", alpha = 0.8, label = "Harm",
              x = 0.1, y = -0.025, size = 2.75) +
-    labs(x = "Effect size", y = bquote(italic(P) * "-value"),
+    labs(x = "Effect size", y = bquote(italic(p) * "-value"),
          color = NULL, linetype = NULL) +
     theme_bw() +
     theme(panel.grid.minor = element_blank(),
@@ -1513,31 +1634,33 @@ and $0.025^2$ levels.
 
 \begin{table}[!htb]
   \centering
-  \caption{Point estimates, 95\% CIs, and \textit{p}-values for the ORBIT trials
-    \citep{Haworth2019}.}
+  \caption{Point estimates (with implicit weights), 95\% CIs (with widths), and
+    \textit{p}-values for the ORBIT trials \citep{Haworth2019}.}
   \label{tab:taborbitcombined}
 << "table-ORBIT", results = "asis" >>=
 ORBITtab <- ORBITres$summariesDF |>
-    mutate(ciwidth = upper - lower,
-           across(c(lower, est, upper, ciwidth), ~ paste0("$",
-                                                          sprintf("%.2f", .x), "$")),
-           p0 =  paste0("$", sprintf("%.5f", p0), "$")) |>
-    select(labels, type, lower, est, upper, ciwidth, p0)
+    mutate(est = formatNumberLaTeX(number = est, digits = dig),
+           w1 = formatNumberLaTeX(number = w1, digits = dig),
+           ci = formatCILaTeX(lower = lower, upper = upper, digits = dig),
+           ciwidth = formatNumberLaTeX(number = upper - lower, digits = dig),
+           p0 = formatNumberLaTeX(number = p0, digits = digPvals)
+           ) |>
+    select(labels, type, est, w1, ci, ciwidth, p0)
 kable(ORBITtab |> select(-labels),
-      format = "latex", booktabs = TRUE, align = "lrrrcc",
+      format = "latex", booktabs = TRUE, align = "lcccccc",
       col.names = c("",
-                    "\\textbf{Lower CI}",
-                    "\\textbf{Estimate}",
-                    "\\textbf{Lower CI}",
+                    "\\textbf{Log rate ratio}",
+                    "\\textbf{Weight ORBIT 3}",
+                    "\\textbf{95\\% CI}",
                     "\\textbf{CI width}",
                     "\\textbf{\\textit{P}-value (one-sided)}"),
       bold = TRUE, escape = FALSE) |>
-    pack_rows("\\textit{Primary endpoint (log hazard ratio)}", 1, 8, escape = FALSE,
-              bold = FALSE) |>
-    pack_rows("\\textit{Secondary endpoint (log rate ratio)}", 9, 16, escape = FALSE,
-              bold = FALSE) |>
+    pack_rows("\\textit{Primary endpoint (log hazard ratio)}", 1, 8,
+              escape = FALSE, bold = FALSE, italic = TRUE) |>
+    pack_rows("\\textit{Secondary endpoint (log rate ratio)}", 9, 16,
+              escape = FALSE, bold = FALSE, italic = TRUE) |>
     row_spec(c(2, 10), hline_after = TRUE) |>
-    row_spec(seq(1, nrow(ORBITtab), by = 2), background = "#F0F0F0")
+    row_spec(seq(1, nrow(RESPIREtab), by = 2), background = "#F0F0F0")
 @
 \end{table}
 
@@ -1592,7 +1715,7 @@ the inverse standard error weighted average in~\eqref{eq:edgingtonpointest}
 corresponds to Edgington's median estimate only in the setting of two trials.
 
 \begin{figure}[!htb]
-<< "morethan2", fig.height = 3.25 >>=
+<< "more-than-2-trials", fig.height = 3 >>=
 ## parameters
 museq <- seq(-1, 0.5, length.out = 5000)
 input_p <- "less"
@@ -1707,7 +1830,7 @@ ggplot(data = pDF, aes(x = mu, y = p, color = method, linetype = method)) +
              x = -0.1, y = -0.025, size = 2.75) +
     annotate(geom = "text", alpha = 0.8, label = "Harm",
              x = 0.1, y = -0.025, size = 2.75) +
-    labs(x = "Log rate ratio", y = bquote(italic(P) * "-value"),
+    labs(x = "Log rate ratio", y = bquote(italic(p) * "-value"),
          color = NULL, linetype = NULL) +
     theme_bw() +
     theme(panel.grid.minor = element_blank(),
@@ -1761,52 +1884,84 @@ Investigators could therefore report not only individual trial \textit{p}-values
 (essentially the two-trials rule) and meta-analytic estimates but also point
 estimates and CIs based on the two-trials rule.
 
-Our findings also clarify how different \textit{p}-value combination methods implicitly
-target different estimands. Reassuringly, under effect homogeneity (i.e., the
-same true effect in both trials), all methods yield consistent point estimates
-and CIs that shrink toward the true effect as standard errors decrease, although
-some show bias. Theoretically, meta-analysis has the smallest variance among all
-unbiased estimators (attaining the Cramér-Rao lower bound) and may be preferred.
-However, under effect heterogeneity -- arguably the more realistic scenario --
-it is less clear which method should be recommended. The two-trials rule and
-Pearson's method are conservative (targeting the less extreme effect), Fisher's
-and Tippett's methods are anti-conservative (targeting the more extreme effect),
-while Edgington's method and meta-analysis are balanced (targeting a weighted
-average). This raises an important question: What kind of effect is of
-scientific interest when the true trial effects differ? If the investigators are
-interested in the less extreme effect -- arguably a sensible choice when the
-effects relate to a medical treatment with potential side effects -- then the
-two-trials rule and Pearson's method seem reasonable. On the other hand, a
-weighted average effect, as targeted by meta-analysis and Edgington's method,
-might be a relevant estimand if it is representative for a larger population
-\citep{Rice_etal2018}. Finally, the more extreme effect might be the relevant
-estimand if the maximum achievable benefit of a treatment is of scientific
-interest, in which case Tippett's and Fisher's methods might be reasonable
-choices.
+Our findings also clarify how different \textit{p}-value combination methods
+implicitly target different estimands. Reassuringly, under effect homogeneity
+(i.e., the same true effect in both trials), all methods yield consistent point
+estimates and CIs that shrink toward the true effect as standard errors
+decrease, although some show bias. Theoretically, meta-analysis has the smallest
+variance among all unbiased estimators (attaining the Cramér-Rao lower bound)
+and may be preferred. However, under effect heterogeneity -- arguably the more
+realistic scenario -- it is less clear which method should be recommended. The
+two-trials rule and Pearson's method are conservative (targeting the less
+extreme effect), Fisher's and Tippett's methods are anti-conservative (targeting
+the more extreme effect), while Edgington's method and meta-analysis are
+balanced (targeting a weighted average). This raises an important question: What
+kind of effect is of scientific interest when the true trial effects differ? If
+the investigators are interested in the less extreme effect -- arguably a
+sensible choice when the effects relate to a medical treatment with potential
+side effects -- then the two-trials rule and Pearson's method seem reasonable.
+On the other hand, a weighted average effect, as targeted by meta-analysis and
+Edgington's method, might be a relevant estimand if it is representative for a
+larger population \citep{Rice_etal2018}. Finally, the more extreme effect might
+be the relevant estimand if the maximum achievable benefit of a treatment is of
+scientific interest, in which case Tippett's and Fisher's methods might be
+reasonable choices. %% While the conclusion that no single method is always
+%% appropriate may seem unsatisfying, it aligns with the
+This parallels the findings of Heard and Rubin-Delanchy \citep{Heard2018}, who
+showed that many \textit{p}-value combination methods are equivalent to a
+likelihood ratio test for specific alternative hypotheses. This means that each
+such method can be most powerful under certain conditions. Therefore,
+researchers must carefully reflect which alternative hypothesis is most relevant
+to their application -- just as they need to reflect on choosing an appropriate
+estimand -- to select a suitable combination method.
 
 Beyond theoretical considerations, practical issues must be addressed. A major
 concern is that if the effect estimates from both trials are the same, the
 two-trials rule, Tippett's, Fisher's, and Pearson's methods all produce
 counterintuitive effect estimates that differ from the one observed in both
 trials. Such point estimates are unintuitive and difficult to communicate to
-non-statisticians. From this perspective, Edgington's method and meta-analysis
-may be preferable. In particular, Edgington's method can also account for effect
-heterogeneity by widening its CI when there is heterogeneity, and it
-asymptotically always includes both effects. Another challenge is aligning
-decisions based on a one-sided combined \textit{p}-value thresholded at $\alpha$ with
-two-sided CIs. This requires using a $(1 - 2\alpha^{2})\times 100\%$ confidence
-level. However, in many fields, researchers are not used to such confidence
-levels, so we suggest to report both a more conventional level (e.g., 95\%)
-along with $(1 - 2\alpha^{2}) \times 100\%$ via telescope-style CIs, as well as
-the underlying \textit{p}-value function, as in
+non-statisticians. Moreover, only Edgington's method and meta-analysis produce
+the same combined estimate and two-sided confidence interval in case the
+alternative of combined $p$-values is changed \citep{Held_etal2024b}, which
+seems another practically desired property. From this perspective, Edgington's
+method and meta-analysis may be preferable. In particular, Edgington's method
+can also account for effect heterogeneity by widening its CI when there is
+heterogeneity and asymptotically always includes both effects. However, this is
+traded off with a less efficient median estimate under effect homogeneity, whose
+standard error can even be larger than those from both trials if they greatly
+differ. Finally, another practical challenge is aligning decisions based on a
+one-sided combined \textit{p}-value thresholded at $\alpha^2$ with two-sided
+CIs. This requires using a $(1 - 2\alpha^{2})\times 100\%$ confidence level.
+However, in many fields, researchers are not used to such confidence levels, so
+we suggest to report both a more conventional level (e.g., 95\%) along with $(1
+- 2\alpha^{2}) \times 100\%$ via telescope-style CIs, as well as the underlying
+\textit{p}-value function, as in
 Figures~\ref{fig:twinstudies}--\ref{fig:respireall}.
+
+A broader issue is the question of whether two trials are actually necessary. If
+the designs of the two trials are so similar that they can be considered
+exchangeable (``direct replications'' \citep{Nosek2017b}), there are various
+arguments in favor of conducting one large trial instead of two smaller ones
+\citep{Fisher1999,Senn2021}. Also our study demonstrates that having two trials
+instead of one makes estimation more complicated. Conversly, if the trial
+designs differ significantly (``conceptual replications'' \citep{Nosek2017b},
+e.g., if they use different endpoints or populations), achieving success in both
+trials may provide more robust evidence of treatment efficacy. From this
+perspective, it is sensible to design the trials differently to some extent
+\citep{Senn2021}. However, there is perhaps a limit to how different the trials
+can be, as when there is too much heterogeneity, combining the effect estimates
+into a single number would no longer be meaningful.
+%% However, in practice sponsors often do the opposite and run two almost
+%% identical trials, which one could argue diminishes the logical justification
+%% of the two-trials rule to some extent \citep[Section 12.2.8]{Senn2021}.
+
 
 
 Our results have broader implications beyond the two-trial setting. Methods for
 combining \textit{p}-values are also used in adaptive trials, where they enable
 combination of stage-wise \textit{p}-values \citep{Bauer1994, Lehmacher1999,
-  Bauer1999}. Combined \textit{p}-value functions can be generalized to more than two
-studies, making them applicable to meta-analysis \citep{XieSingh2013,
+  Bauer1999}. Combined \textit{p}-value functions can be generalized to more
+than two studies, making them applicable to meta-analysis \citep{XieSingh2013,
   Held_etal2024b}. They can also be applied to replication and real-world
 evidence studies, where the two-trials rule (under different names such as
 significance criterion or vote-counting) is used to assess the replicability of
@@ -1816,53 +1971,57 @@ estimation, but in each application researchers must also decide which
 combination method has the statistical properties to estimate the scientific
 effect of interest. Future research may also examine other combination methods
 beyond the ones considered here, such as the inverse chi-square method
-\citep{Lancaster1961, HedgesOlkin1985}, random-effects meta-analysis
-\citep{Borenstein2010}, and combining \textit{p}-value functions that are based on the
-exact distribution of the data rather than normality \citep[e.g., the \textit{p}-value
-  function based on Fisher's exact test with mid-\textit{p} correction as
-  considered in ][]{Schweder2013, Held_etal2024b}. Additionally, fixed-effect
-meta-analysis has a Bayesian interpretation, corresponding to posterior
-inferences assuming equal true study effects and a flat prior distribution.
-Investigating whether other \textit{p}-value combination methods have similar Bayesian
-justifications could be an interesting avenue for future work. To sum up,
-combined \textit{p}-value functions provide a unified approach for combining
-results from two trials that can be further developed theoretically. Moreover,
-our software implementation allows researchers to conveniently apply these
-methods in practice.
+\citep{Lancaster1961, HedgesOlkin1985}, the harmonic mean $\chi^2$ test
+\citep{Held2020b}, the Cauchy combination test \citep{Liu2019}, random-effects
+meta-analysis \citep{Borenstein2010}, and combining \textit{p}-value functions
+that are based on the exact distribution of the data rather than normality
+\citep[e.g., the \textit{p}-value function based on Fisher's exact test with
+  mid-\textit{p} correction as considered in ][]{Schweder2013, Held_etal2024b}.
+Additionally, fixed-effect meta-analysis has a Bayesian interpretation,
+corresponding to posterior inferences assuming equal true study effects and a
+flat prior distribution. Investigating whether other \textit{p}-value
+combination methods have similar Bayesian justifications could be an interesting
+avenue for future work. To sum up, combined \textit{p}-value functions provide a
+unified approach for combining results from two trials that can be further
+developed theoretically. Moreover, our software implementation allows
+researchers to conveniently apply these methods in practice.
 
-%% \section*{Acknowledgments}
-%% We thank .... for valuable comments on drafts of the manuscript. The
-%% acknowledgment of these individuals does not imply their endorsement of the
-%% paper.
+\bmsection*{Acknowledgments}
 
-\section*{Conflict of interest}
+We thank the editor, associate editor, Stephen Senn, and another anonymous
+reviewer for valuable comments that led to numerous additions and improvements.
+The acknowledgment of these individuals does not imply their endorsement of the
+paper.
+
+\bmsection*{Conflict of interest}
 We declare no conflict of interest.
 
-\section*{Software and data}
-Data from the RESPIRE trials were extracted from Table~3 in De Soyza et al.
-\citep{DeSoyza2018} and Table~3 in Aksamit et al. \citep{Aksamit2018}. Data from
-the ORBIT trials were extracted from page~219 in Haworth et al.
-\citep{Haworth2019}. Code and data to reproduce our analyses are openly
-available at \url{https://github.com/SamCH93/twotrials}. A snapshot of the
+\bmsection*{Software and data} Data from the RESPIRE trials were extracted from
+Table~3 in De Soyza et al. \citep{DeSoyza2018} and Table~3 in Aksamit et al.
+\citep{Aksamit2018}. Data from the ORBIT trials were extracted from page~219 in
+Haworth et al. \citep{Haworth2019}. Code and data to reproduce all numbers,
+tables, and figures are openly available at
+\url{https://github.com/SamCH93/twotrials}. Spreadsheets containing the numbers
+from Tables~\ref{tab:tabrespirecombined} and~\ref{tab:taborbitcombined} with
+higher precision are also available at the repository. A snapshot of the
 repository at the time of writing is available at
 \url{https://doi.org/10.5281/zenodo.15017483}. We used the statistical
 programming language \Sexpr{R.Version()[["version.string"]]} for analyses
 \citep{R} along with the \texttt{confMeta} \citep{confMeta2024},
-\texttt{ggplot2} \citep{Wickham2016}, \texttt{xtable} \citep{Dahl2019},
-\texttt{kableExtra} \citep{Zhu2024}, \texttt{dplyr} \citep{Wickham2023}, and
-\texttt{knitr} \citep{Xie2015} packages.
+\texttt{ggplot2} \citep{Wickham2016}, \texttt{kableExtra} \citep{Zhu2024},
+\texttt{dplyr} \citep{Wickham2023}, and \texttt{knitr} \citep{Xie2015} packages.
 
-\begin{appendices}
+\bibliography{bibliography.bib}
 
-\section{The twotrials R package}
+\appendix
+
+\bmsection{The R package twotrials}
 \label{app:rpackage}
 We have developed the \texttt{twotrials} R package for easily conducting
 combined \textit{p}-value function inference based on the parameter estimates
-(with standard errors) from two trials. The package can be installed from GitHub
-via the R command \texttt{remotes::install\_github(repo = "SamCH93/twotrials",
-  subdir = "package")} (requires the \texttt{remotes} package). We plan to make
-the package available on the Comprehensive R Archive Network (CRAN) after
-receiving community feedback.
+(with standard errors) from two trials. The package can be installed from the
+Comprehensive R Archive Network (CRAN) via the R command
+\texttt{install.packages("twotrials")}.
 
 For every \textit{p}-value combination method discussed in this paper, the package
 provides a combined \textit{p}-value function (e.g., \texttt{pEdgington}) and a
@@ -1873,33 +2032,45 @@ based on all methods, and allows for easy printing and plotting of the results.
 The following code chunk illustrates its usage by reproducing the results for
 the 14-day treatment group from Table~\ref{tab:tabrespirecombined}.
 
-\begin{spacing}{1}
-<< "R-package-illustration", echo = TRUE, fig.height = 4 >>=
+<< "R-package-illustration", echo = TRUE, fig.height = 3.5, size = "scriptsize" >>=
 library(twotrials) # load package
 
 ## combine logRR estimates from RESPIRE trials
 results <- twotrials(null = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833,
                      se2 = 0.1738, alternative = "less", level = 0.95)
 print(results, digits = 2) # print summary of results
+@
+
+Note that, for each combined estimate, the function also returns the weights
+$w_1$ (\texttt{W1}) and $w_2$ (\texttt{W2}). These represent the implicit linear
+weights of the point estimates from trials 1 and 2 towards the combined
+estimate, i.e., $\hat{\mu}(1/2) = w_1 \hat{\theta}_1 + w_2 \hat{\theta}_2$. Such
+weights aid interpretation by indicating how close each trial estimate is to the
+combined estimate. Finally, applying the plot function to the resulting object
+makes it easy to display the combined \textit{p}-value functions, as
+demonstrated below.
+
+<< "R-package-illustration2", echo = TRUE, fig.height = 3.5, size = "scriptsize" >>=
 plot(results, xlim = c(-1, 0.5), two.sided = TRUE) # plot p-value functions
 @
-\end{spacing}
 
-\section{Technical details}
+\bmsection{Technical details}
 \label{app:technicaldetails}
 This appendix contains technical details on the derivation of results from the
 main paper.
 
 
-\subsection{Expectation of the combined estimation function}
+\bmsubsection{Expectation of the combined estimation function}
 \label{app:expectation}
 Consider the random variables
-\begin{align*}
-  &Y = \max\{\hat{\theta}_1 - \sigma_1 \, q, \hat{\theta}_2 - \sigma_2 \, q\}& &\text{and}&
-  &X = \min\{\hat{\theta}_1 + \sigma_1 \, q, \hat{\theta}_2 + \sigma_2 \, q\}.&
-\end{align*}
-Table~\ref{tab:constant} shows that for certain choices of the constant $q$, $Y$
-and $X$ are equal to the combined estimation functions from the two-trials
+\begin{align}
+  \label{eq:XandY}
+  &X = \min\{\hat{\theta}_1 + \sigma_1 \, q, \hat{\theta}_2 + \sigma_2 \, q\}&
+   &\text{and}&
+  &Y = \max\{\hat{\theta}_1 - \sigma_1 \, q, \hat{\theta}_2 - \sigma_2 \, q\}.&
+\end{align}
+Table~\ref{tab:constant} shows that for certain choices of the constant $q$, $X$
+and $Y$ are equal to the combined estimation functions from the two-trials
 rule~\eqref{eq:2trialsest} and Tippett's method~\eqref{eq:tippest} in the main
 paper, and the approximate combined estimation functions from
 Fisher's~\eqref{eq:fisherest2}, Pearson's~\eqref{eq:pearsonest2}, and
@@ -1911,7 +2082,7 @@ and its expectation is therefore known and need not be derived here.
 \begin{table}[!htb]
   \centering
 
-  \caption{Constants $q$ for which $Y$ or $X$ are equal to the combined
+  \caption{Constants $q$ for which $X$ or $Y$ are equal to the combined
     estimation function of a specific method.}
   \label{tab:constant} \rowcolors{1}{}{gray!15}
 
@@ -1940,24 +2111,24 @@ and its expectation is therefore known and need not be derived here.
 
 According to the assumptions stated at the beginning of
 Section~\ref{sec:combinedp}, $\hat{\theta}_1$ and $\hat{\theta}_2$ are
-independent normal random variables with means $\theta_1, \theta_2$, and
+independent normal random variables with means $\theta_1, \theta_2$ and
 variances $\sigma_1^2,\sigma_2^2$. We can therefore use the results from
 Nadarajah and Kotz \citep{Nadarajah2008} on closed-form expressions for the
 moments of minima and maxima of bivariate Gaussian random vectors. That is,
-using their equations (9) and (11), it can be shown that the expectations of $Y$
-and $X$ are given by
-\begin{align*}
-  E(Y) =&
-  (\theta_1 - \sigma_1 \, q) \times \Phi\left(\frac{\theta_1 - \theta_2 + q (\sigma_2 - \sigma_1)}{\sqrt{\sigma_1^2 + \sigma_2^2}}\right)
-  + (\theta_2 - \sigma_2 \, q) \times  \Phi\left(\frac{\theta_2 - \theta_1 + q (\sigma_1 - \sigma_2)}{\sqrt{\sigma_1^2 + \sigma_2^2}}\right) \\
-  &+ \sqrt{\sigma_1^2 + \sigma_2^2} \times \phi\left(\frac{\theta_1 - \theta_2 + q (\sigma_2 - \sigma_1)}{\sqrt{\sigma_1^2 + \sigma_2^2}}\right)
-\end{align*}
-and
+using their equations (9) and (11), it can be shown that the expectations of $X$
+and $Y$ are given by
 \begin{align*}
   E(X) =&
   (\theta_1 + \sigma_1 \, q) \times \Phi\left(\frac{\theta_2 - \theta_1 + q (\sigma_2 - \sigma_1)}{\sqrt{\sigma_1^2 + \sigma_2^2}}\right)
   + (\theta_2 + \sigma_2 \, q) \times \Phi\left(\frac{\theta_1 - \theta_2 + q (\sigma_1 - \sigma_2)}{\sqrt{\sigma_1^2 + \sigma_2^2}}\right)  \\
-  &- \sqrt{\sigma_1^2 + \sigma_2^2} \times \phi\left(\frac{\theta_2 - \theta_1 + q (\sigma_2 - \sigma_1)}{\sqrt{\sigma_1^2 + \sigma_2^2}}\right),
+  &- \sqrt{\sigma_1^2 + \sigma_2^2} \times \phi\left(\frac{\theta_2 - \theta_1 + q (\sigma_2 - \sigma_1)}{\sqrt{\sigma_1^2 + \sigma_2^2}}\right)
+\end{align*}
+and
+\begin{align*}
+  E(Y) =&
+  (\theta_1 - \sigma_1 \, q) \times \Phi\left(\frac{\theta_1 - \theta_2 + q (\sigma_2 - \sigma_1)}{\sqrt{\sigma_1^2 + \sigma_2^2}}\right)
+  + (\theta_2 - \sigma_2 \, q) \times  \Phi\left(\frac{\theta_2 - \theta_1 + q (\sigma_1 - \sigma_2)}{\sqrt{\sigma_1^2 + \sigma_2^2}}\right) \\
+  &+ \sqrt{\sigma_1^2 + \sigma_2^2} \times \phi\left(\frac{\theta_1 - \theta_2 + q (\sigma_2 - \sigma_1)}{\sqrt{\sigma_1^2 + \sigma_2^2}}\right),
 \end{align*}
 respectively. The expectation of the combined estimation function from a
 specific method are thus obtained by setting the constant $q$ to the
@@ -1967,7 +2138,304 @@ corresponding value. For example, the expectation of the median estimate ($a =
 = z_{\sqrt{1/2}}$.
 
 
-\subsection{Limiting combined estimation functions}
+\bmsubsection{Median estimate standard errors}
+\label{app:ses}
+Since the median estimates from meta-analysis and Edgington's method are simple
+linear combinations of the trial effect estimates, their standard errors can be
+straightforwardly derived to be
+\begin{align*}
+  &\sigma_{\text{MA}} %% \sqrt{\mathrm{Var}[\hat{\mu}_{\text{MA}}(1/2)]}
+  = \frac{1}{\sqrt{1/\sigma^2_1 + 1/\sigma^2_2}}& &\text{and}& &\sigma_{\text{E}} %% \sqrt{\mathrm{Var}[\hat{\mu}_{\text{E}}(1/2)]}
+  = \frac{\sqrt{2}}{1/\sigma_1 + 1/\sigma_2}.&
+\end{align*}
+By applying algebraic manipulations to $\sigma_{\text{MA}} \leq
+\sigma_{\text{E}}$, one can see that the meta-analytic standard error is never
+larger than Edgington's standard error, with equality if and only if the trial
+standard error coincide ($\sigma_1 = \sigma_2$). Similarly, by applying
+algebraic manipulations to $\sigma_{\text{E}} \leq \sigma_1$ and
+$\sigma_{\text{E}} \leq \sigma_2$, one can see that Edgington's standard error
+is only equal or smaller than either trial standard error if $\sqrt{2} - 1 \leq
+\sigma_2/\sigma_1 \leq 1/(\sqrt{2} - 1) = \sqrt{2} + 1$.
+
+For the remaining methods, the (approximate) median estimates are given by $X$
+and $Y$ in equation~\eqref{eq:XandY} with $a = 1/2$. We can therefore use the
+results from Nadarajah and Kotz \citep{Nadarajah2008} to obtain their second
+moments
+\begin{align*}
+  E(X^2) =&
+  \{\sigma^2_1 + (\theta_1 + \sigma_1\,q)^2\}\, \Phi\left(\frac{\theta_2 - \theta_1 + q(\sigma_2 - \sigma_1)}{\sqrt{\sigma^2_1 + \sigma^2_2}}\right) +
+  \{\sigma^2_2 + (\theta_2 + \sigma_2\,q)^2\} \, \Phi\left(\frac{\theta_1 - \theta_2 + q(\sigma_1 - \sigma_2)}{\sqrt{\sigma^2_1 + \sigma^2_2}}\right) \\
+  & -
+  \{\theta_1 + \theta_2 + q(\sigma_1 + \sigma_2)\} \sqrt{\sigma_1^2 + \sigma_2^2} \, \phi\left(\frac{\theta_2 - \theta_1 + q(\sigma_2^2 - \sigma_1^2)}{\sqrt{\sigma_1 + \sigma_2}}\right)
+\end{align*}
+and
+\begin{align*}
+  E(Y^2) =&
+  \{\sigma^2_1 + (\theta_1 - \sigma_1\,q)^2\}\, \Phi\left(\frac{\theta_1 - \theta_2 + q(\sigma_2 - \sigma_1)}{\sqrt{\sigma^2_1 + \sigma^2_2}}\right) +
+  \{\sigma^2_2 + (\theta_2 - \sigma_2\,q)^2\} \, \Phi\left(\frac{\theta_2 - \theta_1 + q(\sigma_1 - \sigma_2)}{\sqrt{\sigma^2_1 + \sigma^2_2}}\right) \\
+  & +
+  \{\theta_1 + \theta_2 - q(\sigma_1 + \sigma_2)\} \sqrt{\sigma_1^2 + \sigma_2^2} \, \phi\left(\frac{\theta_1 - \theta_2 + q(\sigma_2 - \sigma_1)}{\sqrt{\sigma_1^2 + \sigma_2^2}}\right)
+\end{align*}
+and corresponding standard errors.
+%% by subtracting the squared expectation followed by taking the square root.
+For example, assuming equal standard errors ($\sigma_1 = \sigma_2 = \sigma$),
+equal true effects ($\theta_1 = \theta_2 = \theta$) and the alternative
+``greater'', the standard error of the two-trials rule median estimate ($X$ with
+$q = z_{\sqrt{1/2}}$) simplifies to~\eqref{eq:se2tr}.
+%% \begin{align*}
+%%   \sigma_{\text{2TR}}
+%%   = \sqrt{E(X^2) - E(X)^2}
+%%   %% &=
+%%   %% \sqrt{\sigma^2 + (\theta + \sigma z_{\sqrt{1/2}})^2 -
+%%   %% \frac{2\sigma(\theta + \sigma z_{\sqrt{1/2}})}{\sqrt{\pi}}
+%%   %% - \{\theta + \sigma (z_{\sqrt{1/2}} - 1/\sqrt{\pi})\}^2}
+%%   %% %% many painful simplifications ...
+%%   = \sigma \, \sqrt{1 - 1/\pi} \approx \sigma \times \Sexpr{round(sqrt(1 - 1/pi), 2)}.
+%% \end{align*}
+
+Figure~\ref{fig:ses} shows the standard errors from the median estimates of the
+two-trials rule, meta-analysis, Tippett's, and Edgington's methods for various
+scenarios of true trial effects and trial standard errors that should resemble
+typical ranges for standardized mean difference parameters. The standard errors
+from Fisher's and Pearson's methods are very close to the ones from Tippett's
+method and the two-trials rule, and therefore not shown to make the plot easier
+to read.
+
+
+\begin{figure}[!htb]
+<< "standard-errors-comparison", fig.height = 5 >>=
+seMA <- function(se1, se2, ...) {
+    1/sqrt(1/se1^2 + 1/se2^2)
+}
+seE <- function(se1, se2, ...) {
+    sqrt(2)/(1/se1 + 1/se2)
+}
+
+## first and second moment of a random variable
+## Y = max(hat(theta)_1 - q*se1, hat(theta)_2 - q*se2)
+EY <- function(se1, se2, q, t1, t2) {
+    (t1 - se1*q)*
+        pnorm((t1 - t2 + q*(se2 - se1))/sqrt(se1^2 + se2^2)) +
+        (t2 - se2*q)*
+        pnorm((t2 - t1 + q*(se1 - se2))/sqrt(se1^2 + se2^2)) +
+        sqrt(se1^2 + se2^2)*
+        dnorm((t1 - t2 + q*(se2 - se1))/sqrt(se1^2 + se2^2))
+}
+EY2 <- function(se1, se2, q, t1, t2) {
+    (se1^2 + (t1 - se1*q)^2)*
+        pnorm((t1 - t2 + q*(se2 - se1))/sqrt(se1^2 + se2^2)) +
+        (se2^2 + (t2 - se2*q)^2)*
+        pnorm((t2 - t1 + q*(se1 - se2))/sqrt(se1^2 + se2^2)) +
+        (t1 + t2 - q*(se1 + se2))*sqrt(se1^2 + se2^2)*
+        dnorm((t1 - t2 + q*(se2 - se1))/sqrt(se1^2 + se2^2))
+}
+
+## first and second moment of a random variable
+## X = min(hat(theta)_1 + q*se1, hat(theta)_2 + q*se2)
+EX <- function(se1, se2, q, t1, t2) {
+    (t1 + se1*q)*
+        pnorm((t2 - t1 + q*(se2 - se1))/sqrt(se1^2 + se2^2)) +
+        (t2 + se2*q)*
+        pnorm((t1 - t2 + q*(se1 - se2))/sqrt(se1^2 + se2^2)) -
+        sqrt(se1^2 + se2^2)*
+        dnorm((t2 - t1 + q*(se2 - se1))/sqrt(se1^2 + se2^2))
+}
+EX2 <- function(se1, se2, q, t1, t2) {
+    (se1^2 + (t1 + se1*q)^2)*
+        pnorm((t2 - t1 + q*(se2 - se1))/sqrt(se1^2 + se2^2)) +
+        (se2^2 + (t2 + se2*q)^2)*
+        pnorm((t1 - t2 + q*(se1 - se2))/sqrt(se1^2 + se2^2)) -
+        (t1 + t2 + q*(se1 + se2))*sqrt(se1^2 + se2^2)*
+        dnorm((t2 - t1 + q*(se2 - se1))/sqrt(se1^2 + se2^2))
+}
+
+se2TR <- function(se1, se2, t1, t2, alternative = "greater") {
+    q <- qnorm(p = sqrt(0.5))
+    if (alternative == "greater") {
+        sqrt(EX2(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2) -
+             EX(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2)^2)
+    } else {
+        sqrt(EY2(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2) -
+             EY(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2)^2)
+    }
+}
+seT <- function(se1, se2, t1, t2, alternative = "greater") {
+    q <- qnorm(p = sqrt(0.5))
+    if (alternative == "greater") {
+        sqrt(EY2(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2) -
+             EY(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2)^2)
+    } else {
+        sqrt(EX2(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2) -
+             EX(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2)^2)
+    }
+}
+seF <- function(se1, se2, t1, t2, alternative = "greater") {
+    ## only approximately valid when t1 != t2
+    q <- -qnorm(p = exp(-qchisq(p = 0.25, df = 4)))
+    if (alternative == "greater") {
+        sqrt(EY2(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2) -
+             EY(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2)^2)
+    } else {
+        sqrt(EX2(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2) -
+             EX(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2)^2)
+    }
+}
+seP <- function(se1, se2, t1, t2, alternative = "greater") {
+    ## only approximately valid when t1 != t2
+    q <- -qnorm(p = exp(-qchisq(p = 0.25, df = 4)))
+    if (alternative == "greater") {
+        sqrt(EX2(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2) -
+             EX(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2)^2)
+    } else {
+        sqrt(EY2(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2) -
+             EY(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2)^2)
+    }
+}
+
+
+## se1 <- 0.05
+## se2 <- 0.1
+## theta1 <- 0.45
+## theta2 <- 0.5
+
+## ## computing standard errors with simulation
+## nsim <- 10000
+## set.seed(42)
+## t1 <- rnorm(n = nsim, mean = theta1, sd = se1)
+## t2 <- rnorm(n = nsim, mean = theta2, sd = se2)
+## simres <- do.call("rbind", lapply(X = seq_len(nsim), FUN = function(i) {
+##     res <- twotrials(t1 = t1[i], t2 = t2[i], se1 = se1, se2 = se2)
+##     data.frame(sim = i, res$summaries[,c("method", "est")])
+## }))
+
+## simSE <- tapply(simres$est, simres$method, FUN = sd)
+## ## comparing to analytical standard errors
+## aSE <- sapply(X = list("Edgington" = seE, "Fisher" = seF,
+##                        "Meta-analysis" = seMA, "Pearson" = seP, "Tippett" = seT,
+##                        "Two-trials rule" = se2TR),
+##               FUN = function(f) f(se1 = se1, se2 = se2, t1 = theta1, t2 = theta2))
+## signif(cbind(simSE, aSE), 4)
+
+## ## checking simplified formula for 2TR
+## se <- 1
+## theta <- 0.5
+## q <- qnorm(sqrt(0.5))
+## se2TR(se1 = se, se2 = se, t1 = theta, t2 = theta)
+## ## first simplification
+## sqrt(se^2 + (theta + se*q)^2 - 2*se*(theta + se*q)/sqrt(pi) -
+##      (theta + se*(q - 1/sqrt(pi)))^2)
+## ## next simplification
+## sqrt(se^2 + theta^2 + 2*theta*se*q + se^2*q^2 - 2*se*theta/sqrt(pi) - 2*se^2*q/sqrt(pi) - theta^2 - 2*theta*se*(q - 1/sqrt(pi)) - se^2*(q - 1/sqrt(pi))^2)
+## ## next simplification
+## sqrt(se^2*(1 - 1/pi))
+
+## evaluate SEs over a grid of parameter values
+n1 <- 200
+se1 <- sqrt(2/n1)
+rse <- c(0.33, 0.5, 1, 1.5, 3) # relative standard error
+se2 <- se1*rse
+nsim <- 10000
+t <- c(0, 0.5, 1)
+grid <- expand.grid(se1 = se1, se2 = se2, t1 = t, t2 = t)
+
+## estimate SEs with simulation for comparison
+## set.seed(120396)
+## library(parallel)
+## simres <- mclapply(X = seq(1, nrow(grid)), FUN = function(i) {
+##     t1 <- rnorm(n = nsim, mean = grid$t1[i], sd = grid$se1[i])
+##     t2 <- rnorm(n = nsim, mean = grid$t2[i], sd = grid$se2[i])
+##     simdat <- do.call("rbind", lapply(X = seq_len(nsim), FUN = function(j) {
+##         res <- twotrials(t1 = t1[j], t2 = t2[j], se1 = grid$se1[i],
+##                          se2 = grid$se2[i])
+##         data.frame(sim = j, res$summaries[,c("method", "est")])
+##     }))
+##     res <- data.frame(grid[i,], simdat)
+##     return(res)
+## }, mc.cores = pmax(detectCores() - 4, 1))
+## save(simres, file = "simulation-results.RData")
+## load("simulation-results.RData")
+## ## simres |>
+## ##     bind_rows() |>
+## ##     group_by(method) |>
+## ##     summarise(n = n(),
+## ##               converged = mean(is.finite(est)))
+## simsummaries <- simres |>
+##     bind_rows() |>
+##     group_by(method, se1, se2, t1, t2) |>
+##     summarise(se = sd(est)) |>
+##     mutate(type = "simulation")
+
+## compute analytical SEs
+grid2 <- expand.grid(se1 = se1, se2 = seq(min(se2), max(se2), length.out = 100),
+                     t1 = t, t2 = t)
+summaries <- do.call("rbind", lapply(X = seq(1, nrow(grid2)), FUN = function(i) {
+    aSE <- sapply(X = list("Edgington" = seE, "Fisher" = seF,
+                           "Meta-analysis" = seMA, "Pearson" = seP, "Tippett" = seT,
+                           "Two-trials rule" = se2TR),
+                  FUN = function(f) f(se1 = grid2$se1[i], se2 = grid2$se2[i],
+                                      t1 = grid2$t1[i], t2 = grid2$t2[i]))
+    res <- data.frame(method = names(aSE), grid2[i,], se = aSE, type = "analytical")
+    return(res)
+})) |>
+    ## rbind(simsummaries) |> # uncomment if comparison with simulation SEs desired
+    mutate(method = factor(method, levels = typelevels))
+
+cols <- c("Trial 1" = "#CC79A7F2", "Trial 2" = "#888888F2",
+          "Meta-analysis" = "#56B4E9F2", "Two-trials rule" = "#000000F2",
+          "Tippett" = "#E69F00F2", "Edgington" = "#009E73F2",
+          "Fisher" = "#F0E442F2", "Pearson" = "#0072B2F2")
+ggplot(filter(summaries, type == "analytical",
+              method != "Pearson", method != "Fisher"),
+       ## filter(summaries, type == "analytical"),
+       aes(x = se2, y = se, color = method)) +
+    facet_grid(t2 ~ t1,
+               labeller = label_bquote(theta[2] == .(t2), theta[1] == .(t1))) +
+    geom_hline(yintercept = se1, alpha = 0.3) +
+    geom_line(aes(linetype = method), alpha = 0.8, linewidth = 0.8) +
+    ## geom_point(data = filter(summaries, type == "simulation"),
+    ##            aes(shape = method), alpha = 0.9) +
+    scale_color_manual(values = cols) +
+    scale_linetype_manual(values = c(2, 1, 3, 4, 5, 6)) +
+    labs(x = bquote(sigma[2]), y = "Standard error of median estimate",
+         color = "", shape = "", linetype = "") +
+    theme_bw() +
+    theme(panel.grid.minor = element_blank(),
+          legend.position = "top", legend.key.width = unit(0.9,"cm"),
+          strip.background = element_rect(fill = "#00000005"))
+@
+\caption{Comparison of median estimate standard errors across different
+  scenarios of true trial effects $\theta_1$ and $\theta_2$ and trial standard
+  error from the second trial $\sigma_2$. The standard error of the first trial
+  is $\sigma_1 = \Sexpr{se1}$ across all scenarios. The standard errors from
+  Fisher's and Pearson's methods are close to Tippett's method the two-trials
+  rule, and not shown to make the plot easier to read.}
+\label{fig:ses}
+\end{figure}
+
+We can see that the standard error from meta-analysis is always the lowest and
+is always smaller than the minimum of the two standard errors
+($\sigma_{\text{MA}} \leq \min\{\sigma_1, \sigma_2\}$). The standard error from
+Edgington's method is equal (when $\sigma_1 = \sigma2$) to or larger than the
+meta-analytic one, and can exceed the minimum standard error from the two trials
+(e.g., for $\sigma_1 = 0.1$ and $\sigma_2 = 0.3$, it is $\sigma_{\text{E}} =
+\Sexpr{round(seE(0.1, 0.3), 3)}$ ). The standard errors for both Edgington's
+method and meta-analysis only depend on the trials' standard error, but not on
+the true effects, so their standard errors are the same across all panels in
+Figure~\ref{fig:ses}. This is not the case case for the two-trials rule and
+Tippett's method, which show a more irregular behavior. When, the true trial
+effects coincide ($\theta_1 = \theta_2$; panels on the diagonal), the combined
+standard error decreases with decreasing standard error from the second trial
+$\sigma_2$. However, when the true effect from the first trial is smaller than
+the one from the second trial ($\theta_1 < \theta_2$; upper off-diagonal
+panels), the combined standard error from Tippett's method remains constant
+whereas the standard error from the two-trials rule changes drastically with
+with changing $\sigma_2$. The opposite occurs when the effect from the first
+trial is larger ($\theta_1 > \theta_2$; lower off-diagonal panels). This is
+plausible, as these methods target the minimum (two-trials rule) or maximum
+(Tippett) effect, meaning that the standard error of the trial with minimum or
+maximum effect mainly drives the standard error of the combined estimate.
+
+\bmsubsection{Limiting combined estimation functions}
 \label{app:asymptotics}
 
 Consider again the random variables $Y$ and $X$ as defined in
@@ -2013,10 +2481,9 @@ for any constant $q$. Thus, all combined estimation functions from
 Table~\ref{tab:constant} converge in probability to $\max\{\theta_1, \theta_2\}$
 or $\min\{\theta_1, \theta_2\}$ as $\sigma_1$ and $\sigma_2$ decrease.
 
-\subsection{Approximate combined estimation functions}
+\bmsubsection{Approximate combined estimation functions}
 \label{app:approxmu}
 Suppose that the trials' individual \textit{p}-value functions
-{\small
 \begin{align*}
   &p_1(\mu) =
   \begin{cases}
@@ -2030,7 +2497,6 @@ Suppose that the trials' individual \textit{p}-value functions
      \Phi\left(\frac{\hat{\theta}_2 - \mu}{\sigma_2}\right) & \text{for alternative = ``less''} \\
     \end{cases}&
 \end{align*}
-}%
 are ``well-separated'' in the sense that in the region where $p_1(\mu)$ changes
 from 0 to 1, $p_2(\mu)$ stays almost constant at 0 or 1, see the dotted lines in
 Figure~\ref{fig:separated-pvals} for an example. This happens when either the
@@ -2038,7 +2504,6 @@ estimates $\hat{\theta}_1$ and $\hat{\theta}_2$ are far apart and/or the
 standard errors $\sigma_1$ and $\sigma_2$ are small relative to the estimates
 (provided the estimates are not equal). Note that asymptotically the individual
 \textit{p}-value functions approach the step functions
-{\small
 \begin{align*}
   &\lim_{\sigma_1 \downarrow 0} p_1(\mu) =
   \begin{cases}
@@ -2052,22 +2517,23 @@ standard errors $\sigma_1$ and $\sigma_2$ are small relative to the estimates
      1_{(-\infty, \theta_2]}(\mu) & \text{foralternative = ``less''} \\
     \end{cases}&
 \end{align*}
-}%
 Hence, with decreasing standard errors, the trials' \textit{p}-value functions
 eventually become well-separated whenever the true effects $\theta_1$ and
 $\theta_2$ are unequal.
 
 
 \begin{figure}[!htb]
-<< "fisher-pearson-edgington-approximation", fig.height = 4 >>=
+<< "fisher-pearson-edgington-approximation", fig.height = 3.5 >>=
 ## when trials have small standard error
 museq <- seq(0.2, 0.8, 0.001)
 t1 <- 0.3
 t2 <- 0.6
 se1 <- 0.05
 se2 <- 0.07
-p1 <- 1 - pnorm((t1 - museq)/se1)
-p2 <- 1 - pnorm((t2 - museq)/se2)
+z1 <- (t1 - museq)/se1
+z2 <- (t2 - museq)/se2
+p1 <- 1 - pnorm(z1)
+p2 <- 1 - pnorm(z2)
 pfis <- 1 - pchisq(q = -2*(log(p1) + log(p2)), df = 4)
 ppear <- pchisq(q = -2*(log(1 - p1) + log(1 - p2)), df = 4)
 e <- p1 + p2
@@ -2086,7 +2552,7 @@ par("mar" = c(4.1, 4.1, 1.5, 4.1), "oma" = c(0, 0, 0, 0))
 cols <- c("Edgington" = "#009E73F2", "Fisher" = "#F0E442F2",
           "Pearson" = "#0072B2F2")
 matplot(museq, cbind(p1, p2), lty = 3, col = c(1, 1), type = "l",
-        xlab = bquote(mu), ylab = bquote(italic(P) * "-value"), las = 1,
+        xlab = bquote(mu), ylab = bquote(italic(p) * "-value"), las = 1,
         lwd = 1.5)
 matlines(museq, cbind(pedg, pfis, ppear), lty = 1, col = cols, lwd = 1.5)
 legend("right", legend = c("Trial 1", "Trial 2", "Edgington", "Fisher", "Pearson"),
@@ -2112,9 +2578,9 @@ points(x = c(estedg1, estfis1, estpear1, estedg2, estfis2, estpear2),
 ## estedg1 <- max(c(t1, t2) - c(se1, se2)*qnorm(p = sqrt(2*a1)))
 ## estpear2 <- max(c(t1, t2) + c(se1, se2)*qnorm(p = exp(-0.5*qchisq(p = a2, df = 4))))
 ## estfis2 <- min(c(t1, t2) - c(se1, se2)*qnorm(p = exp(-0.5*qchisq(p = 1 - a2, df = 4))))
-## estedg2 <- min(c(t1, t2) +- c(se1, se2)*qnorm(p = sqrt(2*(1 - a2))))
+## estedg2 <- min(c(t1, t2) + c(se1, se2)*qnorm(p = sqrt(2*(1 - a2))))
 ## matplot(museq, cbind(p1, p2), lty = 3, col = c(1, 1), type = "l",
-##         xlab = bquote(mu), ylab = bquote(italic(P) * "-value"), las = 1,
+##         xlab = bquote(mu), ylab = bquote(italic(p) * "-value"), las = 1,
 ##         lwd = 1.5)
 ## matlines(museq, cbind(pedg, pfis, ppear), lty = 1, col = cols, lwd = 1.5)
 ## legend("right", legend = c("Trial 1", "Trial 2", "Edgington", "Fisher", "Pearson"),
@@ -2206,9 +2672,9 @@ leading to the approximate combined estimation function
   \hat{\mu}_{\text{P}}(a) =
   \begin{cases}
     \min\{\hat{\theta}_{1} - \sigma_{1} \, z_{\exp\{-\chi^{2}_{4}(a)/2\}},
-    \hat{\theta}_{2} + \sigma_{2} \, z_{\exp\{-\chi^{2}_{4}(a)/2\}}\} &  \text{for alternative = "greater"} \\
+    \hat{\theta}_{2} - \sigma_{2} \, z_{\exp\{-\chi^{2}_{4}(a)/2\}}\} &  \text{for alternative = "greater"} \\
     \max\{\hat{\theta}_{1} + \sigma_{1} \, z_{\exp\{-\chi^{2}_{4}(a)/2\}},
-    \hat{\theta}_{2} - \sigma_{2} \, z_{\exp\{-\chi^{2}_{4}(a)/2\}}\} &  \text{for alternative = "less"}. \\
+    \hat{\theta}_{2} + \sigma_{2} \, z_{\exp\{-\chi^{2}_{4}(a)/2\}}\} &  \text{for alternative = "less"}. \\
   \end{cases}
 \end{equation}
 The functions~\eqref{eq:fisherest2} and~\eqref{eq:pearsonest2} based on Fisher's
@@ -2223,8 +2689,9 @@ In a similar way, Edgington's combined \textit{p}-value function can be approxim
   p_{\text{E}}(\mu) =
   \begin{cases}
     \left\{1 - \Phi\left(\min\left\{\frac{\hat{\theta}_1 - \mu}{\sigma_1}, \frac{\hat{\theta}_2 - \mu}{\sigma_2}\right\}\right)\right\}^{2} \big/ \,2
-    & \text{if} ~ 1 - \Phi\left(\min\left\{\frac{\hat{\theta}_1 - \mu}{\sigma_1}, \frac{\hat{\theta}_2 - \mu}{\sigma_2}\right\}\right) < 1 \\
-    1 - \left\{\Phi\left(\max\left\{\frac{\hat{\theta}_1 - \mu}{\sigma_1}, \frac{\hat{\theta}_2 - \mu}{\sigma_2}\right\}\right)\right\}^{2} \big/ \,2 & \text{else} %\text{if} ~ 1 < 2 - \Phi\left(\max\left\{\frac{\hat{\theta}_1 - \mu}{\sigma_1}, \frac{\hat{\theta}_2 - \mu}{\sigma_2}\right\}\right) \leq 2 \\
+    & \text{if} ~ \mu < \dfrac{\hat{\theta}_1/\sigma_1 + \hat{\theta}_2/\sigma_2}{1/\sigma_1 + 1/\sigma_2} \\
+    \dfrac{1}{2} & \text{if} ~  \mu = \dfrac{\hat{\theta}_1/\sigma_1 + \hat{\theta}_2/\sigma_2}{1/\sigma_1 + 1/\sigma_2} \\
+    1 - \left\{\Phi\left(\max\left\{\frac{\hat{\theta}_1 - \mu}{\sigma_1}, \frac{\hat{\theta}_2 - \mu}{\sigma_2}\right\}\right)\right\}^{2} \big/ \,2 & \text{else}
   \end{cases}
 \end{align*}
 for the alternative ``greater'' and with
@@ -2232,8 +2699,9 @@ for the alternative ``greater'' and with
   p_{\text{E}}(\mu) =
   \begin{cases}
     \left\{ \Phi\left(\max\left\{\frac{\hat{\theta}_1 - \mu}{\sigma_1}, \frac{\hat{\theta}_2 - \mu}{\sigma_2}\right\}\right)\right\}^{2} \big/ \,2
-    & \text{if} ~  \Phi\left(\max\left\{\frac{\hat{\theta}_1 - \mu}{\sigma_1}, \frac{\hat{\theta}_2 - \mu}{\sigma_2}\right\}\right) < 1 \\
-    1- \left\{1 - \Phi\left(\min\left\{\frac{\hat{\theta}_1 - \mu}{\sigma_1}, \frac{\hat{\theta}_2 - \mu}{\sigma_2}\right\}\right)\right\}^{2} \big/ \,2 & \text{else} %\text{if} ~ 1 < 2 - \Phi\left(\max\left\{\frac{\hat{\theta}_1 - \mu}{\sigma_1}, \frac{\hat{\theta}_2 - \mu}{\sigma_2}\right\}\right) \leq 2 \\
+    & \text{if} ~  \mu > \dfrac{\hat{\theta}_1/\sigma_1 + \hat{\theta}_2/\sigma_2}{1/\sigma_1 + 1/\sigma_2}  \\
+    \dfrac{1}{2} & \text{if} ~  \mu = \dfrac{\hat{\theta}_1/\sigma_1 + \hat{\theta}_2/\sigma_2}{1/\sigma_1 + 1/\sigma_2} \\
+    1- \left\{1 - \Phi\left(\min\left\{\frac{\hat{\theta}_1 - \mu}{\sigma_1}, \frac{\hat{\theta}_2 - \mu}{\sigma_2}\right\}\right)\right\}^{2} \big/ \,2 & \text{else}
   \end{cases}
 \end{align*}
 for the alternative ``less''. Consequently, the approximate combined estimation
@@ -2280,25 +2748,15 @@ standard errors $\sigma_1$ and $\sigma_2$ decrease toward zero, all minima
 converge in probability to $\min\{\theta_1,\theta_2\}$ while all maxima converge
 to $\max\{\theta_1,\theta_2\}$.
 
-\end{appendices}
 
-\onehalfspacing % Reset line spacing to 1.5 from here on
-{\small
-%% \bibliographystyle{apalikedoiurl}
-\bibliographystyle{wileyNJD-AMA} %{unsrtnat}
-\bibliography{bibliography}
-}
-
-\begin{spacing}{1}
 << "sessionInfo1", eval = Reproducibility, results = "asis" >>=
 ## print R sessionInfo to see system information and package versions
 ## used to compile the manuscript (set Reproducibility = FALSE, to not do that)
 cat("\\newpage \\section*{Computational details}")
 @
-<< "sessionInfo2", echo = Reproducibility, results = Reproducibility >>=
+<< "sessionInfo2", echo = Reproducibility, results = Reproducibility, size = "scriptsize" >>=
 cat(paste(Sys.time(), Sys.timezone(), "\n"))
 sessionInfo()
 @
-\end{spacing}
 
 \end{document}

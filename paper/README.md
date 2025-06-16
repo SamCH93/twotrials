@@ -17,9 +17,9 @@ install.packages(pkgs)
 remotes::install_github("felix-hof/confMeta")
 ```
 
-and then rerunning the code in `paper/est2TR.R`. To recompile the manuscript make
-sure to have LaTeX installed (tested only with TeX Live 2023/Debian) and
-then run
+and then rerunning the code in `paper/est2TR.R`. To recompile the manuscript
+make sure to have LaTeX installed (tested only with TeX Live 2023/Debian) and
+the Wiley NJD LaTeX template files in the `paper/` directory. Then run
 
 ``` sh
 make

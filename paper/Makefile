@@ -35,8 +35,8 @@ $(FILE)-changes.pdf: $(FILE).tex old/$(FILE)-v1.tex old/ld.cfg
 ## clean
 clean:  
 	-rm $(FILE).aux  $(FILE).blg  $(FILE).log  $(FILE).tex  $(FILE).bbl \
-	$(FILE).out $(FILE).brf $(FILE).tex $(FILE).synctex.gz \
+	$(FILE).out $(FILE).brf $(FILE).tex $(FILE).synctex.gz $(FILE).pag \
 	$(FILE)-changes.aux  $(FILE)-changes.blg  $(FILE)-changes.log \
 	$(FILE)-changes.tex  $(FILE)-changes.bbl $(FILE)-changes.out \
-	$(FILE)-changes.brf $(FILE)-changes.synctex.gz
+	$(FILE)-changes.brf $(FILE)-changes.synctex.gz $(FILE)-changes.pag
 	-rm -r ./figure/

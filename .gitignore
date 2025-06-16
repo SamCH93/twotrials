@@ -58,7 +58,17 @@ rsconnect/
 *.tex
 figure/
 
-# misc folder to put stuff
+# misc folders to put stuff
 misc/
+old/
 
+# output files not to be shared
 *.pdf
+simulation-results.RData
+
+# LaTeX template
+LETTERSP.STY
+NJDnatbib.sty
+WileyNJDv5.cls
+appendix.sty
+natbib.sty
