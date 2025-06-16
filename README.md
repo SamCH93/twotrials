@@ -5,9 +5,9 @@ This repository contains
 1. `./package` The R package **twotrials** to conduct combined *p*-value
 function inference based on the results from two trials.
 
-2. `./paper` Code and data to reproduce result from the preprint: *Pawel, S.,
-   Roos, M., Held. L. (2025). Combined P-value Functions for Compatible Effect
-   Estimation and Hypothesis Testing in Drug Regulation.
+2. `./paper` Code and data to reproduce result from: *Pawel, S., Roos, M.,
+   Held. L. (2025). Combined P-value Functions for Compatible Effect Estimation
+   and Hypothesis Testing in Drug Regulation.
    <https://doi.org/10.48550/arXiv.2503.10246>*
 
 To cite our work, use the following BibTeX reference
