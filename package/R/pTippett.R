@@ -10,6 +10,8 @@
 #'
 #' @author Samuel Pawel
 #'
+#' @seealso \code{\link{muTippett}}
+#'
 #' @examples
 #' ## p-value for H0: logRR = 0 in RESPIRE trials
 #' pTippett(mu = 0, t1 = -0.491, t2 = -0.185, se1 = 0.179, se2 = 0.174,
@@ -33,14 +35,16 @@ pTippett <- function(mu = 0, t1, t2, se1, se2, alternative = "greater") {
 
 #' @title Combined estimation function from Tippett's method
 #'
-#' @description Computes parameter estimate from estimation function based on
-#'     Tippett's method
+#' @description This function computes parameter estimates from the combined
+#'     estimation function based on Tippett's method
 #'
 #' @inheritParams mu2TR
 #'
 #' @return The parameter estimate based on Tippett's method
 #'
 #' @author Samuel Pawel
+#'
+#' @seealso \code{\link{pTippett}}
 #'
 #' @examples
 #' ## 95% CI and median estimate for logRR in RESPIRE trials

@@ -10,6 +10,8 @@
 #'
 #' @author Samuel Pawel
 #'
+#' @seealso \code{\link{muEdgington}}
+#'
 #' @examples
 #' ## p-value for H0: logRR = 0 in RESPIRE trials
 #' pEdgington(mu = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
@@ -34,8 +36,8 @@ pEdgington <- function(mu = 0, t1, t2, se1, se2, alternative = "greater") {
 
 #' @title Combined estimation function from Edgington's method
 #'
-#' @description Computes parameter estimate from estimation function based on
-#'     Edgington's method
+#' @description This function computes parameter estimates from the combined
+#'     estimation function based on Edgington's method
 #'
 #' @inheritParams mu2TR
 #' @param ... Additional arguments for \code{stats::uniroot}
@@ -43,6 +45,8 @@ pEdgington <- function(mu = 0, t1, t2, se1, se2, alternative = "greater") {
 #' @return The parameter estimate based on Edgington's method
 #'
 #' @author Samuel Pawel
+#'
+#' @seealso \code{\link{pEdgington}}
 #'
 #' @examples
 #' ## 95% CI and median estimate for logRR in RESPIRE trials

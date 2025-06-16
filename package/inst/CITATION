@@ -1,4 +1,4 @@
-citHeader(paste("To cite the R-package 'twotrails' in publications,",
+citHeader(paste("To cite the R-package 'twotrials' in publications,",
                 "please use:",
                 "Pawel, S., Roos, M., Held, L.",
                 "(2025).",

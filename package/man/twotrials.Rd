@@ -29,13 +29,13 @@ Object of class \code{"twotrials"}, which is a list of the supplied
     individual p-value functions), \code{mufuns} and \code{imufuns} (combined
     and individual estimation functions), and \code{summaries} and
     \code{isummaries} (combined and individual confidence intervals, point
-    estimates, p-values) elements
+    estimates, p-values, implicit weights) elements
 }
 \description{
 This function computes combined p-values, point estimates, and
-    confidence intervals based on two parameter estimates and using
-    fixed-effect meta-analysis, the two-trials rule, Edgington's, Fisher's,
-    Pearson's, and Tippett's p-value functions.
+    confidence intervals based on two parameter estimates using fixed-effect
+    meta-analysis, the two-trials rule, Edgington's, Fisher's, Pearson's, and
+    Tippett's combination methods
 }
 \examples{
 ## logRR estimates from RESPIRE trials
@@ -46,6 +46,14 @@ twotrials(null = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
 twotrials(null = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
           alternative = "less", level = 0.99875)
 
+}
+\seealso{
+\code{\link{pEdgington}}, \code{\link{muEdgington}},
+    \code{\link{pMA}}, \code{\link{muMA}}, \code{\link{pTippett}},
+    \code{\link{muTippett}}, \code{\link{p2TR}}, \code{\link{mu2TR}},
+    \code{\link{pFisher}}, \code{\link{muFisher}}, \code{\link{pPearson}},
+    \code{\link{muPearson}}, \code{\link{plot.twotrials}},
+    \code{\link{print.twotrials}}
 }
 \author{
 Samuel Pawel

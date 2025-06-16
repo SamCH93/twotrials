@@ -10,6 +10,8 @@
 #'
 #' @author Samuel Pawel
 #'
+#' @seealso \code{\link{muFisher}}
+#'
 #' @examples
 #' ## p-value for H0: logRR = 0 in RESPIRE trials
 #' pFisher(mu = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
@@ -33,14 +35,16 @@ pFisher <- function(mu = 0, t1, t2, se1, se2, alternative = "greater") {
 
 #' @title Combined estimation function from Fisher's method
 #'
-#' @description Computes parameter estimate from estimation function based on
-#'     Fisher's method
+#' @description This function computes parameter estimates from the combined
+#'     estimation function based on Fisher's method
 #'
 #' @inheritParams muEdgington
 #'
 #' @return The parameter estimate based on Fisher's method
 #'
 #' @author Samuel Pawel
+#'
+#' @seealso \code{\link{pFisher}}
 #'
 #' @examples
 #' ## 95% CI and median estimate for logRR in RESPIRE trials

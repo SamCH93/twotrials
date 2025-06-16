@@ -1,9 +1,9 @@
 #' @title Combined p-value function inference for two trials
 #'
 #' @description This function computes combined p-values, point estimates, and
-#'     confidence intervals based on two parameter estimates and using
-#'     fixed-effect meta-analysis, the two-trials rule, Edgington's, Fisher's,
-#'     Pearson's, and Tippett's p-value functions.
+#'     confidence intervals based on two parameter estimates using fixed-effect
+#'     meta-analysis, the two-trials rule, Edgington's, Fisher's, Pearson's, and
+#'     Tippett's combination methods
 #'
 #' @inheritParams p2TR
 #' @param null Null value for which p-values should be computed. Defaults to
@@ -15,9 +15,16 @@
 #'     individual p-value functions), \code{mufuns} and \code{imufuns} (combined
 #'     and individual estimation functions), and \code{summaries} and
 #'     \code{isummaries} (combined and individual confidence intervals, point
-#'     estimates, p-values) elements
+#'     estimates, p-values, implicit weights) elements
 #'
 #' @author Samuel Pawel
+#'
+#' @seealso \code{\link{pEdgington}}, \code{\link{muEdgington}},
+#'     \code{\link{pMA}}, \code{\link{muMA}}, \code{\link{pTippett}},
+#'     \code{\link{muTippett}}, \code{\link{p2TR}}, \code{\link{mu2TR}},
+#'     \code{\link{pFisher}}, \code{\link{muFisher}}, \code{\link{pPearson}},
+#'     \code{\link{muPearson}}, \code{\link{plot.twotrials}},
+#'     \code{\link{print.twotrials}}
 #'
 #' @examples
 #' ## logRR estimates from RESPIRE trials
@@ -86,8 +93,17 @@ twotrials <- function(null = 0, t1, t2, se1, se2, alternative = "greater",
         p0 <- pf(mu = null) # combined p-value
         medest <- mf(a = 0.5) # median estimate
         ci <- mf(a = (1 + c(-1, 1)*level)*0.5) # CI
+        ## compute study 1 weight for median estimate
+        if (mtdnames[i] == "Meta-analysis") {
+            w1 <- 1/se1^2/(1/se1^2 + 1/se2^2)
+        } else if (mtdnames[i] == "Edgington") {
+            w1 <- 1/se1/(1/se1 + 1/se2)
+        } else {
+            w1 <- (medest - t2)/(t1 - t2) # implicit weight
+            if (!is.finite(w1)) w1 <- NaN
+        }
         sumDF <- data.frame(method = mtdnames[i], lower = min(ci), est = medest,
-                            upper = max(ci), p0 = p0)
+                            upper = max(ci), p0 = p0, w1 = w1, w2 = 1 - w1)
         out <- list("pf" = pf, "mf" = mf, "summary" = sumDF)
         return(out)
     })
@@ -120,6 +136,8 @@ twotrials <- function(null = 0, t1, t2, se1, se2, alternative = "greater",
 #'
 #' @author Samuel Pawel
 #'
+#' @seealso \code{\link{twotrials}}
+#'
 #' @examples
 #' ## logRR estimates from RESPIRE trials
 #' twotrials(null = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
@@ -130,7 +148,7 @@ print.twotrials <- function(x, digits = 3, ...) {
     ## results of individual trials
     cat("INDIVIDUAL RESULTS\n")
     isummaries <- x$isummaries
-    names(isummaries) <- c("Trial", "Lower CI", "Estimate", "Upper CI",
+    names(isummaries) <- c("Trial", "Lower CL", "Estimate", "Upper CL",
                           "P-value")
     print(isummaries, digits = digits, row.names = FALSE)
     cat("\n")
@@ -138,8 +156,8 @@ print.twotrials <- function(x, digits = 3, ...) {
     ## results of combined trials
     cat("COMBINED RESULTS\n")
     summaries <- x$summaries
-    names(summaries) <- c("Method", "Lower CI", "Estimate", "Upper CI",
-                          "P-value")
+    names(summaries) <- c("Method", "Lower CL", "Estimate", "Upper CL",
+                          "P-value", "W1", "W2")
     print(summaries, digits = digits, row.names = FALSE)
     cat("\n")
 
@@ -168,10 +186,12 @@ print.twotrials <- function(x, digits = 3, ...) {
 #'     Defaults to \code{TRUE}
 #' @param ... Other arguments (for consistency with the generic)
 #'
-#' @return Plots p-value functions and invisibly returns a data frames
+#' @return Plots combined p-value functions and invisibly returns a data frame
 #'     containing the data underlying the plot
 #'
 #' @author Samuel Pawel
+#'
+#' @seealso \code{\link{twotrials}}
 #'
 #' @examples
 #' ## logRR estimates from RESPIRE trials

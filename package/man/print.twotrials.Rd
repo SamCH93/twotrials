@@ -26,6 +26,9 @@ twotrials(null = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
           alternative = "less", level = 0.95)
 
 }
+\seealso{
+\code{\link{twotrials}}
+}
 \author{
 Samuel Pawel
 }

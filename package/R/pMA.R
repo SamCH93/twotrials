@@ -10,6 +10,8 @@
 #'
 #' @author Samuel Pawel
 #'
+#' @seealso \code{\link{pMA}}
+#'
 #' @examples
 #' ## p-value for H0: logRR = 0 in RESPIRE trials
 #' pMA(mu = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
@@ -34,14 +36,16 @@ pMA <- function(mu = 0, t1, t2, se1, se2, alternative = "greater") {
 
 #' @title Combined estimation function from fixed-effect meta-analysis
 #'
-#' @description Computes parameter estimate from estimation function based on
-#'     fixed-effect meta-analysis
+#' @description This function computes parameter estimates from the combined
+#'     estimation function based on fixed-effect meta-analysis
 #'
 #' @inheritParams mu2TR
 #'
 #' @return The parameter estimate based on fixed-effect meta-analysis
 #'
 #' @author Samuel Pawel
+#'
+#' @seealso \code{\link{muMA}}
 #'
 #' @examples
 #' ## 95% CI and median estimate for logRR in RESPIRE trials

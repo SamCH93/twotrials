@@ -34,6 +34,9 @@ pTippett(mu = 0, t1 = -0.491, t2 = -0.185, se1 = 0.179, se2 = 0.174,
          alternative = "less")
 
 }
+\seealso{
+\code{\link{muTippett}}
+}
 \author{
 Samuel Pawel
 }

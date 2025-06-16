@@ -34,6 +34,9 @@ pEdgington(mu = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
            alternative = "less")
 
 }
+\seealso{
+\code{\link{muEdgington}}
+}
 \author{
 Samuel Pawel
 }

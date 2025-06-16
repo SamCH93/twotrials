@@ -16,6 +16,8 @@
 #'
 #' @author Samuel Pawel
 #'
+#' @seealso\code{\link{mu2TR}}
+#'
 #' @examples
 #' ## p-value for H0: logRR = 0 in RESPIRE trials
 #' p2TR(mu = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.1738,
@@ -39,13 +41,13 @@ p2TR <- function(mu = 0, t1, t2, se1, se2, alternative = "greater") {
 
 #' @title Combined estimation function from the two-trials rule
 #'
-#' @description Computes parameter estimate from estimation function based on
-#'     the two-trials rule
+#' @description This function computes parameter estimates from the combined
+#'     estimation function based on the two-trials rule
 #'
 #' @inheritParams p2TR
 #' @param a P-value function quantile corresponding to the parameter estimate.
 #'     Defaults to \code{0.5}, which corresponds to the median estimate. Set
-#'     to \code{a = c(0.025, 0.975)} to obtain limits of a 95% confidence
+#'     to \code{a = c(0.025, 0.975)} to obtain limits of a 95\% confidence
 #'     interval
 #' @param ... Additional arguments (for consistency with other estimation
 #'     functions)
@@ -53,6 +55,8 @@ p2TR <- function(mu = 0, t1, t2, se1, se2, alternative = "greater") {
 #' @return The parameter estimate based on the two-trials rule
 #'
 #' @author Samuel Pawel
+#'
+#' @seealso \code{\link{p2TR}}
 #'
 #' @examples
 #' ## 95% CI and median estimate for logRR in RESPIRE trials

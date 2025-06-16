@@ -9,7 +9,7 @@ mu2TR(a = 0.5, t1, t2, se1, se2, alternative = "greater", ...)
 \arguments{
 \item{a}{P-value function quantile corresponding to the parameter estimate.
 Defaults to \code{0.5}, which corresponds to the median estimate. Set
-to \code{a = c(0.025, 0.975)} to obtain limits of a 95% confidence
+to \code{a = c(0.025, 0.975)} to obtain limits of a 95\% confidence
 interval}
 
 \item{t1}{Parameter estimate from trial 1}
@@ -30,14 +30,17 @@ functions)}
 The parameter estimate based on the two-trials rule
 }
 \description{
-Computes parameter estimate from estimation function based on
-    the two-trials rule
+This function computes parameter estimates from the combined
+    estimation function based on the two-trials rule
 }
 \examples{
 ## 95\% CI and median estimate for logRR in RESPIRE trials
 mu2TR(a = c(0.975, 0.5, 0.025), t1 = -0.4942, t2 = -0.1847, se1 = 0.1833,
       se2 = 0.1738, alternative = "less")
 
+}
+\seealso{
+\code{\link{p2TR}}
 }
 \author{
 Samuel Pawel

@@ -28,7 +28,7 @@ Defaults to \code{TRUE}}
 \item{...}{Other arguments (for consistency with the generic)}
 }
 \value{
-Plots p-value functions and invisibly returns a data frames
+Plots combined p-value functions and invisibly returns a data frame
     containing the data underlying the plot
 }
 \description{
@@ -41,6 +41,9 @@ res <- twotrials(null = 0, t1 = -0.4942, t2 = -0.1847, se1 = 0.1833, se2 = 0.173
 plot(res) # one-sided p-value functions
 plot(res, two.sided = TRUE) # two-sided p-value functions
 
+}
+\seealso{
+\code{\link{twotrials}}
 }
 \author{
 Samuel Pawel

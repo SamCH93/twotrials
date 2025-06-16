@@ -5,7 +5,7 @@
 ## ----------------------------------------------------------------------------
 
 PACKAGE = twotrials
-VERSION = 0.05
+VERSION = 0.6
 TAR = $(PACKAGE)_$(VERSION).tar.gz
 
 all: build

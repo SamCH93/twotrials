@@ -1,3 +1,7 @@
+# twotrials 0.6
+
+- added implicit weights for the combined point estimate to `twotrials`
+
 # twotrials 0.05
 
 - package development started
