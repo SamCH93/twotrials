@@ -1441,7 +1441,9 @@ ggplot(data = RESPIREres$pDF, aes(x = mu, y = p, color = type, linetype = type))
   \centering
   \caption{Point estimates (with implicit weights), 95\% CIs (with widths), and
     \textit{p}-values for the RESPIRE trials \citep{Aksamit2018, DeSoyza2018,
-      Chotirmall2018}.}
+      Chotirmall2018}. Note that weigths and CI widths are computed from
+    unrounded numbers and may not always exactly correspond with rounded point
+    estimates and CIs.}
   \label{tab:tabrespirecombined}
 << "table-RESPIRE", results = "asis" >>=
 formatNumberLaTeX. <- function(number, digits = 2) {
@@ -1637,7 +1639,9 @@ and $0.025^2$ levels.
 \begin{table}[!htb]
   \centering
   \caption{Point estimates (with implicit weights), 95\% CIs (with widths), and
-    \textit{p}-values for the ORBIT trials \citep{Haworth2019}.}
+    \textit{p}-values for the ORBIT trials \citep{Haworth2019}. Note that
+    weigths and CI widths are computed from unrounded numbers and may not always
+    exactly correspond with rounded point estimates and CIs.}
   \label{tab:taborbitcombined}
 << "table-ORBIT", results = "asis" >>=
 ORBITtab <- ORBITres$summariesDF |>
@@ -1715,6 +1719,22 @@ effect estimates with inverse standard error weights. However, a comparison with
 numerically computed median estimates showed that this is not the case. Thus,
 the inverse standard error weighted average in~\eqref{eq:edgingtonpointest}
 corresponds to Edgington's median estimate only in the setting of two trials.
+
+Figure~\ref{fig:respireall} shows \textit{p}-value functions that combine all
+four results from the two RESPIRE trials, as also done by Chotirmall and
+Chalmers \citep{Chotirmall2018} with fixed-effect meta-analysis. Looking at the
+median estimates, we see the same patterns as when the methods are applied to
+only two trials; The median estimates from meta-analysis and Edgington's method
+are somewhere in between the trials' individual estimates. The median estimates
+based on Fisher's and Tippett's method are the most anti-conservative, and the
+median estimates based on Pearson's method and the two-trials rule are the most
+conservative. A decision rule that maintains the $\alpha^2 = 0.025^2$ type I
+error rate of the two trials rule could now be defined by flagging drug efficacy
+when the $(1 - 2\alpha^2) \times 100\% = 99.875\%$ excludes the null value.
+Following this rule, we can see that Fisher's method and meta-analysis flag
+efficacy while the remaining methods do not. In sum, this example illustrates
+how combined \textit{p}-value functions can be applied to more than two trials,
+while allowing to maintain the same type I error rate as for two trials.
 
 \begin{figure}[!htb]
 << "more-than-2-trials", fig.height = 3 >>=
@@ -1850,21 +1870,6 @@ ggplot(data = pDF, aes(x = mu, y = p, color = method, linetype = method)) +
 \label{fig:respireall}
 \end{figure}
 
-Figure~\ref{fig:respireall} shows \textit{p}-value functions that combine all
-four results from the two RESPIRE trials, as also done by Chotirmall and
-Chalmers \citep{Chotirmall2018} with fixed-effect meta-analysis. Looking at the
-median estimates, we see the same patterns as when the methods are applied to
-only two trials; The median estimates from meta-analysis and Edgington's method
-are somewhere in between the trials' individual estimates. The median estimates
-based on Fisher's and Tippett's method are the most anti-conservative, and the
-median estimates based on Pearson's method and the two-trials rule are the most
-conservative. A decision rule that maintains the $\alpha^2 = 0.025^2$ type I
-error rate of the two trials rule could now be defined by flagging drug efficacy
-when the $(1 - 2\alpha^2) \times 100\% = 99.875\%$ excludes the null value.
-Following this rule, we can see that Fisher's method and meta-analysis flag
-efficacy while the remaining methods do not. In sum, this example illustrates
-how combined \textit{p}-value functions can be applied to more than two trials,
-while allowing to maintain the same type I error rate as for two trials.
 
 \section{Discussion}
 \label{sec:discussion}
@@ -1938,7 +1943,9 @@ However, in many fields, researchers are not used to such confidence levels, so
 we suggest to report both a more conventional level (e.g., 95\%) along with $(1
 - 2\alpha^{2}) \times 100\%$ via telescope-style CIs, as well as the underlying
 \textit{p}-value function, as in
-Figures~\ref{fig:twinstudies}--\ref{fig:respireall}.
+Figures~\ref{fig:twinstudies}--\ref{fig:respireall}. The idea of telescope-style
+CIs is not new but has been suggested before in different contexts
+\citep{Louis2008}.
 
 A broader issue is the question of whether two trials are actually necessary. If
 the designs of the two trials are so similar that they can be considered
