@@ -177,7 +177,7 @@ selogrr4 <- (cilogrr4[2] - cilogrr4[1])/(2*qnorm(p = 0.975))
   to the less extreme effect), Fisher's and Tippett's methods are
   anti-conservative (converging to the more extreme effect), and Edgington's
   method and meta-analysis are balanced (converging to a weighted average).
-  Notably, Edgington's confidence intervals asymptotically always include
+  Notably, Edgington's confidence intervals asymptotically always include the
   individual trial effects, while meta-analytic confidence intervals shrink to a
   point at the weighted average effect. We conclude that all of these methods
   may be appropriate depending on the estimand of interest. We implement
@@ -463,20 +463,20 @@ right plot in Figure~\ref{lab:pfunillustration}.
 
 When both trials have the same underlying true effect ($\theta_{1} = \theta_{2}
 = \theta$), sometimes called ``one population assumption'' or ``homogeneity''
-\citep{Shun2005, Zhan2022}, a CI based on a combined \textit{p}-value function has
-correct coverage and the median estimate is median unbiased for the true common
-effect $\theta$, i.e., the probability of the median estimate being greater than
-$\theta$ is equal to the probability of it being smaller than $\theta$
-\citep[see e.g.,][]{XieSingh2013}. However, it is unclear how other operating
-characteristics (e.g., mean bias or CI width) behave for different combined
-\textit{p}-value functions $g$, and how they behave when the true effects are not the
-same ($\theta_{1} \neq \theta_{2}$), known as ``two populations assumption'' or
-``heterogeneity'' \citep{Shun2005, Zhan2022}. In the following, we will
-investigate this in detail for the two-trials rule, meta-analysis, and four
-other types of combined \textit{p}-value functions. As these investigations are
-somewhat technical, readers may choose to look only at the summary in
-Table~\ref{tab:summaries} and then jump directly to the applications in
-Section~\ref{sec:application}.
+\citep{Shun2005, Zhan2022}, a CI based on a combined \textit{p}-value function
+has correct coverage and the median estimate is median unbiased for the true
+common effect $\theta$, i.e., the probability of the median estimate being
+greater than $\theta$ is equal to the probability of it being smaller than
+$\theta$ (see e.g., Xie and Singh\citep{XieSingh2013}). However, it is unclear
+how other operating characteristics (e.g., mean bias or CI width) behave for
+different combined \textit{p}-value functions $g$, and how they behave when the
+true effects are not the same ($\theta_{1} \neq \theta_{2}$), known as ``two
+populations assumption'' or ``heterogeneity'' \citep{Shun2005, Zhan2022}. In the
+following, we will investigate this in detail for the two-trials rule,
+meta-analysis, and four other types of combined \textit{p}-value functions. As
+these investigations are somewhat technical, readers may choose to look only at
+the summary in Table~\ref{tab:summaries} and then jump directly to the
+applications in Section~\ref{sec:application}.
 
 \afterpage{
 \begin{landscape}
@@ -750,14 +750,14 @@ the trials, but also on the true trial effects.
 An intuitively desirable property is that the standard error of a combined
 estimate should not be larger than either of the trials' standard errors.
 Assuming again that the true trial effects and standard errors coincide, the
-two-trials rule satisfies, as the standard error takes the simple form
-\begin{equation*}
+two-trials rule satisfies this, as the standard error takes the simple form
+\begin{equation}
   \label{eq:se2tr}
   \sigma_{\text{2TR}} =
   %% \sqrt{\mathrm{Var}\left[\hat{\mu}_{\text{2TR}}(1/2)\right]} =
   \sigma \sqrt{1 - 1/\pi}
   \approx \sigma \times 0.83,
-\end{equation*}
+\end{equation}
 so is approximately $17\%$ smaller than the standard errors of each individual
 trial. However, this is no longer the case when the trial standard errors
 differ, see Appendix~\ref{app:ses}.
@@ -840,13 +840,13 @@ ggplot(data = pDF, aes(x = mu, y = p, color = type, linetype = type)) +
   two trials. The standard errors are assumed to be of the form $\sigma =
   \sqrt{2/n}$. The sample size $n$ in trial 1 is set to \Sexpr{nsmall}
   (imprecise) or \Sexpr{nlarge} (precise), and in trial 2 to twice the sample
-  size of trial 1. The two-sided \textit{p}-value functions of the individual trials
-  (dashed lines), and the combined \textit{p}-value functions (solid lines) based on
-  the two-trials rule, fixed-effect meta-analysis, Tippett's, Fisher's,
-  Pearson's, and Edgington's methods, and are shown along with the corresponding
-  95\%~CIs and median estimates (top). All \textit{p}-values are based on the
-  alternative "\Sexpr{input_p}" and then converted to two-sided \textit{p}-values via
-  the centrality function $2\min\{p, 1 - p\}$.}
+  size of trial 1. The two-sided \textit{p}-value functions of the individual
+  trials (dashed lines), and the combined \textit{p}-value functions (solid
+  lines) based on the two-trials rule, fixed-effect meta-analysis, Tippett's,
+  Fisher's, Pearson's, and Edgington's methods are shown along with the
+  corresponding 95\%~CIs and median estimates (top). All \textit{p}-values are
+  based on the alternative "\Sexpr{input_p}" and then converted to two-sided
+  \textit{p}-values via the centrality function $2\min\{p, 1 - p\}$.}
 \label{fig:extremeExamples}
 \end{figure}
 
@@ -936,7 +936,7 @@ meta-analytic Wald CI.
 
 The standard error of the meta-analytic median estimate is given by
 $\sigma_{\text{MA}}$ from~\eqref{eq:seMA}, and it has two desirable properties:
-First, it it is never larger than either of trials' standard errors
+First, it is never larger than either of trials' standard errors
 ($\sigma_{\text{MA}} \leq \min\{\sigma_1, \sigma_2\}$). Second, under effect
 homogeneity, the standard error is the smallest among all unbiased estimators of
 the common effect \citep{HedgesOlkin1985}. Both properties do not hold for the
@@ -1102,18 +1102,45 @@ and for Pearson's method
   \label{eq:pearsonest}
   \hat{\mu}_{\text{P}}(a) =
   \begin{cases}
-    \hat{\theta} + \sigma \, z_{\exp\{-\chi^{2}_{4}(a)/4\}} &  \text{for alternative = "greater"} \\
-    \hat{\theta} - \sigma \, z_{\exp\{-\chi^{2}_{4}(a)/4\}} &  \text{for alternative = "less"} \\
+    \hat{\theta} - \sigma \, z_{\exp\{-\chi^{2}_{4}(a)/4\}} &  \text{for alternative = "greater"} \\
+    \hat{\theta} + \sigma \, z_{\exp\{-\chi^{2}_{4}(a)/4\}} &  \text{for alternative = "less"} \\
   \end{cases}
 \end{equation}
 with $\chi^{2}_{4}(a)$ the $a\times 100\%$ quantile of the chi-squared
 distribution with four degrees of freedom. Importantly, the median estimates ($a
 = 1/2$) from both methods do not equal the observed estimate $\hat{\theta}$ but
-are shifted away from it by $z_{\exp\{-\chi^{2}_{4}(1/2)/2\}} \approx
+are shifted away from it by $z_{\exp\{-\chi^{2}_{4}(1/2)/4\}} \approx
 \Sexpr{round(qnorm(p = exp(-qchisq(p = 0.5, df = 4)/4)), 2)}$ standard errors
 $\sigma$, similar to the two-trials rule and Tippett's method. Another
 similarity is that the CI is skewed since the distance between the lower and
 upper limits to the point estimate is not the same.
+
+<< "check-closed-form", eval = FALSE >>=
+par(mfrow = c(1, 2))
+t1 <- 0.5
+t2 <- t1
+se1 <- 0.1
+se2 <- se1
+museq <- seq(0.3, 0.7, 0.01)
+aseq <- seq(0.01, 0.99, 0.01)
+alt <- "greater"
+pfis <- pFisher(museq, t1, t2, se1, se2, alt)
+pfis1 <- 1 - pchisq(q = -4*log(1 - pnorm((t1 - museq)/se1)), df = 4)
+ppear <- pPearson(museq, t1, t2, se1, se2, alt)
+ppear1 <- pchisq(q = -4*log(pnorm((t1 - museq)/se1)), df = 4)
+mufis <- muFisher(aseq, t1, t2, se1, se2, alt)
+mufis1 <- t1 + se1*qnorm(exp(-qchisq(1 - aseq, df = 4)/4))
+mupear <- muPearson(aseq, t1, t2, se1, se2, alt)
+mupear1 <- t1 - se1*qnorm(exp(-qchisq(aseq, df = 4)/4))
+matplot(museq, cbind(pfis, ppear), lty = 2, col = c(2, 4), type = "l",
+        xlab = "mu", ylab = "p")
+matlines(museq, cbind(pfis1, ppear1), lty = 3, col = c(2, 4), type = "l")
+legend("topleft", legend = c("Fisher", "Pearson"), col = c(2, 4), lty = 1)
+matplot(aseq, cbind(mufis, mupear), lty = 2, col = c(2, 4), type = "l",
+        xlab = "a", ylab = "mu")
+matlines(aseq, cbind(mufis1, mupear1), lty = 3, col = c(2, 4), type = "l")
+
+@
 
 
 \subsubsection{Asymptotics}
@@ -1239,7 +1266,7 @@ replaced with minus (plus) in~\eqref{eq:edgingtonthesame} for the alternative
 "less". We can see that CIs obtained
 from~\eqref{eq:edgingtonthesame} are symmetric and centered around the observed
 effect estimate $\hat{\theta}$, similar to meta-analysis but unlike the
-CIs from the two-trials rule, Fisher's, and Pearson's methods.
+CIs from the two-trials rule, Tippett's, Fisher's, and Pearson's methods.
 Yet, Edgington's CI is in this case narrower than the
 meta-analytic CI. For example, Edgington's 95\% CI is
 %% \begin{align*}
@@ -1519,7 +1546,7 @@ standard error weighting.
 
 Looking at the CIs, we can see that meta-analysis produces narrower CIs than the
 other methods for both treatment regimens. The widest CIs are produced by
-Edgington's method. For the 28-day regimen, Edgington's CI is the only method
+Edgington's method. For the 28-day regimen, Edgington's 95\% CI is the only method
 that includes both trial effect estimates, and as a result is even wider than
 the CIs from the individual trials, reflecting the apparent heterogeneity.
 Looking at the decision based on the CIs, we can see that for the 14-day
@@ -1676,12 +1703,12 @@ between the results from ORBIT 3 ($\log\widehat{\mathrm{RR}} =
 \Sexpr{round(logrr3, 2)}$ with 95\% CI from $\Sexpr{round(cilogrr3[1], 2)}$ to
 $\Sexpr{round(cilogrr3[2], 2)}$) and ORBIT 4 ($\log\widehat{\mathrm{RR}} =
 \Sexpr{round(logrr4, 2)}$ with 95\% CI from $\Sexpr{round(cilogrr4[1], 2)}$ to
-$\Sexpr{round(cilogrr4[2], 2)}$) leading to some more noticeable qualitative
-differences between the methods. That is, the \Sexpr{round(100*(1 -
-  2*0.025^2),3)}\% CIs from meta-analysis and Fisher's method exclude a log rate
-ratio of zero while the remaining methods include it, leading to different
-decisions at the $0.025^2$ level. Again, Edgington's CI is much wider than the
-others due to the substantial heterogeneity.
+$\Sexpr{round(logrr4 + selogrr4*qnorm(0.975), 2)}$) leading to some more
+noticeable qualitative differences between the methods. That is, the
+\Sexpr{round(100*(1 - 2*0.025^2),3)}\% CIs from meta-analysis and Fisher's
+method exclude a log rate ratio of zero while the remaining methods include it,
+leading to different decisions at the $0.025^2$ level. Again, Edgington's CI is
+much wider than the others due to the substantial heterogeneity.
 
 In summary, the analyses of the RESPIRE and ORBIT trials showed how combined
 \textit{p}-value functions allow us to obtain point estimates, CIs, and
@@ -1707,18 +1734,18 @@ function. In addition, a point estimate and 95\% CI can be used to summarize the
 combined evidence.
 
 
-While all point estimates and confidence intervals in this setting can be
-computed numerically, some of the analytical results derived earlier generalize
-to more than two studies. Specifically, closed-form median estimates and
-confidence intervals remain available for the two-trials rule, Tippett's method,
-and meta-analysis, whereas such closed-form solutions are not available for
-Fisher's, Pearson's, and Edgington's methods \citep{Held_etal2024b}. In
-particular, for Edgington's method, one might expect the median
-estimate~\eqref{eq:edgingtonpointest} to generalize by incorporating additional
-effect estimates with inverse standard error weights. However, a comparison with
-numerically computed median estimates showed that this is not the case. Thus,
-the inverse standard error weighted average in~\eqref{eq:edgingtonpointest}
-corresponds to Edgington's median estimate only in the setting of two trials.
+While all point estimates and CIs in this setting can be computed numerically,
+some of the analytical results derived earlier generalize to more than two
+studies. Specifically, closed-form median estimates and CIs remain available for
+the two-trials rule, Tippett's method, and meta-analysis, whereas such
+closed-form solutions are not available for Fisher's, Pearson's, and Edgington's
+methods \citep{Held_etal2024b}. In particular, for Edgington's method, one might
+expect the median estimate~\eqref{eq:edgingtonpointest} to generalize by
+incorporating additional effect estimates with inverse standard error weights.
+However, a comparison with numerically computed median estimates showed that
+this is not the case. Thus, the inverse standard error weighted average
+in~\eqref{eq:edgingtonpointest} corresponds to Edgington's median estimate only
+in the setting of two trials.
 
 Figure~\ref{fig:respireall} shows \textit{p}-value functions that combine all
 four results from the two RESPIRE trials, as also done by Chotirmall and
@@ -1929,7 +1956,7 @@ counterintuitive effect estimates that differ from the one observed in both
 trials. Such point estimates are unintuitive and difficult to communicate to
 non-statisticians. Moreover, only Edgington's method and meta-analysis produce
 the same combined estimate and two-sided confidence interval in case the
-alternative of combined $p$-values is changed \citep{Held_etal2024b}, which
+alternative of the combined $p$-values is changed \citep{Held_etal2024b}, which
 seems another practically desired property. From this perspective, Edgington's
 method and meta-analysis may be preferable. In particular, Edgington's method
 can also account for effect heterogeneity by widening its CI when there is
@@ -1983,17 +2010,17 @@ beyond the ones considered here, such as the inverse chi-square method
 \citep{Lancaster1961, HedgesOlkin1985}, the harmonic mean $\chi^2$ test
 \citep{Held2020b}, the Cauchy combination test \citep{Liu2019}, random-effects
 meta-analysis \citep{Borenstein2010}, and combining \textit{p}-value functions
-that are based on the exact distribution of the data rather than normality
-\citep[e.g., the \textit{p}-value function based on Fisher's exact test with
-  mid-\textit{p} correction as considered in ][]{Schweder2013, Held_etal2024b}.
-Additionally, fixed-effect meta-analysis has a Bayesian interpretation,
-corresponding to posterior inferences assuming equal true study effects and a
-flat prior distribution. Investigating whether other \textit{p}-value
-combination methods have similar Bayesian justifications could be an interesting
-avenue for future work. To sum up, combined \textit{p}-value functions provide a
-unified approach for combining results from two trials that can be further
-developed theoretically. Moreover, our software implementation allows
-researchers to conveniently apply these methods in practice.
+that are based on the exact distribution of the data rather than normality,
+e.g., the \textit{p}-value function based on Fisher's exact test with
+mid-\textit{p} correction \citep{Schweder2013, Held_etal2024b}. Additionally,
+fixed-effect meta-analysis has a Bayesian interpretation, corresponding to
+posterior inferences assuming equal true study effects and a flat prior
+distribution. Investigating whether other \textit{p}-value combination methods
+have similar Bayesian justifications could be an interesting avenue for future
+work. To sum up, combined \textit{p}-value functions provide a unified approach
+for combining results from two trials that can be further developed
+theoretically. Moreover, our software implementation allows researchers to
+conveniently apply these methods in practice.
 
 \bmsection*{Acknowledgments}
 
@@ -2014,9 +2041,11 @@ tables, and figures are openly available at
 from Tables~\ref{tab:tabrespirecombined} and~\ref{tab:taborbitcombined} with
 higher precision are also available at the repository. A snapshot of the
 repository at the time of writing is available at
-\url{https://doi.org/10.5281/zenodo.15017483}. We used the statistical
-programming language \Sexpr{R.Version()[["version.string"]]} for analyses
-\citep{R} along with the \texttt{confMeta} \citep{confMeta2024},
+\url{https://doi.org/10.5281/zenodo.15017483}. The R package \texttt{twotrials}
+implementing combined \textit{p}-value function inference for two trials is
+available at \url{https://doi.org/10.32614/CRAN.package.twotrials}. We used the
+statistical programming language \Sexpr{R.Version()[["version.string"]]} for
+analyses \citep{R} along with the \texttt{confMeta} \citep{confMeta2024},
 \texttt{ggplot2} \citep{Wickham2016}, \texttt{kableExtra} \citep{Zhu2024},
 \texttt{dplyr} \citep{Wickham2023}, and \texttt{knitr} \citep{Xie2015} packages.
 
@@ -2110,9 +2139,9 @@ and its expectation is therefore known and need not be derived here.
 
     Pearson (approximate) & $X$ with $q = -z_{\exp\{-\chi^2_4(a)/2\}}$ & $Y$ with $q = -z_{\exp\{-\chi^2_4(a)/2\}}$ \\
 
-    Edgington (approximate, $a < 1/2$) & $X$ with $q = z_{\sqrt{2a}}$ & $Y$ with $q = -z_{\sqrt{2a}}$ \\
+    Edgington (approximate, $a < 1/2$) & $X$ with $q = z_{\sqrt{2a}}$ & $Y$ with $q = z_{\sqrt{2a}}$ \\
 
-    Edgington (approximate, $a > 1/2$) & $Y$ with $q = -z_{\sqrt{2(1 - a)}}$ & $X$ with $q = z_{\sqrt{2(1 - a)}}$ \\
+    Edgington (approximate, $a > 1/2$) & $Y$ with $q = z_{\sqrt{2(1 - a)}}$ & $X$ with $q = z_{\sqrt{2(1 - a)}}$ \\
     \bottomrule
   \end{tabular}
   \endgroup
@@ -2280,7 +2309,7 @@ seT <- function(se1, se2, t1, t2, alternative = "greater") {
 }
 seF <- function(se1, se2, t1, t2, alternative = "greater") {
     ## only approximately valid when t1 != t2
-    q <- -qnorm(p = exp(-qchisq(p = 0.25, df = 4)))
+    q <- -qnorm(p = exp(-qchisq(p = 0.5, df = 4)/2))
     if (alternative == "greater") {
         sqrt(EY2(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2) -
              EY(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2)^2)
@@ -2291,7 +2320,7 @@ seF <- function(se1, se2, t1, t2, alternative = "greater") {
 }
 seP <- function(se1, se2, t1, t2, alternative = "greater") {
     ## only approximately valid when t1 != t2
-    q <- -qnorm(p = exp(-qchisq(p = 0.25, df = 4)))
+    q <- -qnorm(p = exp(-qchisq(p = 0.5, df = 4)/2))
     if (alternative == "greater") {
         sqrt(EX2(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2) -
              EX(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2)^2)
@@ -2424,40 +2453,32 @@ ggplot(filter(summaries, type == "analytical",
 We can see that the standard error from meta-analysis is always the lowest and
 is always smaller than the minimum of the two standard errors
 ($\sigma_{\text{MA}} \leq \min\{\sigma_1, \sigma_2\}$). The standard error from
-Edgington's method is equal (when $\sigma_1 = \sigma2$) to or larger than the
+Edgington's method is equal (when $\sigma_1 = \sigma_2$) to or larger than the
 meta-analytic one, and can exceed the minimum standard error from the two trials
 (e.g., for $\sigma_1 = 0.1$ and $\sigma_2 = 0.3$, it is $\sigma_{\text{E}} =
 \Sexpr{round(seE(0.1, 0.3), 3)}$ ). The standard errors for both Edgington's
-method and meta-analysis only depend on the trials' standard error, but not on
+method and meta-analysis only depend on the trials' standard errors, but not on
 the true effects, so their standard errors are the same across all panels in
-Figure~\ref{fig:ses}. This is not the case case for the two-trials rule and
-Tippett's method, which show a more irregular behavior. When, the true trial
-effects coincide ($\theta_1 = \theta_2$; panels on the diagonal), the combined
-standard error decreases with decreasing standard error from the second trial
-$\sigma_2$. However, when the true effect from the first trial is smaller than
-the one from the second trial ($\theta_1 < \theta_2$; upper off-diagonal
-panels), the combined standard error from Tippett's method remains constant
-whereas the standard error from the two-trials rule changes drastically with
-with changing $\sigma_2$. The opposite occurs when the effect from the first
-trial is larger ($\theta_1 > \theta_2$; lower off-diagonal panels). This is
-plausible, as these methods target the minimum (two-trials rule) or maximum
-(Tippett) effect, meaning that the standard error of the trial with minimum or
-maximum effect mainly drives the standard error of the combined estimate.
+Figure~\ref{fig:ses}. This is not the case for the two-trials rule and Tippett's
+method, which show a more irregular behavior. When, the true trial effects
+coincide ($\theta_1 = \theta_2$; panels on the diagonal), the combined standard
+error decreases with decreasing standard error from the second trial $\sigma_2$.
+However, when the true effect from the first trial is smaller than the one from
+the second trial ($\theta_1 < \theta_2$; upper off-diagonal panels), the
+combined standard error from Tippett's method remains constant whereas the
+standard error from the two-trials rule changes drastically with changing
+$\sigma_2$. The opposite occurs when the effect from the first trial is larger
+($\theta_1 > \theta_2$; lower off-diagonal panels). This is plausible, as these
+methods target the minimum (two-trials rule) or maximum (Tippett) effect,
+meaning that the standard error of the trial with minimum or maximum effect
+mainly drives the standard error of the combined estimate.
 
 \bmsubsection{Limiting combined estimation functions}
 \label{app:asymptotics}
 
-Consider again the random variables $Y$ and $X$ as defined in
+Consider again the random variables $X$ and $Y$ as defined in
 Appendix~\ref{app:expectation}. Their cumulative distribution functions can be
 derived to be
-\begin{align*}
-  \Pr(Y \leq y)
-  &= \Pr(\max\{\hat{\theta}_1 - \sigma_1 \, q, \hat{\theta}_2 - \sigma_2 \, q\} \leq y) \\
-  &= \Pr(\hat{\theta}_1 - \sigma_1 \, q \leq y, \hat{\theta}_2 - \sigma_2 \, q \leq y) \\
-  &= \Pr(\hat{\theta}_1 - \sigma_1 \, q \leq y) \times \Pr(\hat{\theta}_2 - \sigma_2 \, q \leq y) \\
-  &= \Phi\left(\frac{y - \theta_1}{\sigma_1} + q\right) \times \Phi\left(\frac{y - \theta_2}{\sigma_2} + q\right)
-\end{align*}
-and
 \begin{align*}
   \Pr(X \leq x)
   &= \Pr(\min\{\hat{\theta}_1 + \sigma_1 \, q, \hat{\theta}_2 + \sigma_2 \, q\} \leq x) \\
@@ -2465,30 +2486,38 @@ and
   &= 1 - \{\Pr(\hat{\theta}_1 + \sigma_1 \, q > x) \times \Pr(\hat{\theta}_2 + \sigma_2 \, q > x)\} \\
   &= 1 - \left\{\Phi\left(\frac{\theta_1 - x}{\sigma_1} + q\right) \times \Phi\left(\frac{ \theta_2 - x}{\sigma_2} + q\right)\right\}.
 \end{align*}
+and
+\begin{align*}
+  \Pr(Y \leq y)
+  &= \Pr(\max\{\hat{\theta}_1 - \sigma_1 \, q, \hat{\theta}_2 - \sigma_2 \, q\} \leq y) \\
+  &= \Pr(\hat{\theta}_1 - \sigma_1 \, q \leq y, \hat{\theta}_2 - \sigma_2 \, q \leq y) \\
+  &= \Pr(\hat{\theta}_1 - \sigma_1 \, q \leq y) \times \Pr(\hat{\theta}_2 - \sigma_2 \, q \leq y) \\
+  &= \Phi\left(\frac{y - \theta_1}{\sigma_1} + q\right) \times \Phi\left(\frac{y - \theta_2}{\sigma_2} + q\right)
+\end{align*}
 Letting the standard errors $\sigma_1$ and $\sigma_2$ got to zero, this leads to
+\begin{align}
+  \lim_{\sigma_1, \sigma_2 \downarrow 0} \Pr(X \leq x)
+  &= 1 - \{1_{(-\infty, \theta_1)}(x) \times 1_{(-\infty, \theta_2)}(x)\} \nonumber \\
+  %% = 1 - \{1_{(-\infty, \min\{\theta_1, \theta_2\}]}(x)\}
+  &= 1_{[\min\{\theta_1, \theta_2\}, +\infty)}(x)
+  \label{eq:limitcdfx}
+\end{align}
+and
 \begin{align}
   \label{eq:limitcdfy}
   \lim_{\sigma_1, \sigma_2 \downarrow 0} \Pr(Y \leq y)
   &= 1_{[\theta_1, +\infty)}(y) \times 1_{[\theta_2, +\infty)}(y) \nonumber \\
   &= 1_{[\max\{\theta_1, \theta_2\}, +\infty)}(y)
 \end{align}
-and
-\begin{align}
-  \lim_{\sigma_1, \sigma_2 \downarrow 0} \Pr(X \leq x)
-  &= 1 - \{1_{(-\infty, \theta_1]}(x) \times 1_{(-\infty, \theta_2]}(x)\} \nonumber \\
-  %% = 1 - \{1_{(-\infty, \min\{\theta_1, \theta_2\}]}(x)\}
-  &= 1_{[\min\{\theta_1, \theta_2\}, +\infty)}(x)
-  \label{eq:limitcdfx}
-\end{align}
 where $1_A(x) = 1$ if $x \in A$ and 0 otherwise, and the constant $q$ vanishes.
-Since~\eqref{eq:limitcdfy} and~\eqref{eq:limitcdfx} is the cumulative
-distribution function of a degenerate random variable at $\max\{\theta_1,
-\theta_2\}$ and $\min\{\theta_1, \theta_2\}$, respectively, this implies that
+Since~\eqref{eq:limitcdfx} and~\eqref{eq:limitcdfy} is the cumulative
+distribution function of a degenerate random variable at $\min\{\theta_1,
+\theta_2\}$ and $\max\{\theta_1, \theta_2\}$, respectively, this implies that
 the combined estimation functions given by $X$ and $Y$ converge in probability
-to $\max\{\theta_1, \theta_2\}$ and $\min\{\theta_1, \theta_2\}$, respectively,
+to $\min\{\theta_1, \theta_2\}$ and $\max\{\theta_1, \theta_2\}$, respectively,
 for any constant $q$. Thus, all combined estimation functions from
-Table~\ref{tab:constant} converge in probability to $\max\{\theta_1, \theta_2\}$
-or $\min\{\theta_1, \theta_2\}$ as $\sigma_1$ and $\sigma_2$ decrease.
+Table~\ref{tab:constant} converge in probability to $\min\{\theta_1, \theta_2\}$
+or $\max\{\theta_1, \theta_2\}$ as $\sigma_1$ and $\sigma_2$ decrease.
 
 \bmsubsection{Approximate combined estimation functions}
 \label{app:approxmu}
