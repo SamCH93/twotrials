@@ -123,26 +123,6 @@ selogrr4 <- (cilogrr4[2] - cilogrr4[1])/(2*qnorm(p = 0.975))
 
 \begin{document}
 
-%% %% title, authors, affiliations, mail
-%% \title{\vspace{-3em} \textbf{\textsf{
-%%       Combined \textit{P}-value Functions for Compatible Effect Estimation and
-%%       Hypothesis Testing in Drug Regulation
-%% }}}
-%% \author{
-%%   Samuel Pawel \orcidlink{0000-0003-2779-320X}
-%%   \and
-%%   Małgorzata Roos \orcidlink{0000-0001-9878-6969}
-%%   \and
-%%   Leonhard Held \orcidlink{0000-0002-8686-5325}
-%% }
-%% \date{
-%%   Epidemiology, Biostatistics and Prevention Institute (EBPI) \\
-%%   Center for Reproducible Science (CRS) \\
-%%   University of Zurich \\
-%%   \texttt{\{samuel.pawel,malgorzata.roos,leonhard.held\}@uzh.ch} \\ ~ \\
-%%   March 13, 2025
-%% }
-
 \title{Combined \textit{P}-value Functions for Compatible Effect Estimation and Hypothesis Testing in Drug Regulation}
 
 \author{Samuel Pawel}
@@ -1115,33 +1095,6 @@ $\sigma$, similar to the two-trials rule and Tippett's method. Another
 similarity is that the CI is skewed since the distance between the lower and
 upper limits to the point estimate is not the same.
 
-<< "check-closed-form", eval = FALSE >>=
-par(mfrow = c(1, 2))
-t1 <- 0.5
-t2 <- t1
-se1 <- 0.1
-se2 <- se1
-museq <- seq(0.3, 0.7, 0.01)
-aseq <- seq(0.01, 0.99, 0.01)
-alt <- "greater"
-pfis <- pFisher(museq, t1, t2, se1, se2, alt)
-pfis1 <- 1 - pchisq(q = -4*log(1 - pnorm((t1 - museq)/se1)), df = 4)
-ppear <- pPearson(museq, t1, t2, se1, se2, alt)
-ppear1 <- pchisq(q = -4*log(pnorm((t1 - museq)/se1)), df = 4)
-mufis <- muFisher(aseq, t1, t2, se1, se2, alt)
-mufis1 <- t1 + se1*qnorm(exp(-qchisq(1 - aseq, df = 4)/4))
-mupear <- muPearson(aseq, t1, t2, se1, se2, alt)
-mupear1 <- t1 - se1*qnorm(exp(-qchisq(aseq, df = 4)/4))
-matplot(museq, cbind(pfis, ppear), lty = 2, col = c(2, 4), type = "l",
-        xlab = "mu", ylab = "p")
-matlines(museq, cbind(pfis1, ppear1), lty = 3, col = c(2, 4), type = "l")
-legend("topleft", legend = c("Fisher", "Pearson"), col = c(2, 4), lty = 1)
-matplot(aseq, cbind(mufis, mupear), lty = 2, col = c(2, 4), type = "l",
-        xlab = "a", ylab = "mu")
-matlines(aseq, cbind(mufis1, mupear1), lty = 3, col = c(2, 4), type = "l")
-
-@
-
 
 \subsubsection{Asymptotics}
 To understand the asymptotic behavior of Fisher's and Pearson's method, we may
@@ -1361,7 +1314,7 @@ resFun <- function(t1, t2, se1, se2, labels, xlim, alternative, alpha, null,
         res <- twotrials(null = null, t1 = t1[i], t2 = t2[i], se1 = se1[i],
                          se2 = se2[i], alternative = alternative,
                          level = 1 - alpha)
-        ## for a lower alpha level to have CI decision at alpha^2
+        ## for a lower alpha level to have CI decision at (one-sided) alpha^2
         res2 <- twotrials(null = null, t1 = t1[i], t2 = t2[i], se1 = se1[i],
                           se2 = se2[i], alternative = alternative,
                           level = 1 - 2*(alpha/2)^2)
@@ -1780,7 +1733,7 @@ labels <- c("RESPIRE 1 14-day", "RESPIRE 1 28-day",
             "RESPIRE 2 14-day", "RESPIRE 2 28-day")
 est <- c(logrr14r1, logrr28r1, logrr14r2, logrr28r2)
 se <- c(selogrr14r1, selogrr28r1, selogrr14r2, selogrr28r2)
-lower2 <- NA # est - se*qnorm(p = 1 - (alpha/2)^2)
+lower2 <- NA # est - se*qnorm(p = 1 - 2*(alpha/2)^2)
 upper2 <- NA # est + se*qnorm(p = 1 - (alpha/2)^2)
 
 ## compute combined p-value functions
@@ -1887,8 +1840,15 @@ ggplot(data = pDF, aes(x = mu, y = p, color = method, linetype = method)) +
 
 ## ## does Edgington's median estimate generalize to more than 2 studies?
 ## ## No! not the same
-## subset(summariesDF, method == "Edgington")$estimate # -0.328873
-## sum(est/se)/sum(1/se) # -0.3238609
+## subset(summariesDF, method == "Edgington")$estimate # -0.3280871
+## sum(est/se)/sum(1/se) # -0.323224
+## ## see also this example
+## ts <- c(0, 0.1, 0.3, 0.4)
+## ses <- c(0.05, 0.3, 0.2, 0.1)
+## res <- confMeta(estimates = ts, SEs = ses, fun = p_edgington, input_p = "greater")
+## res$p_max[1]
+## autoplot(res)
+## sum(ts/ses)/sum(1/ses)
 @
 \caption{Combined \textit{p}-value function based on combining all four estimates from
   the RESPIRE trials \citep{Aksamit2018, DeSoyza2018, Chotirmall2018} along with
@@ -2234,10 +2194,10 @@ $q = z_{\sqrt{1/2}}$) simplifies to~\eqref{eq:se2tr}.
 Figure~\ref{fig:ses} shows the standard errors from the median estimates of the
 two-trials rule, meta-analysis, Tippett's, and Edgington's methods for various
 scenarios of true trial effects and trial standard errors that should resemble
-typical ranges for standardized mean difference parameters. The standard errors
-from Fisher's and Pearson's methods are very close to the ones from Tippett's
-method and the two-trials rule, and therefore not shown to make the plot easier
-to read.
+typical ranges for standardized mean difference parameters. The approximate
+standard errors from Fisher's and Pearson's methods are close to the ones from
+Tippett's method and the two-trials rule, and therefore not shown to make the
+plot easier to read.
 
 
 \begin{figure}[!htb]
@@ -2330,43 +2290,6 @@ seP <- function(se1, se2, t1, t2, alternative = "greater") {
     }
 }
 
-
-## se1 <- 0.05
-## se2 <- 0.1
-## theta1 <- 0.45
-## theta2 <- 0.5
-
-## ## computing standard errors with simulation
-## nsim <- 10000
-## set.seed(42)
-## t1 <- rnorm(n = nsim, mean = theta1, sd = se1)
-## t2 <- rnorm(n = nsim, mean = theta2, sd = se2)
-## simres <- do.call("rbind", lapply(X = seq_len(nsim), FUN = function(i) {
-##     res <- twotrials(t1 = t1[i], t2 = t2[i], se1 = se1, se2 = se2)
-##     data.frame(sim = i, res$summaries[,c("method", "est")])
-## }))
-
-## simSE <- tapply(simres$est, simres$method, FUN = sd)
-## ## comparing to analytical standard errors
-## aSE <- sapply(X = list("Edgington" = seE, "Fisher" = seF,
-##                        "Meta-analysis" = seMA, "Pearson" = seP, "Tippett" = seT,
-##                        "Two-trials rule" = se2TR),
-##               FUN = function(f) f(se1 = se1, se2 = se2, t1 = theta1, t2 = theta2))
-## signif(cbind(simSE, aSE), 4)
-
-## ## checking simplified formula for 2TR
-## se <- 1
-## theta <- 0.5
-## q <- qnorm(sqrt(0.5))
-## se2TR(se1 = se, se2 = se, t1 = theta, t2 = theta)
-## ## first simplification
-## sqrt(se^2 + (theta + se*q)^2 - 2*se*(theta + se*q)/sqrt(pi) -
-##      (theta + se*(q - 1/sqrt(pi)))^2)
-## ## next simplification
-## sqrt(se^2 + theta^2 + 2*theta*se*q + se^2*q^2 - 2*se*theta/sqrt(pi) - 2*se^2*q/sqrt(pi) - theta^2 - 2*theta*se*(q - 1/sqrt(pi)) - se^2*(q - 1/sqrt(pi))^2)
-## ## next simplification
-## sqrt(se^2*(1 - 1/pi))
-
 ## evaluate SEs over a grid of parameter values
 n1 <- 200
 se1 <- sqrt(2/n1)
@@ -2445,8 +2368,8 @@ ggplot(filter(summaries, type == "analytical",
   scenarios of true trial effects $\theta_1$ and $\theta_2$ and trial standard
   error from the second trial $\sigma_2$. The standard error of the first trial
   is $\sigma_1 = \Sexpr{se1}$ across all scenarios. The standard errors from
-  Fisher's and Pearson's methods are close to Tippett's method the two-trials
-  rule, and not shown to make the plot easier to read.}
+  Fisher's and Pearson's methods are close to Tippett's method and the
+  two-trials rule, and not shown to make the plot easier to read.}
 \label{fig:ses}
 \end{figure}
 
@@ -2665,15 +2588,6 @@ We may hence approximate Fisher's combined \textit{p}-value by
   \end{cases}
   \label{eq:fisherapprox}
 \end{align}
-%% Similarly, the combined \textit{p}-value function for the alternative ``less'' may be
-%% approximated by
-%% \begin{align}
-%%   p_{\text{F}}(\mu) =
-%%   1 - \Pr\left[\chi^{2}_{4} \leq -2 %\left[\underbrace{\log (1)}_{=0} +
-%%     \log\left\{1 - \Phi\left(\min\left\{\frac{\hat{\theta}_1 - \mu}{\sigma_1}, \frac{\hat{\theta}_2 - \mu}{\sigma_2}\right\}\right)\right\} %\right]
-%%     \right].
-%%   \label{eq:fisherapprox2}
-%% \end{align}
 The corresponding combined estimation function can then be obtained by
 equating~\eqref{eq:fisherapprox} to $a$ and solving for $\mu$, which leads to
 \begin{equation}
@@ -2767,13 +2681,14 @@ for the alternative ``less''. The combined estimation
 functions~\eqref{eq:edgingtonprecise} and~\eqref{eq:edgingtonprecise2} also
 include the closed-form solution for the median estimate ($a = 1/2$)
 from~\eqref{eq:edgingtonpointest} as this value does not require any
-approximation. Surprisingly, a $(1 - \alpha) \times 100\%$ CI constructed
-from~\eqref{eq:edgingtonprecise} or~\eqref{eq:edgingtonprecise2} always includes
-the individual estimates $\hat{\theta}_1$ and $\hat{\theta}_2$ since the lower
-limit ($a = \alpha/2$) is always smaller than the minimum of the two effect
-estimates, and the upper limit ($a = 1 - \alpha/2$) is always larger than the
-maximum of the two. This demonstrates that Edgington's method reacts to
-heterogeneity by widening its CI to include both trial effect estimates.
+approximation. Surprisingly, a $(1 - \alpha) \times 100\%$ CI with $\alpha <
+1/4$ constructed from~\eqref{eq:edgingtonprecise}
+or~\eqref{eq:edgingtonprecise2} always includes the individual estimates
+$\hat{\theta}_1$ and $\hat{\theta}_2$ since the lower limit ($a = \alpha/2$) is
+always smaller than the minimum of the two effect estimates, and the upper limit
+($a = 1 - \alpha/2$) is always larger than the maximum of the two. This
+demonstrates that Edgington's method reacts to heterogeneity by widening its CI
+to include both trial effect estimates.
 
 
 All of these approximations become more accurate with decreasing standard errors
