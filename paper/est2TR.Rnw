@@ -2414,7 +2414,7 @@ and
   &= \Pr(\hat{\theta}_1 - \sigma_1 \, q \leq y) \times \Pr(\hat{\theta}_2 - \sigma_2 \, q \leq y) \\
   &= \Phi\left(\frac{y - \theta_1}{\sigma_1} + q\right) \times \Phi\left(\frac{y - \theta_2}{\sigma_2} + q\right)
 \end{align*}
-Letting the standard errors $\sigma_1$ and $\sigma_2$ got to zero, this leads to
+Letting the standard errors $\sigma_1$ and $\sigma_2$ go to zero, this leads to
 \begin{align}
   \lim_{\sigma_1, \sigma_2 \downarrow 0} \Pr(X \leq x)
   &= 1 - \{1_{(-\infty, \theta_1)}(x) \times 1_{(-\infty, \theta_2)}(x)\} \nonumber \\
