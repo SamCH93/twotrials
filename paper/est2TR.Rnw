@@ -723,14 +723,10 @@ so the median estimate from the two-trials rule exhibits a conservative bias in
 both cases.
 
 Another interesting operating characteristic is the standard error of the median
-estimate, elaborated in more detail in Appendix~\ref{app:ses}. Notably, the
-standard error of the two-trials rule depends not only on the standard errors of
-the trials, but also on the true trial effects.
-
-An intuitively desirable property is that the standard error of a combined
-estimate should not be larger than either of the trials' standard errors.
-Assuming again that the true trial effects and standard errors coincide, the
-two-trials rule satisfies this, as the standard error takes the simple form
+estimate. An intuitively desirable property is that the standard error of a
+combined estimate should not be larger than either of the trials' standard
+errors. Assuming again that the true trial effects and standard errors coincide,
+the two-trials rule satisfies this, as the standard error takes the simple form
 \begin{equation}
   \label{eq:se2tr}
   \sigma_{\text{2TR}} =
@@ -740,7 +736,9 @@ two-trials rule satisfies this, as the standard error takes the simple form
 \end{equation}
 so is approximately $17\%$ smaller than the standard errors of each individual
 trial. However, this is no longer the case when the trial standard errors
-differ, see Appendix~\ref{app:ses}.
+differ, where the standard error of the two-trial rule also depends on the true
+trial effects. See Appendix~\ref{app:ses} for more details, also on standard
+errors based on other combined \textit{p}-value functions.
 
 
 \begin{figure}[!htb]
@@ -914,14 +912,13 @@ while $a = \alpha/2$ and $a = 1 - \alpha/2$ give the limits of the $(1 -\alpha)
 \times 100\%$ CI corresponding to the usual fixed-effect
 meta-analytic Wald CI.
 
-The standard error of the meta-analytic median estimate is given by
-$\sigma_{\text{MA}}$ from~\eqref{eq:seMA}, and it has two desirable properties:
-First, it is never larger than either of trials' standard errors
-($\sigma_{\text{MA}} \leq \min\{\sigma_1, \sigma_2\}$). Second, under effect
-homogeneity, the standard error is the smallest among all unbiased estimators of
-the common effect \citep{HedgesOlkin1985}. Both properties do not hold for the
-two-trials rule and the other \textit{p}-value combination methods discussed
-below.
+The standard error~\eqref{eq:seMA} of the meta-analytic median estimate has two
+desirable properties: First, it is never larger than either of trials' standard
+errors ($\sigma_{\text{MA}} \leq \min\{\sigma_1, \sigma_2\}$). Second, under
+effect homogeneity, the standard error is the smallest among all unbiased
+estimators of the common effect \citep{HedgesOlkin1985}. Both properties do not
+hold for the two-trials rule and the other \textit{p}-value combination methods
+discussed below.
 
 \subsubsection{Asymptotics}
 Since the meta-analytic combined estimation function is a linear combination of
@@ -992,9 +989,9 @@ with the combined estimation function
 The similarity to the two-trials rule is again visible as~\eqref{eq:tippest}
 looks similar to the estimation function from the two-trials
 rule~\eqref{eq:2trialsest} with the minimum and maximum flipped and using
-different normal quantiles. The same median estimates are obtained (i.e.,
-$\hat{\mu}_{\text{2TR}}(1/2) = \hat{\mu}_{\text{T}}(1/2)$) if opposite
-alternatives are specified.
+different normal quantiles. In particular, the same median estimates are
+obtained (i.e., $\hat{\mu}_{\text{2TR}}(1/2) = \hat{\mu}_{\text{T}}(1/2)$) if
+opposite alternatives are specified.
 
 We can see that when the observed effect estimates are the same ($\hat{\theta}_1
 = \hat{\theta}_2 = \hat{\theta}$), the median estimate ($a = 1/2$) based on
@@ -1134,10 +1131,10 @@ the weighted average compared to Tippett's method and the two-trials rule.
 
 \subsection{Edgington's (sum) method}
 \label{sec:edgington}
-Edgington's method based on the sum of \textit{p}-values \citep{Edgington1972} is yet
-another \textit{p}-value combination method that can be used for obtaining a combined
-\textit{p}-value function, and the last method that we will consider in this paper. It
-is given by
+Edgington's method based on the sum of \textit{p}-values \citep{Edgington1972,
+  Held_etal2024} is yet another \textit{p}-value combination method that can be
+used for obtaining a combined \textit{p}-value function, and the last method
+that we will consider in this paper. It is given by
 \begin{equation}
   \label{eq:edgington}
   p_{\text{E}}(\mu) =
@@ -1187,17 +1184,18 @@ The standard error of Edgington's median estimate is given by
   \sigma_{\text{E}} =
   \frac{\sqrt{2}}{1/\sigma_1 + 1/\sigma_2}
 \end{equation}
-and is always larger than the meta-analytic standard error~\eqref{eq:seMA}, see
-Appendix~\ref{app:ses}. Therefore, under effect homogeneity, Edgington's method
-is less efficient than meta-analysis at estimating the common effect. Under
-effect heterogeneity, however, the two methods target different estimands, so a
-comparison of their standard errors is not meaningful. Finally, unlike
-meta-analysis, Edgington's standard error is not always smaller or equal to
-either of the two trials' standard errors. This is only the case if the standard
-error ratio is $\sqrt{2} - 1 \leq \sigma_2/\sigma_1 \leq \sqrt{2} + 1$. For
-example, suppose $\sigma_1 = 0.5$ and $\sigma_2 = 2$, then Edgington's standard
-error is $\sqrt{2}/(2 + 0.5) = \Sexpr{round(sqrt(2)/(2 + 0.5), 3)}$, which is
-greater than $\sigma_1$
+and does not depend on the true effects, similar to meta-analysis but unlike the
+two-trials rule. It is always larger than the meta-analytic standard
+error~\eqref{eq:seMA}, see Appendix~\ref{app:ses}. Therefore, under effect
+homogeneity, Edgington's method is less efficient than meta-analysis at
+estimating the common effect. Under effect heterogeneity, however, the two
+methods target different estimands, so a comparison of their standard errors is
+not meaningful. Finally, unlike meta-analysis, Edgington's standard error is not
+always smaller or equal to either of the two trials' standard errors. This is
+only the case if the standard error ratio is $\sqrt{2} - 1 \leq
+\sigma_2/\sigma_1 \leq \sqrt{2} + 1$. For example, suppose $\sigma_1 = 0.5$ and
+$\sigma_2 = 2$, then Edgington's standard error is $\sqrt{2}/(2 + 0.5) =
+\Sexpr{round(sqrt(2)/(2 + 0.5), 3)}$, which is greater than $\sigma_1$
 
 In general, CIs for Edgington's method do not have closed-form solutions and
 must be computed numerically. Nevertheless, as with Pearson's and Fisher's
@@ -1422,7 +1420,7 @@ ggplot(data = RESPIREres$pDF, aes(x = mu, y = p, color = type, linetype = type))
   \caption{Point estimates (with implicit weights), 95\% CIs (with widths), and
     \textit{p}-values for the RESPIRE trials \citep{Aksamit2018, DeSoyza2018,
       Chotirmall2018}. Note that weigths and CI widths are computed from
-    unrounded numbers and may not always exactly correspond with rounded point
+    unrounded numbers and may not always exactly correspond to the rounded point
     estimates and CIs.}
   \label{tab:tabrespirecombined}
 << "table-RESPIRE", results = "asis" >>=
@@ -1489,13 +1487,12 @@ estimate from RESPIRE 1 toward the median estimate (the weight from RESPIRE 2 is
 one minus the weight from RESPIRE 1).
 %%  These weights were computed by solving $\hat{\mu}(1/2) = w\hat{\theta}_1 +
 %% (1 - w) \hat{\theta}_2$ for the weight $w$.
-It is visible that the more extreme estimate (RESPIRE 1 in the 14-day group, and
-RESPIRE 2 in the 28-day group) contributes more to Tippett's and Fisher's
-estimates and less to Pearson's and the two-trials rule estimates, which aligns
-with the expected behavior. Similarly, the weight of RESPIRE 1 is slightly
-larger for Edgington's method than meta-analysis because Edgington's estimate
-gives more weights to trials with larger standard errors due to its inverse
-standard error weighting.
+The more extreme estimate (RESPIRE 1 in the 14-day group, and RESPIRE 2 in the
+28-day group) contributes more to Tippett's and Fisher's estimates and less to
+Pearson's and the two-trials rule estimates, which aligns with the expected
+behavior. Similarly, the weight of RESPIRE 1 is slightly larger for Edgington's
+method than meta-analysis because Edgington's estimate gives more weights to
+trials with larger standard errors due to its inverse standard error weighting.
 
 Looking at the CIs, we can see that meta-analysis produces narrower CIs than the
 other methods for both treatment regimens. The widest CIs are produced by
@@ -1621,7 +1618,7 @@ and $0.025^2$ levels.
   \caption{Point estimates (with implicit weights), 95\% CIs (with widths), and
     \textit{p}-values for the ORBIT trials \citep{Haworth2019}. Note that
     weigths and CI widths are computed from unrounded numbers and may not always
-    exactly correspond with rounded point estimates and CIs.}
+    exactly correspond to the rounded point estimates and CIs.}
   \label{tab:taborbitcombined}
 << "table-ORBIT", results = "asis" >>=
 ORBITtab <- ORBITres$summariesDF |>
@@ -1850,8 +1847,8 @@ ggplot(data = pDF, aes(x = mu, y = p, color = method, linetype = method)) +
 ## autoplot(res)
 ## sum(ts/ses)/sum(1/ses)
 @
-\caption{Combined \textit{p}-value function based on combining all four estimates from
-  the RESPIRE trials \citep{Aksamit2018, DeSoyza2018, Chotirmall2018} along with
+\caption{Combined \textit{p}-value function based on all four estimates from the
+  RESPIRE trials \citep{Aksamit2018, DeSoyza2018, Chotirmall2018} along with
   corresponding median estimates and CIs (95\% and 99.875\% via telescope
   lines).}
 \label{fig:respireall}
@@ -2156,9 +2153,9 @@ is only equal or smaller than either trial standard error if $\sqrt{2} - 1 \leq
 \sigma_2/\sigma_1 \leq 1/(\sqrt{2} - 1) = \sqrt{2} + 1$.
 
 For the remaining methods, the (approximate) median estimates are given by $X$
-and $Y$ in equation~\eqref{eq:XandY} with $a = 1/2$. We can therefore use the
-results from Nadarajah and Kotz \citep{Nadarajah2008} to obtain their second
-moments
+and $Y$ in equation~\eqref{eq:XandY} and Table~\ref{tab:constant} with $a =
+1/2$. We can therefore use the results from Nadarajah and Kotz
+\citep{Nadarajah2008} to obtain their second moments
 \begin{align*}
   E(X^2) =&
   \{\sigma^2_1 + (\theta_1 + \sigma_1\,q)^2\}\, \Phi\left(\frac{\theta_2 - \theta_1 + q(\sigma_2 - \sigma_1)}{\sqrt{\sigma^2_1 + \sigma^2_2}}\right) +
@@ -2295,11 +2292,11 @@ n1 <- 200
 se1 <- sqrt(2/n1)
 rse <- c(0.33, 0.5, 1, 1.5, 3) # relative standard error
 se2 <- se1*rse
-nsim <- 10000
 t <- c(0, 0.5, 1)
 grid <- expand.grid(se1 = se1, se2 = se2, t1 = t, t2 = t)
 
-## estimate SEs with simulation for comparison
+## ## estimate SEs with simulation for comparison
+## nsim <- 10000
 ## set.seed(120396)
 ## library(parallel)
 ## simres <- mclapply(X = seq(1, nrow(grid)), FUN = function(i) {

@@ -2,7 +2,7 @@
 FILE=est2TR
 BIB=bibliography
 
-all: $(FILE).pdf code clean
+all: $(FILE).pdf $(FILE).R clean
 .PHONY: all clean packageinstall
 
 ## generate .tex file from .Rnw file with knitr

@@ -85,7 +85,7 @@ selogrr4 <- (cilogrr4[2] - cilogrr4[1])/(2*qnorm(p = 0.975))
 ##           se2 = selogrr4, alternative = "less", level = 0.95)
 
 
-## ----"respire-trials"---------------------------------------------------------
+## ----"RESPIRE-trials"---------------------------------------------------------
 ## RESPIRE trials
 t1 <- logrr14r1
 t2 <- logrr14r2
@@ -251,7 +251,7 @@ resFun <- function(t1, t2, se1, se2, labels, xlim, alternative, alpha, null,
         res <- twotrials(null = null, t1 = t1[i], t2 = t2[i], se1 = se1[i],
                          se2 = se2[i], alternative = alternative,
                          level = 1 - alpha)
-        ## for a lower alpha level to have CI decision at alpha^2
+        ## for a lower alpha level to have CI decision at (one-sided) alpha^2
         res2 <- twotrials(null = null, t1 = t1[i], t2 = t2[i], se1 = se1[i],
                           se2 = se2[i], alternative = alternative,
                           level = 1 - 2*(alpha/2)^2)
@@ -478,7 +478,7 @@ kable(ORBITtab |> select(-labels),
     row_spec(seq(1, nrow(RESPIREtab), by = 2), background = "#F0F0F0")
 
 
-## ----"morethan2", fig.height = 3----------------------------------------------
+## ----"more-than-2-trials", fig.height = 3-------------------------------------
 ## parameters
 museq <- seq(-1, 0.5, length.out = 5000)
 input_p <- "less"
@@ -494,7 +494,7 @@ labels <- c("RESPIRE 1 14-day", "RESPIRE 1 28-day",
             "RESPIRE 2 14-day", "RESPIRE 2 28-day")
 est <- c(logrr14r1, logrr28r1, logrr14r2, logrr28r2)
 se <- c(selogrr14r1, selogrr28r1, selogrr14r2, selogrr28r2)
-lower2 <- NA # est - se*qnorm(p = 1 - (alpha/2)^2)
+lower2 <- NA # est - se*qnorm(p = 1 - 2*(alpha/2)^2)
 upper2 <- NA # est + se*qnorm(p = 1 - (alpha/2)^2)
 
 ## compute combined p-value functions
@@ -601,8 +601,15 @@ ggplot(data = pDF, aes(x = mu, y = p, color = method, linetype = method)) +
 
 ## ## does Edgington's median estimate generalize to more than 2 studies?
 ## ## No! not the same
-## subset(summariesDF, method == "Edgington")$estimate # -0.328873
-## sum(est/se)/sum(1/se) # -0.3238609
+## subset(summariesDF, method == "Edgington")$estimate # -0.3280871
+## sum(est/se)/sum(1/se) # -0.323224
+## ## see also this example
+## ts <- c(0, 0.1, 0.3, 0.4)
+## ses <- c(0.05, 0.3, 0.2, 0.1)
+## res <- confMeta(estimates = ts, SEs = ses, fun = p_edgington, input_p = "greater")
+## res$p_max[1]
+## autoplot(res)
+## sum(ts/ses)/sum(1/ses)
 
 
 ## ----"R-package-illustration", echo = TRUE, fig.height = 3.5, size = "scriptsize"----
@@ -686,7 +693,7 @@ seT <- function(se1, se2, t1, t2, alternative = "greater") {
 }
 seF <- function(se1, se2, t1, t2, alternative = "greater") {
     ## only approximately valid when t1 != t2
-    q <- -qnorm(p = exp(-qchisq(p = 0.25, df = 4)))
+    q <- -qnorm(p = exp(-qchisq(p = 0.5, df = 4)/2))
     if (alternative == "greater") {
         sqrt(EY2(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2) -
              EY(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2)^2)
@@ -697,7 +704,7 @@ seF <- function(se1, se2, t1, t2, alternative = "greater") {
 }
 seP <- function(se1, se2, t1, t2, alternative = "greater") {
     ## only approximately valid when t1 != t2
-    q <- -qnorm(p = exp(-qchisq(p = 0.25, df = 4)))
+    q <- -qnorm(p = exp(-qchisq(p = 0.5, df = 4)/2))
     if (alternative == "greater") {
         sqrt(EX2(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2) -
              EX(se1 = se1, se2 = se2, q = q, t1 = t1, t2 = t2)^2)
@@ -707,53 +714,16 @@ seP <- function(se1, se2, t1, t2, alternative = "greater") {
     }
 }
 
-
-## se1 <- 0.05
-## se2 <- 0.1
-## theta1 <- 0.45
-## theta2 <- 0.5
-
-## ## computing standard errors with simulation
-## nsim <- 10000
-## set.seed(42)
-## t1 <- rnorm(n = nsim, mean = theta1, sd = se1)
-## t2 <- rnorm(n = nsim, mean = theta2, sd = se2)
-## simres <- do.call("rbind", lapply(X = seq_len(nsim), FUN = function(i) {
-##     res <- twotrials(t1 = t1[i], t2 = t2[i], se1 = se1, se2 = se2)
-##     data.frame(sim = i, res$summaries[,c("method", "est")])
-## }))
-
-## simSE <- tapply(simres$est, simres$method, FUN = sd)
-## ## comparing to analytical standard errors
-## aSE <- sapply(X = list("Edgington" = seE, "Fisher" = seF,
-##                        "Meta-analysis" = seMA, "Pearson" = seP, "Tippett" = seT,
-##                        "Two-trials rule" = se2TR),
-##               FUN = function(f) f(se1 = se1, se2 = se2, t1 = theta1, t2 = theta2))
-## signif(cbind(simSE, aSE), 4)
-
-## ## checking simplified formula for 2TR
-## se <- 1
-## theta <- 0.5
-## q <- qnorm(sqrt(0.5))
-## se2TR(se1 = se, se2 = se, t1 = theta, t2 = theta)
-## ## first simplification
-## sqrt(se^2 + (theta + se*q)^2 - 2*se*(theta + se*q)/sqrt(pi) -
-##      (theta + se*(q - 1/sqrt(pi)))^2)
-## ## next simplification
-## sqrt(se^2 + theta^2 + 2*theta*se*q + se^2*q^2 - 2*se*theta/sqrt(pi) - 2*se^2*q/sqrt(pi) - theta^2 - 2*theta*se*(q - 1/sqrt(pi)) - se^2*(q - 1/sqrt(pi))^2)
-## ## next simplification
-## sqrt(se^2*(1 - 1/pi))
-
 ## evaluate SEs over a grid of parameter values
 n1 <- 200
 se1 <- sqrt(2/n1)
 rse <- c(0.33, 0.5, 1, 1.5, 3) # relative standard error
 se2 <- se1*rse
-nsim <- 10000
 t <- c(0, 0.5, 1)
 grid <- expand.grid(se1 = se1, se2 = se2, t1 = t, t2 = t)
 
-## estimate SEs with simulation
+## ## estimate SEs with simulation for comparison
+## nsim <- 10000
 ## set.seed(120396)
 ## library(parallel)
 ## simres <- mclapply(X = seq(1, nrow(grid)), FUN = function(i) {
@@ -768,17 +738,17 @@ grid <- expand.grid(se1 = se1, se2 = se2, t1 = t, t2 = t)
 ##     return(res)
 ## }, mc.cores = pmax(detectCores() - 4, 1))
 ## save(simres, file = "simulation-results.RData")
-load("simulation-results.RData")
-## simres |>
+## load("simulation-results.RData")
+## ## simres |>
+## ##     bind_rows() |>
+## ##     group_by(method) |>
+## ##     summarise(n = n(),
+## ##               converged = mean(is.finite(est)))
+## simsummaries <- simres |>
 ##     bind_rows() |>
-##     group_by(method) |>
-##     summarise(n = n(),
-##               converged = mean(is.finite(est)))
-simsummaries <- simres |>
-    bind_rows() |>
-    group_by(method, se1, se2, t1, t2) |>
-    summarise(se = sd(est)) |>
-    mutate(type = "simulation")
+##     group_by(method, se1, se2, t1, t2) |>
+##     summarise(se = sd(est)) |>
+##     mutate(type = "simulation")
 
 ## compute analytical SEs
 grid2 <- expand.grid(se1 = se1, se2 = seq(min(se2), max(se2), length.out = 100),
@@ -792,7 +762,7 @@ summaries <- do.call("rbind", lapply(X = seq(1, nrow(grid2)), FUN = function(i) 
     res <- data.frame(method = names(aSE), grid2[i,], se = aSE, type = "analytical")
     return(res)
 })) |>
-    rbind(simsummaries) |>
+    ## rbind(simsummaries) |> # uncomment if comparison with simulation SEs desired
     mutate(method = factor(method, levels = typelevels))
 
 cols <- c("Trial 1" = "#CC79A7F2", "Trial 2" = "#888888F2",
