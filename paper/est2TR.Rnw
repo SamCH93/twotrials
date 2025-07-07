@@ -1189,10 +1189,10 @@ two-trials rule. It is always larger than the meta-analytic standard
 error~\eqref{eq:seMA}, see Appendix~\ref{app:ses}. Therefore, under effect
 homogeneity, Edgington's method is less efficient than meta-analysis at
 estimating the common effect. Under effect heterogeneity, however, the two
-methods target different estimands, so a comparison of their standard errors is
-not meaningful. Finally, unlike meta-analysis, Edgington's standard error is not
-always smaller or equal to either of the two trials' standard errors. This is
-only the case if the standard error ratio is $\sqrt{2} - 1 \leq
+methods target different estimands, so a comparison of their standard errors may
+not be meaningful. Finally, unlike meta-analysis, Edgington's standard error is
+not always smaller or equal to either of the two trials' standard errors. This
+is only the case if the standard error ratio is $\sqrt{2} - 1 \leq
 \sigma_2/\sigma_1 \leq \sqrt{2} + 1$. For example, suppose $\sigma_1 = 0.5$ and
 $\sigma_2 = 2$, then Edgington's standard error is $\sqrt{2}/(2 + 0.5) =
 \Sexpr{round(sqrt(2)/(2 + 0.5), 3)}$, which is greater than $\sigma_1$
@@ -2174,7 +2174,7 @@ and
 and corresponding standard errors.
 %% by subtracting the squared expectation followed by taking the square root.
 For example, assuming equal standard errors ($\sigma_1 = \sigma_2 = \sigma$),
-equal true effects ($\theta_1 = \theta_2 = \theta$) and the alternative
+equal true effects ($\theta_1 = \theta_2 = \theta$), and the alternative
 ``greater'', the standard error of the two-trials rule median estimate ($X$ with
 $q = z_{\sqrt{1/2}}$) simplifies to~\eqref{eq:se2tr}.
 %% \begin{align*}
@@ -2391,7 +2391,7 @@ $\sigma_2$. The opposite occurs when the effect from the first trial is larger
 ($\theta_1 > \theta_2$; lower off-diagonal panels). This is plausible, as these
 methods target the minimum (two-trials rule) or maximum (Tippett) effect,
 meaning that the standard error of the trial with minimum or maximum effect
-mainly drives the standard error of the combined estimate.
+mainly affects the standard error of the combined estimate.
 
 \bmsubsection{Limiting combined estimation functions}
 \label{app:asymptotics}
